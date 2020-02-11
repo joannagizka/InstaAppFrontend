@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import MainPage from "./main/MainPage";
 import Register from "./main/Register";
-import Login from "./main/Login";
+import Logging from "./main/Logging";
 
 export default function App() {
   return (
@@ -20,7 +20,7 @@ export default function App() {
             <Register/>
           </Route>
           <Route path="/login">
-            <Login />
+            <Logging />
           </Route>
           <Route path="/">
             <MainPage />

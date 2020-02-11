@@ -10,8 +10,8 @@ export default class Register extends React.Component {
       password: ''
     };
 
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this); //tego nie
+    this.handleSubmit = this.handleSubmit.bind(this); //i tego tez
   }
 
   handleInputChange(event) {
@@ -25,9 +25,7 @@ export default class Register extends React.Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault();
-    //TODO jesli username i password beda puste wyswietl alert i nie wysylaj na serwer
-    // alert('A name was submitted: ' + this.state.use/name + ' password ' + this.state.password);
+    event.preventDefault(); //tego tez
 
     const data = {
       username: this.state.username,
@@ -35,16 +33,20 @@ export default class Register extends React.Component {
     };
 
     axios.post('http://localhost:8000/register/', JSON.stringify(data))
-      .then(function (response) {
+      .then(response => {
         alert(response.data);
         console.log(response);
       })
-      .catch(function (error) {
-        alert(error.body);
-        console.log(error);
+      .catch(error => {
+        if (error.response.status===400){
+          alert("Użytkownik o danej nazwie użytkownika już istnieje");
+        }
       });
-
   }
+
+
+
+
 
   render() {
     return (
