@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import {Redirect} from "react-router-dom";
 
 export default class Logging extends Component {
   constructor(props) {
@@ -8,7 +9,8 @@ export default class Logging extends Component {
     this.state = {
       username: "",
       password: "",
-      loginErrors: ""
+      loginErrors: "",
+      redirectToWelcome: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,15 +39,22 @@ export default class Logging extends Component {
 
     result.then(response => {
       alert(response.data);
+      this.setState({redirectToWelcome: true});
     });
 
     result.catch(error => {
         console.log("login error", error);
+        alert("Blad w trakcie logowania")
       });
     event.preventDefault();
   }
 
+
   render() {
+    if (this.state.redirectToWelcome) {
+      return <Redirect to="/welcome" />;
+    }
+
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
