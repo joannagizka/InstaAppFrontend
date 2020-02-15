@@ -9,6 +9,7 @@ import Register from "./main/Register";
 import Logging from "./main/Logging";
 import WelcomeSite from "./main/WelcomeSite";
 import MyProfile from "./main/MyProfile";
+import AddPhoto from "./main/AddPhoto";
 import axios from 'axios';
 
 axios.defaults.withCredentials = true;
@@ -31,6 +32,9 @@ export default function App() {
           </Route>
           <Route path="/myprofile">
             <MyProfile />
+          </Route>
+          <Route path="/addphoto">
+            <AddPhoto />
           </Route>
         </Switch>
       </div>
