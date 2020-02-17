@@ -7,23 +7,40 @@ export default class AddPhoto extends Component {
     super(props);
 
     this.state = {
-      description: ""
+      description: "",
+      photoSrc: ""
+
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.uploadPhoto = this.uploadPhoto.bind(this);
     this.handlePhotoUploadChange = this.handlePhotoUploadChange.bind(this);
+    this.setPhotoSource = this.setPhotoSource.bind(this);
   }
 
   handleDescriptionChange(event) {
     this.setState({
-      [event.target.name]: event.target.value
+      "description": event.target.value
+    });
+  }
+
+  setPhotoSource(event) {
+    this.setState({
+      "photoSrc": event.target.result
     });
   }
 
   handlePhotoUploadChange(event) {
-    console.log(event);
+    // console.log(event.target.files);
+    let input = event.target;
+    if (input.files && input.files[0]) {
+      let reader = new FileReader();
+
+      reader.onload = this.setPhotoSource;
+
+      reader.readAsDataURL(input.files[0]);
+    }
   }
 
   handleSubmit(event) {
@@ -38,13 +55,20 @@ export default class AddPhoto extends Component {
       })
     ).then(response => {
       this.uploadPhoto(response.data.photoId);
-    })
+    });
 
     event.preventDefault();
   }
 
   uploadPhoto(id) {
-
+    axios.post(
+      //poczytaj o "url path parameters"
+      "http://localhost:8000/addPhotoContent/" + id,
+      //wylij zawartos zjecia
+      //poszukaj jak "convert html image src to raw bytes" a potem wysłać to tutaj przez axiosa
+    ).then(response => {
+      this.uploadPhoto(response.data.photoId);
+    })
   }
 
   render() {
@@ -59,6 +83,13 @@ export default class AddPhoto extends Component {
             value={this.state.description}
             onChange={this.handleDescriptionChange}
             required
+          />
+          <img
+            id="photo"
+            src={this.state.photoSrc}
+            alt="your image"
+            height="500"
+            width="500"
           />
           <input
             type="file"
