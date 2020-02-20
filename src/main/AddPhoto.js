@@ -8,13 +8,12 @@ export default class AddPhoto extends Component {
 
     this.state = {
       description: "",
-      photoSrc: ""
-
+      photoSrc: "",
+      photoData: null,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-    this.uploadPhoto = this.uploadPhoto.bind(this);
     this.handlePhotoUploadChange = this.handlePhotoUploadChange.bind(this);
     this.setPhotoSource = this.setPhotoSource.bind(this);
   }
@@ -32,7 +31,7 @@ export default class AddPhoto extends Component {
   }
 
   handlePhotoUploadChange(event) {
-    // console.log(event.target.files);
+    this.setState({photoData: event.target.files[0]});
     let input = event.target;
     if (input.files && input.files[0]) {
       let reader = new FileReader();
@@ -44,31 +43,20 @@ export default class AddPhoto extends Component {
   }
 
   handleSubmit(event) {
-    const { description } = this.state;
-
+    const formData = new FormData();
+    formData.append(
+      'file',
+      this.state.photoData,
+    );
+    formData.append('description', this.state.description);
     axios.post(
       "http://localhost:8000/addPhoto/",
-      JSON.stringify({
-        photoA: {
-          description: description
-        }
-      })
+      formData
     ).then(response => {
-      this.uploadPhoto(response.data.photoId);
+      console.log(response);
     });
 
     event.preventDefault();
-  }
-
-  uploadPhoto(id) {
-    axios.post(
-      //poczytaj o "url path parameters"
-      "http://localhost:8000/addPhotoContent/" + id,
-      //wylij zawartos zjecia
-      //poszukaj jak "convert html image src to raw bytes" a potem wysłać to tutaj przez axiosa
-    ).then(response => {
-      this.uploadPhoto(response.data.photoId);
-    })
   }
 
   render() {
