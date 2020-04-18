@@ -10,6 +10,7 @@ import Logging from "./main/Logging";
 import WelcomeSite from "./main/WelcomeSite";
 import MyProfile from "./main/MyProfile";
 import AddPhoto from "./main/AddPhoto";
+import SeeYouLater from "./main/SeeYouLater";
 import axios from 'axios';
 
 axios.defaults.withCredentials = true;
@@ -35,6 +36,9 @@ export default function App() {
           </Route>
           <Route path="/addphoto">
             <AddPhoto />
+          </Route>
+          <Route path="/seeyoulater">
+            <SeeYouLater />
           </Route>
         </Switch>
       </div>
