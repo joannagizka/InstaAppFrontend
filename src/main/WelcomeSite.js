@@ -20,6 +20,7 @@ export default class WelcomeSite extends React.Component{
                 <div className="btn-group">
 
                   <Link to="/myprofile" className="btn bg-primary light">Pokaż mój profil</Link>
+                  <Link to="/seeyoulater" className="btn bg-primary light" onClick={this.handleLogout}>Wyloguj się</Link>
                 </div>
               </ul>
             </div>

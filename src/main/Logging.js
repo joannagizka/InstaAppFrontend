@@ -3,8 +3,7 @@ import axios from "axios";
 import {Link, Redirect} from "react-router-dom";
 import './Style.css';
 import './MainStyle.css';
-import './RegisterStyle.css';
-
+// import './RegisterStyle.css';
 
 export default class Logging extends Component {
   constructor(props) {
@@ -42,7 +41,7 @@ export default class Logging extends Component {
       );
 
     result.then(response => {
-      alert(response.data);
+     /* alert(response.data);*/
       this.setState({redirectToWelcome: true});
     });
 
@@ -54,13 +53,16 @@ export default class Logging extends Component {
   }
 
   render() {
+    require('./Style.css');
+    require('./MainStyle.css');
+
+
     if (this.state.redirectToWelcome) {
       return <Redirect to="/welcome" />;
     }
 
     return (
       <div>
-        {/*tutaj jest nagłówek navbar */}
         <nav className="navbar navbar-expand-lg navbar-light sticky-top" id="mainNav">
           <div className="container">
             <a className="navbar-brand js-scroll-trigger" href="/">insta-app</a>
@@ -85,7 +87,6 @@ export default class Logging extends Component {
             </div>
           </div>
         </nav>
-
 
           <div className="base-container center form-group justify-content-center row">
             <div className="container register-form flex-column">
@@ -129,7 +130,6 @@ export default class Logging extends Component {
             </div>
           </div>
       </div>
-
     );
   }
 }

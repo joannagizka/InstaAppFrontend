@@ -1,10 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import {Link} from "react-router-dom";
-import './Style.css';
-import './MainStyle.css';
-import './RegisterStyle.css';
-
+import {Link, Redirect} from "react-router-dom";
 
 export default class Register extends React.Component {
 
@@ -37,25 +33,30 @@ export default class Register extends React.Component {
       password: this.state.password
     };
 
-    axios.post('http://localhost:8000/register/', JSON.stringify(data))
-      .then(response => {
-        alert(response.data);
-        console.log(response);
-      })
-      .catch(error => {
-        if (error.response.status===400){
-          alert("Użytkownik o danej nazwie użytkownika już istnieje");
-        }
-      });
+    let result = axios.post('http://localhost:8000/register/', JSON.stringify(data))
+    result.then(response => {
+      console.log(response);
+      this.setState({redirectToWelcome: true});
+    })
+    result.catch(error => {
+      if (error.response.status === 400) {
+        alert("Użytkownik o danej nazwie już istnieje");
+      }
+    })
   }
 
 
-
-
-
   render() {
+    require('./Style.css');
+    require('./MainStyle.css');
+    require('./RegisterStyle.css');
+
+    if (this.state.redirectToWelcome) {
+      return <Redirect to="/welcome"/>;
+    }
     return (
-      <div >
+
+      <div>
         {/*tutaj jest nagłówek navbar */}
         <nav className="navbar navbar-expand-lg navbar-light sticky-top" id="mainNav">
           <div className="container">
@@ -95,8 +96,8 @@ export default class Register extends React.Component {
                       />
                     </div>
                     <div className="form-group">
-                      <div className="form-group">
-                        <label id="password" />
+                      {/*<div className="form-group">*/}
+                        <label id="password"/>
                         <input
                           type="password"
                           name="password"
@@ -105,7 +106,7 @@ export default class Register extends React.Component {
                           className="form-control"
                           placeholder="Hasło *"
                         />
-                      </div>
+                      {/*</div>*/}
                     </div>
                     <div className="form-group col-md-auto">
                       <button type="button" className="btnSubmit" onClick={this.handleSubmit}>Zarejestruj</button>
