@@ -47,15 +47,10 @@ export default class MyProfile extends Component {
   renderPhoto(photo) {
     const src = "http://localhost:8000/photo/" + photo.id + "/"
     return (
-      <div className="col-md-4">
-        <div className="thumbnail">
-          <a href="" target="_blank">
-            <img src={src} alt="Lights"/>
-            <div className="caption">
-              <h2>{photo.id}</h2>
-              <h2>{photo.description}</h2>
-            </div>
-          </a>
+      <div className="card col-md-4 thumbnail">
+        <img src={src} alt="Lights"/>
+        <div className="card-body">
+          <p className="card-text">{photo.description}</p>
         </div>
       </div>
     )

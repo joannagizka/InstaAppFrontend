@@ -1,9 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import Logo from './img/logo_transparent.png'
 import './Style.css';
 import './MainStyle.css';
-import bg from './img/main-bg.jpg'
 
 
 export default class MainPage extends React.Component {

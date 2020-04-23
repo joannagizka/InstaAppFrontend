@@ -11,6 +11,7 @@ export default class AddPhoto extends Component {
       description: "",
       photoSrc: "",
       photoData: null,
+      redirectToMyProfile: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -53,7 +54,10 @@ export default class AddPhoto extends Component {
       formData
     ).then(response => {
       console.log(response);
-    });
+      this.setState({redirectToMyProfile: true});
+     }
+
+    );
 
     event.preventDefault();
   }
@@ -63,6 +67,10 @@ export default class AddPhoto extends Component {
     require('./Style.css');
     require('./MainStyle.css');
     require("./AddPhotoStyle.css");
+
+    if (this.state.redirectToMyProfile) {
+      return <Redirect to="/myprofile"/>;
+    }
 
     return (
       <div className="layout text-center col-md-8">
