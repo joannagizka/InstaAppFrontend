@@ -84,7 +84,7 @@ export default class AddPhoto extends Component {
                     aria-expanded="false"
                     aria-label="Toggle navigation">
               Menu
-              <i className="fas fa-bars"></i>
+              <i className="fas fa-bars"/>
             </button>
             <div className="collapse navbar-collapse" id="navbarResponsive">
               <ul className="navbar-nav ml-auto">

@@ -86,10 +86,14 @@ h1 {
     box-shadow: 0 3px 0 0 deeppink;
 }
 
+
 .centered-and-cropped {
     object-fit: cover;
-    margin-top: 90% ;
+    width:600px;
+    height:600px;
 }
+
+
 
 input[type=text], select, textarea {
     width: 400px;

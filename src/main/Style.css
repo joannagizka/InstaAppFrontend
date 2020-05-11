@@ -1,5 +1,4 @@
-.header
-{
+.header {
     margin-bottom: 30px;
 }
 
@@ -22,12 +21,11 @@
     margin-right: 40px;
 }
 
-#login-btn{
+#login-btn {
     margin-bottom: auto;
 }
 
-.note
-{
+.note {
     text-align: center;
     height: 80px;
     background: -webkit-linear-gradient(left, #0072ff, #8811c5);
@@ -35,19 +33,20 @@
     font-weight: bold;
     line-height: 80px;
 }
+
 /*.form-content*/
 /*{*/
 /*    padding: 5%;*/
 /*    border: 1px solid #ced4da;*/
 /*    margin-bottom: 2%;*/
 /*}*/
-.form-control{
-    border-radius:1.5rem;
+.form-control {
+    border-radius: 1.5rem;
 }
-.btnSubmit
-{
-    border:none;
-    border-radius:1.5rem;
+
+.btnSubmit {
+    border: none;
+    border-radius: 1.5rem;
     padding: 1%;
     width: 20%;
     cursor: pointer;
@@ -57,15 +56,64 @@
     margin-inside: 20px;
 }
 
-.alert-danger{
-    border:none;
-    border-radius:1.5rem;
+.alert-danger {
+    border: none;
+    border-radius: 1.5rem;
     margin-top: 30px;
     cursor: pointer;
     padding: 30%;
 }
 
-.btnSubmit{
-
+.modal-dialog {
+    width: 100% !important;
+    height: 100% !important;
 }
 
+#grad1 {
+    background-image: linear-gradient(to bottom right, red, yellow); /* Standard syntax (must be last) */
+}
+
+.card {
+    border: none;
+    border-radius: 20px;
+}
+
+.btn-primary {
+    border: none;
+    border-radius: 8px;
+    width: 80px;
+    color: #DFEFFF;
+    transform: translateY(-22px);
+    background-color: #5778F9 !important
+}
+
+.btn-primary:focus {
+    box-shadow: none;
+    outline: none;
+    padding: 10px;
+}
+
+.btn-primary:hover {
+    background-color: #007bff !important;
+    margin-bottom: auto;
+    margin-right: 5px;
+}
+
+.list-group {
+    width: 600px;
+}
+
+.body{
+    background-color: #f1f3fa;
+}
+
+
+img {
+    width:100%;
+    min-height:100px;
+}
+
+.card {
+    width: 600px;
+    position: center;
+}

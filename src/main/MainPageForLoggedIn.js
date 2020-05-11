@@ -1,9 +1,54 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import './Style.css';
 import './MainStyle.css';
+import axios from "axios";
 
 export default class MainPage extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      photos: [],
+    };
+  }
+
+  componentDidMount() {
+
+    axios.get('http://localhost:8000/allPhotos/').then(response => {
+      this.setState({photos: response.data.photos});
+    })
+  }
+
+
+  renderAllPhotos() {
+    const renderedPhotos = [];
+
+    for (let photo of this.state.photos) {
+      renderedPhotos.push(this.renderPhoto(photo));
+    }
+
+    return (
+      <div className="row">
+        {renderedPhotos}
+      </div>
+    )
+  }
+
+  renderPhoto(photo) {
+    const src = "http://localhost:8000/photo/" + photo.id + "/";
+    const linkTo = "/photodetails/" + photo.id;
+    return (
+      <Link to={linkTo} className="card col-md-4 thumbnail">
+        <img src={src} alt="Lights"/>
+        <div className="card-body">
+          <p className="card-text">{photo.description}</p>
+        </div>
+
+      </Link>
+    )
+  }
+
   render() {
     return (
       <div className="layout">
@@ -23,10 +68,12 @@ export default class MainPage extends React.Component {
                 <div className="btn-group">
                   <Link to="/addphoto" className="btn bg-primary light">Dodaj zdjęcie</Link>
                   <Link to="/myprofile" className="btn bg-primary light">Pokaż mój profil</Link>
+                  <Link to="/search" className="btn bg-primary light">Znajdź innych użytkowników</Link>
                   <Link to="/seeyoulater" className="btn bg-primary light" onClick={this.handleLogout}>Wyloguj
                     się</Link>
                 </div>
               </ul>
+
             </div>
           </div>
         </nav>
@@ -43,6 +90,11 @@ export default class MainPage extends React.Component {
             </div>
           </div>
         </header>
+        <div className="container">
+          <div className="profile-content col-md-2s align-content-md-center">
+            {this.renderAllPhotos()}
+          </div>
+        </div>
       </div>
     );
   }

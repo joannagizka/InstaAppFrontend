@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
 
+
 export default class MyProfile extends Component {
 
   constructor(props) {
@@ -44,17 +45,17 @@ export default class MyProfile extends Component {
     )
   }
 
-  renderPhoto(photo) {
-    const src = "http://localhost:8000/photo/" + photo.id + "/"
-    return (
-      <div className="card col-md-4 thumbnail">
-        <img src={src} alt="Lights"/>
-        <div className="card-body">
-          <p className="card-text">{photo.description}</p>
+    renderPhoto(photo) {
+      const src = "http://localhost:8000/photo/" + photo.id + "/"
+      return (
+        <div className="card col-md-4 thumbnail">
+          <img src={src} alt="Lights"/>
+            <div className="card-body">
+              <p className="card-text">{photo.description}</p>
+            </div>
         </div>
-      </div>
-    )
-  }
+      )
+    }
 
   render() {
     require('./MyProfileStyle.css');

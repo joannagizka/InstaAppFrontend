@@ -12,6 +12,8 @@ import MyProfile from "./main/MyProfile";
 import AddPhoto from "./main/AddPhoto";
 import SeeYouLater from "./main/SeeYouLater";
 import MainPageForLoggedIn from "./main/MainPageForLoggedIn";
+import PhotoDetails from "./main/PhotoDetails";
+import Search from "./main/Search";
 import axios from 'axios';
 
 axios.defaults.withCredentials = true;
@@ -43,6 +45,12 @@ export default function App() {
           </Route>
           <Route path="/mainpageforloggedin">
             <MainPageForLoggedIn />
+          </Route>
+          <Route path="/photodetails/:id"  >
+            <PhotoDetails />
+          </Route>
+          <Route path="/search">
+            <Search />
           </Route>
         </Switch>
       </div>
