@@ -81,9 +81,9 @@
 .btn-primary {
     border: none;
     border-radius: 8px;
-    width: 80px;
+
     color: #DFEFFF;
-    transform: translateY(-22px);
+
     background-color: #5778F9 !important
 }
 

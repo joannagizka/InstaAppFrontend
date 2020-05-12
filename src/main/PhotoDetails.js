@@ -7,30 +7,106 @@ import axios from "axios";
 export default class PhotoDetails extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      description: ""
-    };
-  }
 
-  componentDidMount() {
     const arr = window.location.href.split("/");
     const photoId = arr[arr.length - 1];
 
-    axios.get("http://localhost:8000/photoMeta/" + photoId + "/").then(response => {
-      this.setState({description: response.data.description});
+    this.state = {
+      description: "",
+      photoId: photoId,
+      content: "",
+      comments: [],
+      authorId: "",
+      authorUsername: "",
+      isMe: false
+    };
+
+
+    this.handleContentChange = this.handleContentChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    axios.get("http://localhost:8000/photoMeta/" + this.state.photoId + "/").then(response => {
+      this.setState({
+        description: response.data.description,
+        comments: response.data.comments,
+        authorId: response.data.authorId,
+        authorUsername: response.data.authorUsername,
+        isMe: response.data.isMe,
+        creationTime: response.data.creationTime
+      });
     })
+  }
+
+  handleContentChange(event) {
+    this.setState({
+      "content": event.target.value
+    });
+  }
+
+  handleSubmit(event) {
+    const data = {
+      "content": this.state.content,
+    };
+    let result = axios.post("http://localhost:8000/photoMeta/" + this.state.photoId + "/comments/", JSON.stringify(data))
+    result.then(response => {
+      console.log(response);
+      this.setState({
+        description: response.data.description,
+        comments: response.data.comments,
+        authorId: response.data.authorId,
+        authorUsername: response.data.authorUsername,
+        isMe: response.data.isMe,
+      });
+    })
+    result.catch(error => {
+      console.log(error);
+    })
+  }
+
+  renderAllComments() {
+    const renderedComments = [];
+
+    for (let comment of this.state.comments) {
+      renderedComments.push(this.commentPattern(comment));
+    }
+
+    return (
+      <div>
+        {renderedComments}
+      </div>
+    )
+  }
+
+  commentPattern(comment) {
+    return (
+      <div>
+        <div className="well well-lg">
+          <h4 className="media-heading text-uppercase reviews">{comment.authorUsername} </h4>
+          <ul className="media-date text-uppercase reviews list-inline">
+            {comment.creationTime}
+          </ul>
+          <p className="media-comment">
+            {comment.content}
+          </p>
+        </div>
+      </div>
+    );
   }
 
 
   render() {
     require('./Style.css');
     require('./AddPhotoStyle.css');
-
     const arr = window.location.href.split("/");
     const photoId = arr[arr.length - 1];
     const photoSrc = "http://localhost:8000/photo/" + photoId + "/";
 
+
     return (
+
+
       <div className="layout">
         <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
           <div className="container">
@@ -50,50 +126,37 @@ export default class PhotoDetails extends React.Component {
                     się</Link>
                 </div>
               </ul>
-            </div>
-          </div>
-        </nav>
-        <div className="card mx-auto">
-          <img className="centered-and-cropped rounded mx-auto d-block"
+              <div className="card mx-auto">
+                <img className="centered-and-cropped rounded mx-auto d-block"
 
-               src={photoSrc}
-               alt="your image"/>
-          <div className="card-body">
+                     src={photoSrc}
+                     alt="your image"/>
+                <div className="card-body">
 
-            <div className="well well-lg light">
-              <h4 className="media-heading text-uppercase reviews">Bella </h4>
-              <ul className="media-date text-uppercase reviews list-inline">
-                <li className="dd">22</li>
-                <li className="mm">09</li>
-                <li className="aaaa">2014</li>
-              </ul>
-            <p className="card-text text-justify">{this.state.description}</p>
-            </div>
-            <div className="media-body">
-              <span className="badge badge-light"><h4>KOMENTARZE:</h4></span>
-              <div className="well well-lg">
-                <h4 className="media-heading text-uppercase reviews">Bella </h4>
-                <ul className="media-date text-uppercase reviews list-inline">
-                  <li className="dd">22</li>
-                  <li className="mm">09</li>
-                  <li className="aaaa">2014</li>
-                </ul>
+                  <div className="well well-lg light">
+                    <h4 className="media-heading text-uppercase reviews">{this.state.authorUsername} </h4>
+                    <ul className="media-date text-uppercase reviews list-inline">
+                      {this.state.creationTime}
+                    </ul>
+                    <p className="card-text text-justify">{this.state.description}</p>
+                  </div>
+                  <div className="media-body">
+                    <div className="form-group">
+                      <label htmlFor="exampleFormControlTextarea1">Dodaj komentarz:</label>
 
-                <p className="media-comment">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat.
-                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                  laborum.
-                </p>
+                      <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"
+                                onChange={this.handleContentChange}/>
+                      <button className="btn bg-primary light" onClick={this.handleSubmit}> Dodaj</button>
+                    </div>
+                  </div>
+
+                </div>
+                <div>{this.renderAllComments()}</div>
+
               </div>
             </div>
           </div>
-        </div>
-
-
+        </nav>
       </div>
     )
   }

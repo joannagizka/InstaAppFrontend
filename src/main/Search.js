@@ -4,12 +4,66 @@ import axios from "axios";
 
 export default class Search extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: []
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
   componentDidMount() {
     axios.get("http://localhost:8000/users/").then(response => {
-      console.log(response.data);
 
+      console.log(response.data);
+      this.setState({users: response.data.users});
     })
   }
+
+  renderUsers() {
+    const renderedUsers = [];
+
+    for (let user of this.state.users) {
+      renderedUsers.push(this.makeListOftheSearchedProfiles(user.id, user.username, user.isObserved));
+    }
+    return (
+      <ul>
+        {renderedUsers}
+      </ul>
+    )
+  }
+
+  handleClick(id, isObserved) {
+    console.log(id);
+    console.log(isObserved);
+
+    const path = isObserved ? "unfollow/" : "follow/";
+
+    axios.get("http://localhost:8000/" + path + id + "/").then(response => {
+      console.log(response.data);
+      this.setState({users: response.data.users});
+    })
+  }
+
+
+  makeListOftheSearchedProfiles(id, username, isObserved){
+    return (
+    <div>
+      <ul className="list-group">
+        <li className="list-group-item">
+          <p>{username}</p>
+          <button type="button" className="btn btn-primary" onClick={() => this.handleClick(id, isObserved)} id={id}>
+            {isObserved ? 'przestań obserwować' : 'obserwuj'}
+          </button>
+        </li>
+      </ul>
+    </div>
+    )
+
+
+  }
+
+
 
   render() {
     require('./Style.css');
@@ -68,109 +122,8 @@ export default class Search extends React.Component {
                         </ul>
                       </div>
                       <div className="container">
-                        <div className="row justify-content-md-center">
-                          <ul className="list-group align-content-center">
-                            <div>
-                              <li className="list-group-item border-0">
-                                <div className="container d-flex ">
-                                  <div className="card p-3">
-                                    <div className="media">
-                                      <img src="https://imgur.com/ZnxJ2SY.png" className="mr-3"/>
-                                      <div className="media-body">
-                                        <h5 className="mt-2 mb-0">Bella joe</h5>
-                                        <div className="d-flex flex-row justify-content-between align-text-center">
-                                          <small
-                                            className="text-muted">programista</small>
-                                          <div className="col col-lg-2">
-                                            <Link
-                                              to="/myprofile"
-                                              className="btn bg-primary light align-top">
-                                              obserwuj
-                                            </Link>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </li>
-                            </div>
-                            <div>
-                              <li className="list-group-item border-0">
-                                <div className="container d-flex justify-content-left">
-                                  <div className="card p-3">
-                                    <div className="media">
-                                      <img src="https://imgur.com/ZnxJ2SY.png" className="mr-3"/>
-                                      <div className="media-body">
-                                        <h5 className="mt-2 mb-0">Bella joe</h5>
-                                        <div className="d-flex flex-row justify-content-between align-text-center">
-                                          <small
-                                            className="text-muted">programista</small>
-                                          <div className="col col-lg-2">
-                                            <Link
-                                              to="/myprofile"
-                                              className="btn bg-primary light align-top">
-                                              obserwuj
-                                            </Link>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </li>
-                            </div>
-                            <div>
-                              <li className="list-group-item border-0">
-                                <div className="container d-flex justify-content-left">
-                                  <div className="card p-3">
-                                    <div className="media">
-                                      <img src="https://imgur.com/ZnxJ2SY.png" className="mr-3"/>
-                                      <div className="media-body">
-                                        <h5 className="mt-2 mb-0">Bella joe</h5>
-                                        <div className="d-flex flex-row justify-content-between align-text-center">
-                                          <small
-                                            className="text-muted">programista</small>
-                                          <div className="col col-lg-2">
-                                            <Link
-                                              to="/myprofile"
-                                              className="btn bg-primary light align-top">
-                                              obserwuj
-                                            </Link>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </li>
-                            </div>
-                            <div>
-                              <li className="list-group-item border-0">
-                                <div className="container d-flex justify-content-left ">
-                                  <div className="card p-3">
-                                    <div className="media">
-                                      <img src="https://imgur.com/ZnxJ2SY.png" className="mr-3"/>
-                                      <div className="media-body">
-                                        <h5 className="mt-2 mb-0">Bella joe</h5>
-                                        <div className="d-flex flex-row justify-content-between align-text-center">
-                                          <small
-                                            className="text-muted">programista</small>
-                                          <div className="col col-lg-2">
-                                            <Link
-                                              to="/myprofile"
-                                              className="btn bg-primary light align-top">
-                                              obserwuj
-                                            </Link>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </li>
-                            </div>
-                          </ul>
+                        <div className="profile-content col-md-2s align-content-md-center">
+                          {this.renderUsers()}
                         </div>
                       </div>
                     </div>
