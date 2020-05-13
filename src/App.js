@@ -14,6 +14,7 @@ import SeeYouLater from "./main/SeeYouLater";
 import MainPageForLoggedIn from "./main/MainPageForLoggedIn";
 import PhotoDetails from "./main/PhotoDetails";
 import Search from "./main/Search";
+import Profile from "./main/Profile";
 import axios from 'axios';
 
 axios.defaults.withCredentials = true;
@@ -51,6 +52,9 @@ export default function App() {
           </Route>
           <Route path="/search">
             <Search />
+          </Route>
+          <Route path="/profile">
+            <Profile />
           </Route>
         </Switch>
       </div>
