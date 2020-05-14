@@ -45,17 +45,19 @@ export default class MyProfile extends Component {
     )
   }
 
-    renderPhoto(photo) {
-      const src = "http://localhost:8000/photo/" + photo.id + "/"
-      return (
-        <div className="card col-md-4 thumbnail">
-          <img src={src} alt="Lights"/>
-            <div className="card-body">
-              <p className="card-text">{photo.description}</p>
-            </div>
+  renderPhoto(photo) {
+    const src = "http://localhost:8000/photo/" + photo.id + "/"
+    const linkTo = "/photodetails/" + photo.id;
+    return (
+      <Link to={linkTo} className="card col-md-4 thumbnail">
+        <img src={src} alt="Lights"/>
+        <div className="card-body">
+          <p className="card-text">{photo.description}</p>
         </div>
-      )
-    }
+      </Link>
+
+    )
+  }
 
   render() {
     require('./MyProfileStyle.css');
@@ -89,6 +91,7 @@ export default class MyProfile extends Component {
                 <ul className="navbar-nav ml-auto">
                   <div className="btn-group">
                     <Link to="/addphoto" className="btn bg-primary light">Dodaj zdjęcie</Link>
+                    <Link to="/search" className="btn bg-primary light">Znajdź innych użytkowników</Link>
                     <Link to="/seeyoulater" className="btn bg-primary light" onClick={this.handleLogout}>Wyloguj
                       się</Link>
                   </div>

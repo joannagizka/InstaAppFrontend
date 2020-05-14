@@ -3,6 +3,8 @@ import {
   Link,
 } from "react-router-dom";
 import axios from "axios";
+import 'moment-timezone';
+import Moment from 'react-moment';
 
 export default class PhotoDetails extends React.Component {
   constructor(props) {
@@ -79,13 +81,20 @@ export default class PhotoDetails extends React.Component {
     )
   }
 
-  commentPattern(comment) {
+
+  commentPattern(comment, isMe) {
+
     return (
+
       <div>
         <div className="well well-lg">
-          <h4 className="media-heading text-uppercase reviews">{comment.authorUsername} </h4>
+          <h4 className="media-heading text-uppercase reviews">
+            {this.renderCommentAuthorLinkTo(comment)}
+          </h4>
           <ul className="media-date text-uppercase reviews list-inline">
-            {comment.creationTime}
+            <Moment format="YYYY/MM/DD">
+              {comment.creationTime}
+            </Moment>
           </ul>
           <p className="media-comment">
             {comment.content}
@@ -95,30 +104,58 @@ export default class PhotoDetails extends React.Component {
     );
   }
 
+  renderAuthorLinkTo() {
+    if (this.state.isMe) {
+      return (
+        <Link to="/myprofile">
+          {this.state.authorUsername}
+        </Link>
+      )
+    }
+
+    const to = "/profile/" + this.state.authorId;
+    return (
+      <Link to={to}>
+        {this.state.authorUsername}
+      </Link>
+    )
+  }
+
+
+  renderCommentAuthorLinkTo(comment) {
+    if (comment.isMe) {
+      return (
+        <Link to="/myprofile">
+          {comment.authorUsername}
+        </Link>
+      )
+    }
+
+    const to = "/profile/" + comment.authorId;
+    return (
+      <Link to={to}>
+        {comment.authorUsername}
+      </Link>
+    )
+  }
+
 
   render() {
     require('./Style.css');
-    require('./AddPhotoStyle.css');
     const arr = window.location.href.split("/");
     const photoId = arr[arr.length - 1];
     const photoSrc = "http://localhost:8000/photo/" + photoId + "/";
 
 
     return (
-
-
       <div className="layout">
         <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
           <div className="container">
-            <a className="navbar-brand js-scroll-trigger" href="#page-top">insta-app</a>
-            <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-                    aria-label="Toggle navigation">
-              Menu
-              <i className="fas fa-bars"></i>
-            </button>
+
             <div className="collapse navbar-collapse" id="navbarResponsive">
+              <a className="navbar-brand js-scroll-trigger" href="/mainpageforloggedin">insta-app</a>
               <ul className="navbar-nav ml-auto">
+
                 <div className="btn-group">
 
                   <Link to="/myprofile" className="btn bg-primary light">Pokaż mój profil</Link>
@@ -134,9 +171,14 @@ export default class PhotoDetails extends React.Component {
                 <div className="card-body">
 
                   <div className="well well-lg light">
-                    <h4 className="media-heading text-uppercase reviews">{this.state.authorUsername} </h4>
+                    <h4 className="media-heading text-uppercase reviews">
+                      {this.renderAuthorLinkTo()}
+                    </h4>
                     <ul className="media-date text-uppercase reviews list-inline">
-                      {this.state.creationTime}
+                      <Moment format="YYYY/MM/DD">
+                        {this.state.creationTime}
+                      </Moment>
+
                     </ul>
                     <p className="card-text text-justify">{this.state.description}</p>
                   </div>

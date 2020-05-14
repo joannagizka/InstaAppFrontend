@@ -23,6 +23,7 @@ export default class MyProfile extends Component {
 
     this.handleLogout = this.handleLogout.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.isFollowed = this.isFollowed.bind(this);
   }
 
   handleLogout() {
@@ -36,7 +37,6 @@ export default class MyProfile extends Component {
     axios.get("http://localhost:8000/profile/" + this.state.userId + "/").then(response => {
       this.setState({
         username: response.data.username,
-        userId: response.data.userId,
         isObserved: response.data.isObserved,
         photos: response.data.photos,
       });
@@ -59,27 +59,33 @@ export default class MyProfile extends Component {
 
   renderPhoto(photo) {
     const src = "http://localhost:8000/photo/" + photo.id + "/"
+    const linkTo = "/photodetails/" + photo.id;
     return (
-      <div className="card col-md-4 thumbnail">
+      <Link to={linkTo} className="card col-md-4 thumbnail">
         <img src={src} alt="Lights"/>
         <div className="card-body">
           <p className="card-text">{photo.description}</p>
         </div>
-      </div>
+      </Link>
     )
   }
 
-  handleClick(id, isObserved) {
-    console.log(id);
-    console.log(isObserved);
+  handleClick() {
+    const path = this.state.isObserved ? "unfollow/" : "follow/";
 
-    const path = isObserved ? "unfollow/" : "follow/";
-
-    axios.get("http://localhost:8000/" + path + id + "/").then(response => {
-      console.log(response.data);
-      this.setState({users: response.data.users});
+    axios.get("http://localhost:8000/" + path + this.state.userId + "/").then(response => {
+      this.setState({isObserved: !this.state.isObserved});
     })
   }
+
+  isFollowed() {
+    return (
+      <button type="button" className="btn btn-primary" onClick={this.handleClick} id={this.state.userId}>
+        {this.state.isObserved ? 'przestań obserwować' : 'obserwuj'}
+      </button>
+    );
+  }
+
 
   render() {
     require('./MyProfileStyle.css');
@@ -134,7 +140,7 @@ export default class MyProfile extends Component {
                     </div>
                   </div>
                   <div className="profile-userbuttons">
-                    <button type="button" className="btn btn-success btn-sm">Obserwuj</button>
+                    {this.isFollowed()}
                   </div>
                   <div className="profile-usermenu">
                     <ul className="nav">

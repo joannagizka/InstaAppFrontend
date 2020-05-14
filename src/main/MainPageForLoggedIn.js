@@ -67,7 +67,7 @@ export default class MainPage extends React.Component {
               <ul className="navbar-nav ml-auto">
                 <div className="btn-group">
                   <Link to="/addphoto" className="btn bg-primary light">Dodaj zdjęcie</Link>
-                  <Link to="/myprofile" className="btn bg-primary light">Pokaż mój profil</Link>
+                  <Link to="/myprofile" className="btn bg-primary light">Mój profil </Link>
                   <Link to="/search" className="btn bg-primary light">Znajdź innych użytkowników</Link>
                   <Link to="/seeyoulater" className="btn bg-primary light" onClick={this.handleLogout}>Wyloguj
                     się</Link>

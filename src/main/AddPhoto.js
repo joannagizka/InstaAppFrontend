@@ -90,6 +90,7 @@ export default class AddPhoto extends Component {
               <ul className="navbar-nav ml-auto">
                 <div className="btn-group">
                   <Link to="/myprofile" className="btn bg-primary light">Mój profil</Link>
+                  <Link to="/search" className="btn bg-primary light">Znajdź innych użytkowników</Link>
                   <Link
                     to="/seeyoulater"
                     className="btn bg-primary light"

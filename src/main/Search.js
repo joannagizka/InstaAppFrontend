@@ -46,23 +46,27 @@ export default class Search extends React.Component {
   }
 
 
-  makeListOftheSearchedProfiles(id, username, isObserved){
+  makeListOftheSearchedProfiles(id, username, isObserved) {
+    const to = "/profile/" + id
     return (
-    <div>
-      <ul className="list-group">
-        <li className="list-group-item">
-          <p>{username}</p>
-          <button type="button" className="btn btn-primary" onClick={() => this.handleClick(id, isObserved)} id={id}>
-            {isObserved ? 'przestań obserwować' : 'obserwuj'}
-          </button>
-        </li>
-      </ul>
-    </div>
+      <div>
+        <ul className="list-group">
+          <li className="list-group-item">
+            <Link to={to}>
+              <p>
+                {username}
+              </p>
+            </Link>
+            <button type="button" className="btn btn-primary" onClick={() => this.handleClick(id, isObserved)} id={id}>
+              {isObserved ? 'przestań obserwować' : 'obserwuj'}
+            </button>
+          </li>
+        </ul>
+      </div>
     )
 
 
   }
-
 
 
   render() {

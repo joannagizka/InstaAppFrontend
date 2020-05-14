@@ -13,7 +13,7 @@ export default class Logging extends Component {
       username: "",
       password: "",
       loginErrors: "",
-      redirectToWelcome: false,
+      redirectToMainPageForLoggedIn: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,8 +41,8 @@ export default class Logging extends Component {
       );
 
     result.then(response => {
-     /* alert(response.data);*/
-      this.setState({redirectToWelcome: true});
+
+      this.setState({redirectToMainPageForLoggedIn: true});
     });
 
     result.catch(error => {
@@ -57,8 +57,8 @@ export default class Logging extends Component {
     require('./MainStyle.css');
 
 
-    if (this.state.redirectToWelcome) {
-      return <Redirect to="/welcome" />;
+    if (this.state.redirectToMainPageForLoggedIn) {
+      return <Redirect to="/mainpageforloggedin" />;
     }
 
     return (
