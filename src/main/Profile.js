@@ -130,10 +130,6 @@ export default class MyProfile extends Component {
             <div className="row profile">
               <div className="col-md-3">
                 <div className="profile-sidebar">
-                  <div className="profile-userpic">
-                    <img
-                      className="img-responsive" alt=""/>
-                  </div>
                   <div className="profile-usertitle">
                     <div className="profile-usertitle-name">
                       <h2>{this.state.username}</h2>
@@ -148,11 +144,6 @@ export default class MyProfile extends Component {
                         <a href="#">
                           <i className="glyphicon glyphicon-home"></i>
                           Przegląd </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i className="glyphicon glyphicon-user"></i>
-                          Ustawienia konta </a>
                       </li>
                     </ul>
                   </div>

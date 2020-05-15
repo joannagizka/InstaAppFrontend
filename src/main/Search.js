@@ -7,17 +7,30 @@ export default class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: []
+      users: [],
+      query: "",
     };
     this.handleClick = this.handleClick.bind(this);
+    this.searchUsers = this.searchUsers.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
-    axios.get("http://localhost:8000/users/").then(response => {
+    this.searchUsers()
+  }
 
-      console.log(response.data);
+  searchUsers() {
+    const query = this.state.query ? "?username=" + this.state.query : "";
+
+    axios.get("http://localhost:8000/users/" + query).then(response => {
       this.setState({users: response.data.users});
     })
+  }
+
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   }
 
   renderUsers() {
@@ -40,8 +53,7 @@ export default class Search extends React.Component {
     const path = isObserved ? "unfollow/" : "follow/";
 
     axios.get("http://localhost:8000/" + path + id + "/").then(response => {
-      console.log(response.data);
-      this.setState({users: response.data.users});
+      this.searchUsers()
     })
   }
 
@@ -115,13 +127,16 @@ export default class Search extends React.Component {
                           type="search"
                           placeholder="Wpisz nazwę użytkownika, którego szukasz"
                           aria-describedby="button-addon4"
-                          className="form-control bg-none border-1">
-                        </input>
+                          name="query"
+                          value={this.state.query}
+                          onChange={this.handleChange}
+                          className="form-control bg-none border-1"
+                          required/>
                       </div>
                       <div>
                         <ul className="ml-auto">
                           <div className="btn-group">
-                            <Link to="/myprofile" className="btn bg-primary light">Szukaj</Link>
+                            <button type="button" className="btn bg-primary light" onClick={() => this.searchUsers()}>Szukaj</button>
                           </div>
                         </ul>
                       </div>

@@ -19,12 +19,15 @@ export default class MyProfile extends Component {
 
   handleLogout() {
     axios.post('http://localhost:8000/logout/').then(response => {
-      console.log(response.data.Logout);
       this.setState({redirectToWelcome: true});
     });
   }
 
   componentDidMount() {
+    this.fetchProfileData()
+  }
+
+  fetchProfileData() {
     axios.get('http://localhost:8000/myProfile/').then(response => {
       console.log(response.data.username);
       this.setState({username: response.data.username, photos: response.data.photos});
@@ -49,14 +52,22 @@ export default class MyProfile extends Component {
     const src = "http://localhost:8000/photo/" + photo.id + "/"
     const linkTo = "/photodetails/" + photo.id;
     return (
-      <Link to={linkTo} className="card col-md-4 thumbnail">
-        <img src={src} alt="Lights"/>
-        <div className="card-body">
-          <p className="card-text">{photo.description}</p>
-        </div>
-      </Link>
-
+      <div>
+        <Link to={linkTo} className="card col-md-4 thumbnail">
+          <img src={src} alt="Lights"/>
+          <div className="card-body">
+            <p className="card-text">{photo.description}</p>
+          </div>
+        </Link>
+        <button type="button" className="btn bg-primary light" onClick={() => this.deletePhoto(photo.id)}>Usun</button>
+      </div>
     )
+  }
+
+  deletePhoto(photoId) {
+    axios.post('http://localhost:8000/photoMeta/' + photoId + "/delete/").then(response => {
+      this.fetchProfileData()
+    })
   }
 
   render() {
@@ -103,29 +114,20 @@ export default class MyProfile extends Component {
             <div className="row profile">
               <div className="col-md-3">
                 <div className="profile-sidebar">
-                  <div className="profile-userpic">
-                    <img
-                      className="img-responsive" alt=""/>
-                  </div>
                   <div className="profile-usertitle">
                     <div className="profile-usertitle-name">
                       <h2>{this.state.username}</h2>
                     </div>
                   </div>
-                  <div className="profile-userbuttons">
-                    <button type="button" className="btn btn-success btn-sm">Obserwuj</button>
-                  </div>
                   <div className="profile-usermenu">
                     <ul className="nav">
                       <li className="active">
                         <a href="#">
-                          <i className="glyphicon glyphicon-home"></i>
-                          Przegląd </a>
+                          <i className="glyphicon glyphicon-home"></i>Przegląd </a>
                       </li>
                       <li>
                         <a href="#">
-                          <i className="glyphicon glyphicon-user"></i>
-                          Ustawienia konta </a>
+                          <i className="glyphicon glyphicon-user"></i>Ustawienia konta </a>
                       </li>
                     </ul>
                   </div>

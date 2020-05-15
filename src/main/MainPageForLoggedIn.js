@@ -44,6 +44,8 @@ export default class MainPage extends React.Component {
         <div className="card-body">
           <p className="card-text">{photo.description}</p>
         </div>
+        <p>likes: {photo.likesCount}</p>
+        <p>comments: {photo.commentsCount}</p>
 
       </Link>
     )
@@ -84,7 +86,6 @@ export default class MainPage extends React.Component {
                 <div className="header-content mx-auto">
                   <h1 className="mb-5">Dziel się chwilą ze swoimi znajomymi, wrzucaj zdjęcia kiedy chcesz i gdzie
                     chcesz!</h1>
-                  <a href="#download" className="btn btn-outline btn-xl js-scroll-trigger">Zobacz jak!</a>
                 </div>
               </div>
             </div>
