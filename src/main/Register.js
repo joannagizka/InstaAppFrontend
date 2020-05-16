@@ -52,7 +52,7 @@ export default class Register extends React.Component {
     require('./RegisterStyle.css');
 
     if (this.state.redirectToWelcome) {
-      return <Redirect to="/welcome"/>;
+      return <Redirect to="/mainpageforloggedin"/>;
     }
     return (
 

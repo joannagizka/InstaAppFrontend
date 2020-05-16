@@ -71,8 +71,7 @@ export default class MainPage extends React.Component {
                   <Link to="/addphoto" className="btn bg-primary light">Dodaj zdjęcie</Link>
                   <Link to="/myprofile" className="btn bg-primary light">Mój profil </Link>
                   <Link to="/search" className="btn bg-primary light">Znajdź innych użytkowników</Link>
-                  <Link to="/seeyoulater" className="btn bg-primary light" onClick={this.handleLogout}>Wyloguj
-                    się</Link>
+                  <Link to="/logout" className="btn bg-primary light">Wyloguj się</Link>
                 </div>
               </ul>
 

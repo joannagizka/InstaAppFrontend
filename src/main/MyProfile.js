@@ -10,17 +10,10 @@ export default class MyProfile extends Component {
     this.state = {
       username: "",
       Logout: "",
-      redirectToWelcome: false,
       photos: [],
+      displaySettings: false,
+      redirectToMainPage: false,
     };
-
-    this.handleLogout = this.handleLogout.bind(this);
-  }
-
-  handleLogout() {
-    axios.post('http://localhost:8000/logout/').then(response => {
-      this.setState({redirectToWelcome: true});
-    });
   }
 
   componentDidMount() {
@@ -29,7 +22,6 @@ export default class MyProfile extends Component {
 
   fetchProfileData() {
     axios.get('http://localhost:8000/myProfile/').then(response => {
-      console.log(response.data.username);
       this.setState({username: response.data.username, photos: response.data.photos});
     })
   }
@@ -70,14 +62,30 @@ export default class MyProfile extends Component {
     })
   }
 
+  renderSettings() {
+    return (
+      <div>
+        <p>Uwaga usuniecie konta jest nieodwracalne!</p>
+        <button type="button" className="btn bg-primary light" onClick={() => this.deleteAccount()}>Usun</button>
+      </div>
+    )
+  }
+
+  deleteAccount() {
+    axios.post('http://localhost:8000/deleteAccount/').then(response => {
+      this.setState({redirectToMainPage: true})
+    })
+  }
+
   render() {
     require('./MyProfileStyle.css');
     require('./Style.css');
     require('./MainStyle.css');
 
-    if (this.state.redirectToWelcome) {
-      return <Redirect to="/welcome"/>;
+    if (this.state.redirectToMainPage) {
+      return <Redirect to="/"/>;
     }
+
     return (
       <div>
         <div className="layout">
@@ -103,8 +111,7 @@ export default class MyProfile extends Component {
                   <div className="btn-group">
                     <Link to="/addphoto" className="btn bg-primary light">Dodaj zdjęcie</Link>
                     <Link to="/search" className="btn bg-primary light">Znajdź innych użytkowników</Link>
-                    <Link to="/seeyoulater" className="btn bg-primary light" onClick={this.handleLogout}>Wyloguj
-                      się</Link>
+                    <Link to="/logout" className="btn bg-primary light">Wyloguj się</Link>
                   </div>
                 </ul>
               </div>
@@ -121,12 +128,12 @@ export default class MyProfile extends Component {
                   </div>
                   <div className="profile-usermenu">
                     <ul className="nav">
-                      <li className="active">
-                        <a href="#">
+                      <li className={this.state.displaySettings ? "" : "active"}>
+                        <a href="#" onClick={() => this.setState({displaySettings: false})}>
                           <i className="glyphicon glyphicon-home"></i>Przegląd </a>
                       </li>
-                      <li>
-                        <a href="#">
+                      <li className={this.state.displaySettings ? "active" : ""}>
+                        <a href="#" onClick={() => this.setState({displaySettings: true})}>
                           <i className="glyphicon glyphicon-user"></i>Ustawienia konta </a>
                       </li>
                     </ul>
@@ -135,7 +142,7 @@ export default class MyProfile extends Component {
               </div>
               <div className="col-md-9">
                 <div className="profile-content">
-                  {this.renderAllPhotos()}
+                  {this.state.displaySettings ? this.renderSettings() : this.renderAllPhotos()}
                 </div>
               </div>
             </div>

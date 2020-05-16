@@ -7,15 +7,14 @@ import {
 import MainPage from "./main/MainPage";
 import Register from "./main/Register";
 import Logging from "./main/Logging";
-import WelcomeSite from "./main/WelcomeSite";
 import MyProfile from "./main/MyProfile";
 import AddPhoto from "./main/AddPhoto";
-import SeeYouLater from "./main/SeeYouLater";
 import MainPageForLoggedIn from "./main/MainPageForLoggedIn";
 import PhotoDetails from "./main/PhotoDetails";
 import Search from "./main/Search";
 import Profile from "./main/Profile";
 import axios from 'axios';
+import Logout from "./main/Logout";
 
 axios.defaults.withCredentials = true;
 export default function App() {
@@ -29,20 +28,17 @@ export default function App() {
           <Route path="/login">
             <Logging />
           </Route>
+          <Route path="/logout">
+            <Logout />
+          </Route>
           <Route exact path="/">
             <MainPage />
-          </Route>
-          <Route path="/welcome">
-            <WelcomeSite />
           </Route>
           <Route path="/myprofile">
             <MyProfile />
           </Route>
           <Route path="/addphoto">
             <AddPhoto />
-          </Route>
-          <Route path="/seeyoulater">
-            <SeeYouLater />
           </Route>
           <Route path="/mainpageforloggedin">
             <MainPageForLoggedIn />

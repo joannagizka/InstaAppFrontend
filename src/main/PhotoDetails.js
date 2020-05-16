@@ -191,8 +191,7 @@ export default class PhotoDetails extends React.Component {
                 <div className="btn-group">
 
                   <Link to="/myprofile" className="btn bg-primary light">Pokaż mój profil</Link>
-                  <Link to="/seeyoulater" className="btn bg-primary light" onClick={this.handleLogout}>Wyloguj
-                    się</Link>
+                  <Link to="/logout" className="btn bg-primary light">Wyloguj się</Link>
                 </div>
               </ul>
               <div className="card mx-auto">

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, {Component} from "react";
-import {Link, Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 
 export default class MyProfile extends Component {
@@ -13,24 +13,13 @@ export default class MyProfile extends Component {
 
     this.state = {
       username: "",
-      Logout: "",
-      redirectToWelcome: false,
       photos: [],
       userId: userId,
       isObserved: false,
-
     };
 
-    this.handleLogout = this.handleLogout.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.isFollowed = this.isFollowed.bind(this);
-  }
-
-  handleLogout() {
-    axios.post('http://localhost:8000/logout/').then(response => {
-      console.log(response.data.Logout);
-      this.setState({redirectToWelcome: true});
-    });
   }
 
   componentDidMount() {
@@ -92,9 +81,6 @@ export default class MyProfile extends Component {
     require('./Style.css');
     require('./MainStyle.css');
 
-    if (this.state.redirectToWelcome) {
-      return <Redirect to="/welcome"/>;
-    }
     return (
       <div>
         <div className="layout">
@@ -119,8 +105,7 @@ export default class MyProfile extends Component {
                 <ul className="navbar-nav ml-auto">
                   <div className="btn-group">
                     <Link to="/addphoto" className="btn bg-primary light">Dodaj zdjęcie</Link>
-                    <Link to="/seeyoulater" className="btn bg-primary light" onClick={this.handleLogout}>Wyloguj
-                      się</Link>
+                    <Link to="/logout" className="btn bg-primary light">Wyloguj się</Link>
                   </div>
                 </ul>
               </div>

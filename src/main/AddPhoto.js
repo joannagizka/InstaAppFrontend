@@ -92,9 +92,9 @@ export default class AddPhoto extends Component {
                   <Link to="/myprofile" className="btn bg-primary light">Mój profil</Link>
                   <Link to="/search" className="btn bg-primary light">Znajdź innych użytkowników</Link>
                   <Link
-                    to="/seeyoulater"
+                    to="/logout"
                     className="btn bg-primary light"
-                    onClick={this.handleLogout}>
+                    >
                     Wyloguj się
                   </Link>
                 </div>
