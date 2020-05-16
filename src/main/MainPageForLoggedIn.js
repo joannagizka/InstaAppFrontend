@@ -3,6 +3,7 @@ import {Link, Redirect} from "react-router-dom";
 import './Style.css';
 import './MainStyle.css';
 import axios from "axios";
+import ReactPaginate from 'react-paginate';
 
 export default class MainPage extends React.Component {
 
@@ -10,16 +11,26 @@ export default class MainPage extends React.Component {
     super(props);
     this.state = {
       photos: [],
+      pageCount: 0
     };
+
+    this.handlePageClick = this.handlePageClick.bind(this);
   }
 
   componentDidMount() {
-
-    axios.get('http://localhost:8000/allPhotos/').then(response => {
-      this.setState({photos: response.data.photos});
-    })
+    this.fetchPhotosMetadata(0);
   }
 
+  handlePageClick(page) {
+    this.fetchPhotosMetadata(page.selected);
+  }
+
+  fetchPhotosMetadata(pageNumber) {
+    axios.get('http://localhost:8000/allPhotos/?page=' + pageNumber).then(response => {
+      const pageCount = response.data.totalCount / 21;
+      this.setState({photos: response.data.photos, pageCount: pageCount});
+    })
+  }
 
   renderAllPhotos() {
     const renderedPhotos = [];
@@ -94,6 +105,19 @@ export default class MainPage extends React.Component {
           <div className="profile-content col-md-2s align-content-md-center">
             {this.renderAllPhotos()}
           </div>
+          <ReactPaginate
+            previousLabel={'previous'}
+            nextLabel={'next'}
+            breakLabel={'...'}
+            breakClassName={'break-me'}
+            pageCount={this.state.pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={this.handlePageClick}
+            containerClassName={'pagination'}
+            subContainerClassName={'pages pagination'}
+            activeClassName={'active'}
+          />
         </div>
       </div>
     );
