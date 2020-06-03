@@ -45,13 +45,24 @@ export default class MyProfile extends Component {
     const linkTo = "/photodetails/" + photo.id;
     return (
       <div>
-        <Link to={linkTo} className="card col-md-4 thumbnail">
+        <div className="card-body">
+        <Link to={linkTo} className="card col-md-8 thumbnail">
           <img src={src} alt="Lights"/>
-          <div className="card-body">
+
             <p className="card-text">{photo.description}</p>
-          </div>
+
+
+
         </Link>
-        <button type="button" className="btn bg-primary light" onClick={() => this.deletePhoto(photo.id)}>Usun</button>
+        <div className="dropdown">
+          <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          </button>
+          <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <button type="button" className="btn" onClick={() => this.deletePhoto(photo.id)}>Usuń</button>
+          </div>
+        </div>
+        </div>
       </div>
     )
   }
@@ -94,7 +105,7 @@ export default class MyProfile extends Component {
               <a
                 className="navbar-brand js-scroll-trigger"
                 href="/mainpageforloggedin">
-                insta-app
+                WhiteWall
               </a>
               <button
                 className="navbar-toggler navbar-toggler-right"
@@ -118,9 +129,10 @@ export default class MyProfile extends Component {
             </div>
           </nav>
           <div className="container">
-            <div className="row profile">
+            <div className="row profile ">
               <div className="col-md-3">
-                <div className="profile-sidebar">
+
+                <div className="profile-sidebar  ">
                   <div className="profile-usertitle">
                     <div className="profile-usertitle-name">
                       <h2>{this.state.username}</h2>
@@ -140,6 +152,7 @@ export default class MyProfile extends Component {
                   </div>
                 </div>
               </div>
+
               <div className="col-md-9">
                 <div className="profile-content">
                   {this.state.displaySettings ? this.renderSettings() : this.renderAllPhotos()}

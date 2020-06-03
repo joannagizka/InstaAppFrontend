@@ -45,7 +45,7 @@
     width: 20%;
     cursor: pointer;
     background: #0062cc;
-    color: #fff;
+
     margin-top: 40px;
     margin-inside: 20px;
 }
@@ -97,9 +97,6 @@
     width: 600px;
 }
 
-.body {
-    background-color: #f1f3fa;
-}
 
 
 img {
@@ -110,4 +107,19 @@ img {
 .card {
     width: 600px;
     position: center;
+}
+
+.mx-auto{
+    padding-top: 100px;
+}
+
+.mb-5{
+    color: black;
+}
+.border{
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 20px;
+    width: 200px;
+    height: 150px;
 }

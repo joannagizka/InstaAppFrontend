@@ -21,7 +21,6 @@ export default class Logout extends Component {
     if (this.state.redirectToMainPage) {
       return <Redirect to="/"/>;
     }
-    
     return ""
   }
 }

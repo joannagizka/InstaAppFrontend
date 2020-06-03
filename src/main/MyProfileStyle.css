@@ -1,6 +1,4 @@
-body {
-    background: #F1F3FA;
-}
+
 
 /* Profile container */
 .profile {
@@ -10,7 +8,7 @@ body {
 /* Profile sidebar */
 .profile-sidebar {
     padding: 20px 0 10px 0;
-    background: #fff;
+
 }
 
 .profile-userpic img {
@@ -106,3 +104,6 @@ body {
     min-height: 460px;
 }
 
+.card-text {
+    color: black;
+}

@@ -41,7 +41,6 @@ export default class Logging extends Component {
       );
 
     result.then(response => {
-
       this.setState({redirectToMainPageForLoggedIn: true});
     });
 
@@ -65,7 +64,7 @@ export default class Logging extends Component {
       <div>
         <nav className="navbar navbar-expand-lg navbar-light sticky-top" id="mainNav">
           <div className="container">
-            <a className="navbar-brand js-scroll-trigger" href="/">insta-app</a>
+            <a className="navbar-brand js-scroll-trigger" href="/">WhiteWall</a>
             <button
               className="navbar-toggler navbar-toggler-right"
               type="button"
@@ -88,12 +87,13 @@ export default class Logging extends Component {
           </div>
         </nav>
 
-          <div className="base-container center form-group justify-content-center row">
+          <div className="base-container center form-group d-flex justify-content-center">
             <div className="container register-form flex-column">
               <div className="form">
                 <div className="form-content">
                   <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-md-6 mx-auto">
+                      <p>Zaloguj się do WhiteWall'a</p>
                       <div className="form-group">
                         <label id="username"/>
                           <input

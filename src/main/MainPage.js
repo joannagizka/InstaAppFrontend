@@ -10,7 +10,7 @@ export default class MainPage extends React.Component {
       <div className="layout">
         <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
           <div className="container">
-            <a className="navbar-brand js-scroll-trigger" href="/">insta-app</a>
+            <a className="navbar-brand js-scroll-trigger" href="/">WhiteWall</a>
             <button 
               className="navbar-toggler navbar-toggler-right" 
               
@@ -39,7 +39,6 @@ export default class MainPage extends React.Component {
               <div className="col-lg-7 my-auto">
                 <div className="header-content mx-auto">
                   <h1 className="mb-5">Dziel się chwilą ze swoimi znajomymi, wrzucaj zdjęcia kiedy chcesz i gdzie chcesz!</h1>
-                  <a href="#download" className="btn btn-outline btn-xl js-scroll-trigger">Zobacz jak!</a>
                 </div>
               </div>
             </div>

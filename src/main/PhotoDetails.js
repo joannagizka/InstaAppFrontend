@@ -1,8 +1,8 @@
 import React from 'react'
-import {
-  Link,
-  Redirect,
-} from "react-router-dom";
+    import {
+      Link,
+      Redirect,
+    } from "react-router-dom";
 import axios from "axios";
 import 'moment-timezone';
 import Moment from 'react-moment';
@@ -63,7 +63,9 @@ export default class PhotoDetails extends React.Component {
     const data = {
       "content": this.state.content,
     };
-    let result = axios.post("http://localhost:8000/photoMeta/" + this.state.photoId + "/comments/", JSON.stringify(data))
+    let result = axios.post("http://localhost:8000/photoMeta/"
+      + this.state.photoId +
+      "/comments/", JSON.stringify(data))
     result.then(response => {
       this.setState({content: ""})
       this.fetchPhotoMetadata("")
@@ -78,7 +80,6 @@ export default class PhotoDetails extends React.Component {
 
     for (let comment of this.state.comments) {
       renderedComments.push(this.commentPattern(comment));
-
     }
 
     return (
@@ -92,7 +93,6 @@ export default class PhotoDetails extends React.Component {
   commentPattern(comment) {
 
     return (
-
       <div>
         <div className="well well-lg">
           <h4 className="media-heading text-uppercase reviews">
@@ -106,7 +106,6 @@ export default class PhotoDetails extends React.Component {
           <p className="media-comment">
             {comment.content}
           </p>
-
         </div>
       </div>
     );
@@ -158,10 +157,9 @@ export default class PhotoDetails extends React.Component {
   renderDeleteButton() {
     if (this.state.isMe) {
       return (
-        <button type="button" className="btn bg-primary light" onClick={this.deletePhoto}>Usun</button>
+          <button type="button" className="btn bg-primary light" onClick={this.deletePhoto}>Usun</button>
       )
     }
-
     return null;
   }
 
@@ -181,11 +179,11 @@ export default class PhotoDetails extends React.Component {
 
     return (
       <div className="layout">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light">
           <div className="container">
 
             <div className="collapse navbar-collapse" id="navbarResponsive">
-              <a className="navbar-brand js-scroll-trigger" href="/mainpageforloggedin">insta-app</a>
+              <a className="navbar-brand js-scroll-trigger" href="/mainpageforloggedin">WhiteWall</a>
               <ul className="navbar-nav ml-auto">
 
                 <div className="btn-group">
@@ -194,8 +192,9 @@ export default class PhotoDetails extends React.Component {
                   <Link to="/logout" className="btn bg-primary light">Wyloguj się</Link>
                 </div>
               </ul>
-              <div className="card mx-auto">
-                <img className="centered-and-cropped rounded mx-auto d-block"
+              <div className="container mx-auto"  >
+              <div className="card">
+                <img className="centered-and-cropped mx-auto"
 
                      src={photoSrc}
                      alt="your image"/>
@@ -239,7 +238,6 @@ export default class PhotoDetails extends React.Component {
                     </svg>
                     <p>{this.state.comments.length}</p>
 
-
                     <ul className="media-date text-uppercase reviews list-inline">
                       <Moment format="YYYY/MM/DD">
                         {this.state.creationTime}
@@ -248,15 +246,20 @@ export default class PhotoDetails extends React.Component {
                     </ul>
                     <p className="card-text text-justify">{this.state.description}</p>
 
-                    {this.state.isMe ? <button type="button" className="btn bg-primary light" onClick={() => this.deletePhoto()}>Usun</button> : null}
+                    {this.state.isMe ? <button type="button" className="btn bg-primary light" onClick={() => this.deletePhoto()}>Usuń</button> : null}
                   </div>
                   <div className="media-body">
                     <div className="form-group">
                       <label htmlFor="exampleFormControlTextarea1">Dodaj komentarz:</label>
+                      <textarea
+                        className="form-control"
+                        id="exampleFormControlTextarea1"
+                        rows="4"
+                        value={this.state.content}
+                        onChange={this.handleContentChange}
+                      />
 
-                      <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"
-                                value={this.state.content}
-                                onChange={this.handleContentChange}/>
+
                       <button className="btn bg-primary light" onClick={this.handleSubmitComment}> Dodaj</button>
                     </div>
                   </div>
@@ -264,6 +267,7 @@ export default class PhotoDetails extends React.Component {
                 </div>
                 <div>{this.renderAllComments()}</div>
 
+              </div>
               </div>
             </div>
           </div>

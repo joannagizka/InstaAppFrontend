@@ -26,7 +26,7 @@ export default class Register extends React.Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault(); //tego tez
+    event.preventDefault();
 
     const data = {
       username: this.state.username,
@@ -38,6 +38,7 @@ export default class Register extends React.Component {
       console.log(response);
       this.setState({redirectToWelcome: true});
     })
+
     result.catch(error => {
       if (error.response.status === 400) {
         alert("Użytkownik o danej nazwie już istnieje");
@@ -49,7 +50,6 @@ export default class Register extends React.Component {
   render() {
     require('./Style.css');
     require('./MainStyle.css');
-    require('./RegisterStyle.css');
 
     if (this.state.redirectToWelcome) {
       return <Redirect to="/mainpageforloggedin"/>;
@@ -60,7 +60,7 @@ export default class Register extends React.Component {
         {/*tutaj jest nagłówek navbar */}
         <nav className="navbar navbar-expand-lg navbar-light sticky-top" id="mainNav">
           <div className="container">
-            <a className="navbar-brand js-scroll-trigger" href="\">insta-app</a>
+            <a className="navbar-brand js-scroll-trigger" href="\">WhiteWall</a>
             <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                     data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -83,7 +83,8 @@ export default class Register extends React.Component {
             <div className="form">
               <div className="form-content">
                 <div className="row">
-                  <div className="col-md-6">
+                  <div className="col-md-6 mx-auto">
+                    <p>Utwórz konto w WhiteWall</p>
                     <div className="form-group">
                       <label id="username"/>
                       <input

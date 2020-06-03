@@ -53,10 +53,9 @@ export default class AddPhoto extends Component {
       "http://localhost:8000/addPhoto/",
       formData
     ).then(response => {
-      console.log(response);
-      this.setState({redirectToMyProfile: true});
-     }
-
+        console.log(response);
+        this.setState({redirectToMyProfile: true});
+      }
     );
 
     event.preventDefault();
@@ -66,17 +65,17 @@ export default class AddPhoto extends Component {
 
     require('./Style.css');
     require('./MainStyle.css');
-    require("./AddPhotoStyle.css");
+
 
     if (this.state.redirectToMyProfile) {
       return <Redirect to="/myprofile"/>;
     }
 
     return (
-      <div className="layout text-center col-md-8">
+      <div className="layout text-center">
         <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
           <div className="container">
-            <a className="navbar-brand js-scroll-trigger" href="/mainpageforloggedin">insta-app</a>
+            <a className="navbar-brand js-scroll-trigger" href="/mainpageforloggedin">WhiteWall</a>
             <button className="navbar-toggler navbar-toggler-right"
                     type="button" data-toggle="collapse"
                     data-target="#navbarResponsive"
@@ -94,7 +93,7 @@ export default class AddPhoto extends Component {
                   <Link
                     to="/logout"
                     className="btn bg-primary light"
-                    >
+                  >
                     Wyloguj się
                   </Link>
                 </div>
@@ -102,45 +101,56 @@ export default class AddPhoto extends Component {
             </div>
           </div>
         </nav>
-        <form onSubmit={this.handleSubmit}>
-          <div className="center1">
-            <div className="frame">
-              <div className="center">
-                <div className="title">
-                  <h1>Wybierz zdjęcie</h1>
+
+        <div className="d-flex justify-content-center col-6 mx-auto">
+          <div className="container">
+            <row>
+              <form onSubmit={this.handleSubmit}>
+                <div className="col">
+                  <h3 className="text-left">Wybierz zdjęcie</h3>
                 </div>
-                <div className="dropzone">
-                  <img src="https://img.icons8.com/wired/64/000000/add-image.png"/>
-                  <input
-                    type="file"
-                    name="Upload photo"
-                    accept="image/png, image/jpeg"
-                    onChange={this.handlePhotoUploadChange}
-                    className="upload-input"
-                  />
+
+
+                <div className="col mx-auto text-center">
+
+                  <div className="form-group">
+                    <input
+                      type="file" c
+                      lassName="form-control-file"
+                      id="exampleFormControlFile1"
+                      accept="image/png, image/jpeg"
+                      onChange={this.handlePhotoUploadChange}
+                    />
+                  </div>
+
                 </div>
+
+                <div className="col mx-auto text-center">
                 <textarea
-                  id="description"
-                  placeholder="Dodaj opis do zdjęcia"
+                  className="form-control"
+                  id="textareacontent"
+                  rows="3"
                   value={this.state.description}
                   onChange={this.handleDescriptionChange}
                   required
                 />
-                <button type="submit" className="btn" name="uploadbutton">Dodaj</button>
-              </div>
-              <img
-                className="centered-and-cropped"
-                width="500"
-                height="500"
-                src={this.state.photoSrc}
-                alt="your image"
-              />
-            </div>
+                </div>
+
+                <img
+                  className="centered-and-cropped rounded mx-auto d-block"
+                  src={this.state.photoSrc}
+                  alt="your image"/>
+
+                <button type="submit" className="btn btn-primary button-button" name="uploadbutton">Dodaj</button>
+
+              </form>
+            </row>
+
+
           </div>
-        </form>
+        </div>
+
       </div>
     );
   }
 }
-
-

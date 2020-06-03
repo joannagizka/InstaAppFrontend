@@ -89,7 +89,7 @@ export default class Search extends React.Component {
         <div className="layout">
           <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div className="container">
-              <a className="navbar-brand js-scroll-trigger" href="/mainpageforloggedin">insta-app</a>
+              <a className="navbar-brand js-scroll-trigger rounded mb-0" href="/mainpageforloggedin">WhiteWall</a>
               <button
                 className="navbar-toggler navbar-toggler-right"
                 type="button" data-toggle="collapse"

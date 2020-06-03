@@ -61,7 +61,6 @@ export default class MyProfile extends Component {
 
   handleClick() {
     const path = this.state.isObserved ? "unfollow/" : "follow/";
-
     axios.get("http://localhost:8000/" + path + this.state.userId + "/").then(response => {
       this.setState({isObserved: !this.state.isObserved});
     })
@@ -89,7 +88,7 @@ export default class MyProfile extends Component {
               <a
                 className="navbar-brand js-scroll-trigger"
                 href="/mainpageforloggedin">
-                insta-app
+                WhiteWall
               </a>
               <button
                 className="navbar-toggler navbar-toggler-right"
