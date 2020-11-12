@@ -4,6 +4,10 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+
+import axios from "axios";
+
+
 import MainPage from "./main/MainPage";
 import Register from "./main/Register";
 import Logging from "./main/Logging";
@@ -13,11 +17,12 @@ import MainPageForLoggedIn from "./main/MainPageForLoggedIn";
 import PhotoDetails from "./main/PhotoDetails";
 import Search from "./main/Search";
 import Profile from "./main/Profile";
-import axios from 'axios';
 import Logout from "./main/Logout";
 
 axios.defaults.withCredentials = true;
-export default function App() {
+
+
+const App = () => {
   return (
     <Router>
       <div>
@@ -57,4 +62,6 @@ export default function App() {
     </Router>
   );
 }
+
+export default App;
 
