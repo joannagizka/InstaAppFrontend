@@ -1,26 +1,22 @@
-import React, {Component} from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 import {Redirect} from "react-router-dom";
 
-export default class Logout extends Component {
+const Logout = () => {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      redirectToMainPage: false,
-    };
-  }
-  
-  componentDidMount() {
-    axios.post('http://localhost:8000/logout/').then(response => {
-      this.setState({redirectToMainPage: true});
+  const [redirect, setRedirect] = useState(false)
+
+  useEffect(() => {
+    axios.post('http://localhost:8000/logout/').then((response) => {
+      setRedirect(true);
     });
+  }, [])
+
+
+  if (redirect) {
+    return <Redirect to="/"/>;
   }
-  
-  render() {
-    if (this.state.redirectToMainPage) {
-      return <Redirect to="/"/>;
-    }
-    return ""
-  }
+  return ""
 }
+
+export default Logout;
