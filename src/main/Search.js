@@ -1,43 +1,33 @@
-import React from 'react';
-import {Link, Redirect} from "react-router-dom";
+import React, {useState, useEffect} from 'react';
+import {Link} from "react-router-dom";
 import axios from "axios";
 
-export default class Search extends React.Component {
+const Search = () => {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      users: [],
-      query: "",
-    };
-    this.handleClick = this.handleClick.bind(this);
-    this.searchUsers = this.searchUsers.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+  const [users, setUsers] = useState([])
+  const [query, setQuery] = useState('')
+
+
+  useEffect(() => {
+    searchUsers()
+  }, [])
+
+
+  const searchUsers = () => {
+    const query = query ? "?username=" + query : "";
+
+    axios.get("http://localhost:8000/users/" + query)
+      .then((response) => {
+        setUsers(response.data.users);
+      })
   }
 
-  componentDidMount() {
-    this.searchUsers()
-  }
 
-  searchUsers() {
-    const query = this.state.query ? "?username=" + this.state.query : "";
-
-    axios.get("http://localhost:8000/users/" + query).then(response => {
-      this.setState({users: response.data.users});
-    })
-  }
-
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  }
-
-  renderUsers() {
+  const renderUsers = () => {
     const renderedUsers = [];
 
-    for (let user of this.state.users) {
-      renderedUsers.push(this.makeListOftheSearchedProfiles(user.id, user.username, user.isObserved));
+    for (let user of users) {
+      renderedUsers.push(makeListOftheSearchedProfiles(user.id, user.username, user.isObserved));
     }
     return (
       <ul>
@@ -46,19 +36,22 @@ export default class Search extends React.Component {
     )
   }
 
-  handleClick(id, isObserved) {
+
+  const handleClick = (id, isObserved) => {
     console.log(id);
     console.log(isObserved);
 
     const path = isObserved ? "unfollow/" : "follow/";
 
-    axios.get("http://localhost:8000/" + path + id + "/").then(response => {
-      this.searchUsers()
-    })
+    axios.get("http://localhost:8000/" + path + id + "/")
+      .then((response) => {
+        searchUsers()
+        (console.log(response))
+      })
   }
 
 
-  makeListOftheSearchedProfiles(id, username, isObserved) {
+  const makeListOftheSearchedProfiles = (id, username, isObserved) => {
     const to = "/profile/" + id
     return (
       <div>
@@ -69,89 +62,89 @@ export default class Search extends React.Component {
                 {username}
               </p>
             </Link>
-            <button type="button" className="btn btn-primary" onClick={() => this.handleClick(id, isObserved)} id={id}>
+            <button type="button" className="btn btn-primary" onClick={() => handleClick(id, isObserved)} id={id}>
               {isObserved ? 'przestań obserwować' : 'obserwuj'}
             </button>
           </li>
         </ul>
       </div>
     )
-
-
   }
 
 
-  render() {
-    require('./Style.css');
+  require('./Style.css');
 
-    return (
-      <div className="body">
-        <div className="layout">
-          <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-            <div className="container">
-              <a className="navbar-brand js-scroll-trigger rounded mb-0" href="/mainpageforloggedin">WhiteWall</a>
-              <button
-                className="navbar-toggler navbar-toggler-right"
-                type="button" data-toggle="collapse"
-                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-                aria-label="Toggle navigation">
-                Menu
-                <i className="fas fa-bars"></i>
-              </button>
-              <div className="collapse navbar-collapse" id="navbarResponsive">
-                <ul className="navbar-nav ml-auto">
-                  <div className="btn-group">
-                    <Link to="/addphoto" className="btn bg-primary light">Dodaj zdjęcie</Link>
-                    <Link to="/myprofile" className="btn bg-primary light">Pokaż mój profil</Link>
-                    <Link to="/logout" className="btn bg-primary light">Wyloguj się</Link>
-                  </div>
-                </ul>
-              </div>
-            </div>
-          </nav>
+  return (
+    <div className="body">
+      <div className="layout">
+        <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
           <div className="container">
-            <div className="row mb-5">
-              <div className="col-lg-8 mx-auto">
-                <h5 className="font-weight-light mb-4 ">Znajdź użytkowników, którzy Cię intersują i obserwuj ich</h5>
-                <div className="bg-white p-5 rounded shadow">
-                  <form action="">
-                    <div className="input-group-prepend border-0">
-                      <button type="button" className="btn btn-link text-info"><i
-                        className="fa fa-search"/></button>
-                      <i className="fas fa-search fa-7x"/>
-                    </div>
-                    <div className="row">
-                      <div className="col-md-9">
-                        <input
-                          type="search"
-                          placeholder="Wpisz nazwę użytkownika, którego szukasz"
-                          aria-describedby="button-addon4"
-                          name="query"
-                          value={this.state.query}
-                          onChange={this.handleChange}
-                          className="form-control bg-none border-1"
-                          required/>
-                      </div>
-                      <div>
-                        <ul className="ml-auto">
-                          <div className="btn-group">
-                            <button type="button" className="btn bg-primary light" onClick={() => this.searchUsers()}>Szukaj</button>
-                          </div>
-                        </ul>
-                      </div>
-                      <div className="container">
-                        <div className="profile-content col-md-2s align-content-md-center">
-                          {this.renderUsers()}
-                        </div>
-                      </div>
-                    </div>
-                  </form>
+            <a className="navbar-brand js-scroll-trigger rounded mb-0" href="/mainpageforloggedin">WhiteWall</a>
+            <button
+              className="navbar-toggler navbar-toggler-right"
+              type="button" data-toggle="collapse"
+              data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+              aria-label="Toggle navigation">
+              Menu
+              <i className="fas fa-bars"></i>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarResponsive">
+              <ul className="navbar-nav ml-auto">
+                <div className="btn-group">
+                  <Link to="/addphoto" className="btn bg-primary light">Dodaj zdjęcie</Link>
+                  <Link to="/myprofile" className="btn bg-primary light">Pokaż mój profil</Link>
+                  <Link to="/logout" className="btn bg-primary light">Wyloguj się</Link>
                 </div>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <div className="container">
+          <div className="row mb-5">
+            <div className="col-lg-8 mx-auto">
+              <h5 className="font-weight-light mb-4 ">Znajdź użytkowników, którzy Cię intersują i obserwuj ich</h5>
+              <div className="bg-white p-5 rounded shadow">
+                <form action="">
+                  <div className="input-group-prepend border-0">
+                    <button type="button" className="btn btn-link text-info"><i
+                      className="fa fa-search"/></button>
+                    <i className="fas fa-search fa-7x"/>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-9">
+                      <input
+                        type="search"
+                        placeholder="Wpisz nazwę użytkownika, którego szukasz"
+                        aria-describedby="button-addon4"
+                        name="query"
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        className="form-control bg-none border-1"
+                        required/>
+                    </div>
+                    <div>
+                      <ul className="ml-auto">
+                        <div className="btn-group">
+                          <button type="button" className="btn bg-primary light" onClick={() => searchUsers()}>
+                            Szukaj
+                          </button>
+                        </div>
+                      </ul>
+                    </div>
+                    <div className="container">
+                      <div className="profile-content col-md-2s align-content-md-center">
+                        {renderUsers()}
+                      </div>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
+
+export default Search
