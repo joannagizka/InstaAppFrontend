@@ -14,7 +14,7 @@ const Search = () => {
 
 
   const searchUsers = () => {
-    const query = query ? "?username=" + query : "";
+    setQuery(query ? "?username=" + query : "");
 
     axios.get("http://localhost:8000/users/" + query)
       .then((response) => {
