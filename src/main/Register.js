@@ -17,17 +17,22 @@ const Register = () => {
       password: password
     };
 
-    let result = axios.post('http://localhost:8000/register/', JSON.stringify(data))
-    result.then((response) => {
-      console.log(response);
-      setRedirectToWelcome(true);
+   axios.post('http://127.0.0.1:8000/api/users/', data)
+   .then((response) => {
+     console.log(response);
+
+     setRedirectToWelcome(true);
+      const token = `Token ${response.data.token}`
+      axios.defaults.headers.common['Authorization'] = token;
+
+      localStorage.setItem('token', token);
     })
 
-    result.catch(error => {
-      if (error.response.status === 400) {
-        alert("Użytkownik o danej nazwie już istnieje");
-      }
-    })
+    // .catch(error => {
+    //   if (error.response.status === 400) {
+    //     alert("Użytkownik o danej nazwie już istnieje");
+    //   }
+    // })
   }
 
 

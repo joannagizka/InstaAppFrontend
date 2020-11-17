@@ -12,16 +12,19 @@ const Logging = () => {
 
 
   const handleSubmit = (event) => {
+    const data ={
+      username,
+      password
+    }
 
-    axios.post("http://localhost:8000/login/",
-      JSON.stringify({
-        user: {
-          username: username,
-          password: password
-        }
-      })
+    axios.post("http://localhost:8000/auth/", data
+
     ).then((response) => {
-      console.log(response)
+      const token = `Token ${response.data.token}`
+      axios.defaults.headers.common['Authorization'] = token;
+
+      localStorage.setItem('token', token);
+
       setRedirect(true);
     }).catch(error => {
       console.log("login error", error);

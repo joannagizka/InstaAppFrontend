@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -23,6 +23,14 @@ axios.defaults.withCredentials = true;
 
 
 const App = () => {
+
+  useEffect(()=>{
+    const token = localStorage.getItem('token');
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = token;
+    }
+  },[])
+
   return (
     <Router>
       <div>

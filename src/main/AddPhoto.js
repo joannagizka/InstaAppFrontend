@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import axios from "axios";
 import {Link, Redirect} from "react-router-dom";
+import ButtonComponent from "./Components/ButtonComponent";
 
 const AddPhoto = () => {
 
@@ -29,14 +30,10 @@ const AddPhoto = () => {
   const handleSubmit = (event) => {
     const formData = new FormData();
 
-    formData.append(
-      'file',
-      photoData,
-    );
-
+    formData.append('photo', photoData);
     formData.append('description', description);
 
-    axios.post("http://localhost:8000/addPhoto/", formData)
+    axios.post("http://127.0.0.1:8000/api/photo/", formData)
       .then(response => {
           console.log(response);
           setRedirectToMyProfile(true);
@@ -62,17 +59,6 @@ const AddPhoto = () => {
           <a className="navbar-brand js-scroll-trigger" href="/mainpageforloggedin">
             WhiteWall
           </a>
-          <button
-            className="navbar-toggler navbar-toggler-right"
-            type="button" data-toggle="collapse"
-            data-target="#navbarResponsive"
-            aria-controls="navbarResponsive"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            Menu
-            <i className="fas fa-bars"/>
-          </button>
           <div className="collapse navbar-collapse" id="navbarResponsive">
             <ul className="navbar-nav ml-auto">
               <div className="btn-group">
@@ -126,13 +112,11 @@ const AddPhoto = () => {
                 alt="your added content"
               />
 
-              <button
+              <ButtonComponent
                 type="submit"
-                className="btn btn-primary button-button"
-                name="uploadbutton"
-              >
-                Dodaj
-              </button>
+                label="dodaj"
+              />
+
             </form>
           </row>
         </div>

@@ -9,16 +9,12 @@ const PhotoDetails = () => {
   const arr = window.location.href.split("/");
   const photoId = arr[arr.length - 1]
 
-  const [description, setDescription] = useState('')
+  const [photoMeta, setPhotoMeta] = useState({
+    likes: [],
+    comments: []
+  })
   const [content, setContent] = useState('')
-  const [comments, setComments] = useState([])
-  const [authorId, setAuthorId] = useState('')
-  const [authorUsername, setAuthorUsername] = useState('')
-  const [isMe, setIsMe] = useState(false)
-  const [likes, setLikes] = useState([])
-  const [isLikedByMe, setIsLikedByMe] = useState(false)
   const [redirectToProfile, setRedirectToProfile] = useState(false)
-  const [creationTime, setCreationTime] = useState('')
 
 
   useEffect(() => {
@@ -28,14 +24,10 @@ const PhotoDetails = () => {
 
   const fetchPhotoMetadata = () => {
     axios.get("http://localhost:8000/photoMeta/" + photoId + "/").then(response => {
-      setDescription(response.data.description)
-      setComments(response.data.comments)
-      setAuthorId(response.data.authorId)
-      setAuthorUsername(response.data.authorUsername)
-      setIsMe(response.data.isMe)
-      setCreationTime(response.data.creationTime)
-      setLikes(response.data.likes)
-      setIsLikedByMe(response.data.isLikedByMe)
+
+      setPhotoMeta(response.data)
+
+      console.log('response:', response)
     })
   }
 
@@ -61,7 +53,7 @@ const PhotoDetails = () => {
   const renderAllComments = () => {
     const renderedComments = [];
 
-    for (let comment of comments) {
+    for (let comment of photoMeta.comments) {
       renderedComments.push(commentPattern(comment));
     }
 
@@ -82,7 +74,7 @@ const PhotoDetails = () => {
           </h4>
           <ul className="media-date text-uppercase reviews list-inline">
             <Moment format="YYYY/MM/DD">
-              {creationTime}
+              {photoMeta.creationTime}
             </Moment>
           </ul>
           <p className="media-comment">
@@ -95,18 +87,18 @@ const PhotoDetails = () => {
 
 
   const renderAuthorLinkTo = () => {
-    if (isMe) {
+    if (photoMeta.isMe) {
       return (
         <Link to="/myprofile">
-          {authorUsername}
+          {photoMeta.authorUsername}
         </Link>
       )
     }
 
-    const to = "/profile/" + authorId;
+    const to = "/profile/" + photoMeta.authorId;
     return (
       <Link to={to}>
-        {authorUsername}
+        {photoMeta.authorUsername}
       </Link>
     )
   }
@@ -131,7 +123,7 @@ const PhotoDetails = () => {
 
 
   const handleLikeUnlikeClick = () => {
-    const path = isLikedByMe ? "unlike/" : "like/";
+    const path = photoMeta.isLikedByMe ? "unlike/" : "like/";
     axios.get("http://localhost:8000/photoMeta/" + photoId + "/" + path).then(response => {
       fetchPhotoMetadata()
     })
@@ -139,7 +131,7 @@ const PhotoDetails = () => {
 
 
   const renderDeleteButton = () => {
-    if (isMe) {
+    if (photoMeta.isMe) {
       return (
         <button type="button" className="btn bg-primary light" onClick={deletePhoto}>Usun</button>
       )
@@ -162,6 +154,7 @@ const PhotoDetails = () => {
   if (redirectToProfile) {
     return (<Redirect to="/myprofile"/>)
   }
+
 
 
   return (
@@ -199,7 +192,7 @@ const PhotoDetails = () => {
                         className="btn btn-primary"
                         onClick={() => handleLikeUnlikeClick(photoId)}
                         id={photoId}>
-                        {isLikedByMe ?
+                        {photoMeta.isLikedByMe ?
                           <svg
                             className="bi bi-heart"
                             width="1em" height="1em"
@@ -226,7 +219,7 @@ const PhotoDetails = () => {
                           </svg>
                         }
                       </button>
-                      <p>{likes.length}</p>
+                      <p>{photoMeta.likes.length}</p>
                     </div>
                     <svg
                       className="bi bi-chat"
@@ -242,19 +235,19 @@ const PhotoDetails = () => {
                       />
                     </svg>
 
-                    <p>{comments.length}</p>
+                    <p>{photoMeta.comments.length}</p>
 
                     <ul className="media-date text-uppercase reviews list-inline">
                       <Moment format="YYYY/MM/DD">
-                        {creationTime}
+                        {photoMeta.creationTime}
                       </Moment>
                     </ul>
 
                     <p className="card-text text-justify">
-                      {description}
+                      {photoMeta.description}
                     </p>
 
-                    {isMe ? <button
+                    {photoMeta.isMe ? <button
                       type="button"
                       className="btn bg-primary light"
                       onClick={() => deletePhoto()}>
