@@ -17,10 +17,11 @@ const MyProfile = () => {
 
 
   const fetchProfileData = () => {
-    axios.get('http://localhost:8000/myProfile/')
+    axios.get('http://localhost:8000/api/myprofilephotos/')
       .then((response) => {
-        setUsername(response.data.username)
-        setPhotos(response.data.photos)
+        // setUsername(response.data.username)
+        // console.log(response.data.username)
+        setPhotos(response.data)
       })
   }
 
@@ -41,14 +42,14 @@ const MyProfile = () => {
 
   const renderPhoto = (photo) => {
 
-    const src = "http://localhost:8000/photo/" + photo.id + "/"
-    const linkTo = "/photodetails/" + photo.id;
+    const src = "http://localhost:8000" + photo.photo;
+    // const linkTo = "/photodetails/" + photo.id;
 
 
     return (
       <div>
         <div className="card-body">
-          <Link to={linkTo} className="card col-md-8 thumbnail">
+          <Link /*to={linkTo}*/ className="card col-md-8 thumbnail">
             <img src={src} alt="Lights"/>
             <p className="card-text">
               {photo.description}
