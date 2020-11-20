@@ -7,21 +7,19 @@ const Search = () => {
   const [users, setUsers] = useState([])
   const [query, setQuery] = useState('')
 
+  const searchUsers = (query) => {
+    const queryString = query ? "?search=" + query : "/";
 
-  useEffect(() => {
-    searchUsers()
-  }, [])
-
-
-  const searchUsers = () => {
-    setQuery(query ? "?username=" + query : "");
-
-    axios.get("http://localhost:8000/users/" + query)
+    axios.get("http://localhost:8000/api/users" + queryString)
       .then((response) => {
-        setUsers(response.data.users);
+        setUsers(response.data);
       })
+    console.log(query)
   }
 
+  useEffect(() => {
+    searchUsers(query)
+  }, [])
 
   const renderUsers = () => {
     const renderedUsers = [];
@@ -37,18 +35,18 @@ const Search = () => {
   }
 
 
-  const handleClick = (id, isObserved) => {
-    console.log(id);
-    console.log(isObserved);
-
-    const path = isObserved ? "unfollow/" : "follow/";
-
-    axios.get("http://localhost:8000/" + path + id + "/")
-      .then((response) => {
-        searchUsers()
-        (console.log(response))
-      })
-  }
+  // const handleClick = (id, isObserved) => {
+  //   console.log(id);
+  //   console.log(isObserved);
+  //
+  //   const path = isObserved ? "unfollow/" : "follow/";
+  //
+  //   axios.get("http://localhost:8000/" + path + id + "/")
+  //     .then((response) => {
+  //       searchUsers()
+  //       (console.log(response))
+  //     })
+  // }
 
 
   const makeListOftheSearchedProfiles = (id, username, isObserved) => {
@@ -62,7 +60,7 @@ const Search = () => {
                 {username}
               </p>
             </Link>
-            <button type="button" className="btn btn-primary" onClick={() => handleClick(id, isObserved)} id={id}>
+            <button type="button" className="btn btn-primary"/* onClick={() => handleClick(id, isObserved)}*/ id={id}>
               {isObserved ? 'przestań obserwować' : 'obserwuj'}
             </button>
           </li>
@@ -125,7 +123,7 @@ const Search = () => {
                     <div>
                       <ul className="ml-auto">
                         <div className="btn-group">
-                          <button type="button" className="btn bg-primary light" onClick={() => searchUsers()}>
+                          <button type="button" className="btn bg-primary light" onClick={() => searchUsers(query)}>
                             Szukaj
                           </button>
                         </div>

@@ -13,7 +13,7 @@ const Profile = () => {
 
 
   useEffect(() => {
-    axios.get("http://localhost:8000/profile/" + userId + "/").then(response => {
+    axios.get("http://localhost:8000/api/users/" + userId + "/").then(response => {
       setUsername(response.data.username)
       setIsObserved(response.data.isObserved)
       setPhotos(response.data.photos)
@@ -38,7 +38,7 @@ const Profile = () => {
 
 
   const renderPhoto = (photo) => {
-    const src = "http://localhost:8000/photo/" + photo.id + "/"
+    const src = "http://localhost:8000/api/allphotos/" + photo.photo + "/"
     const linkTo = "/photodetails/" + photo.id;
     return (
       <Link to={linkTo} className="card col-md-4 thumbnail">

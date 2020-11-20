@@ -6,8 +6,8 @@ import Moment from 'react-moment';
 
 const PhotoDetails = () => {
 
-  const arr = window.location.href.split("/");
-  const photoId = arr[arr.length - 1]
+  const arr = window.location.href.split('/');
+  const photoId = arr[arr.length - 2]
 
   const [photoMeta, setPhotoMeta] = useState({
     likes: [],
@@ -15,6 +15,7 @@ const PhotoDetails = () => {
   })
   const [content, setContent] = useState('')
   const [redirectToProfile, setRedirectToProfile] = useState(false)
+  const [photos, setPhotos] = useState([])
 
 
   useEffect(() => {
@@ -23,10 +24,11 @@ const PhotoDetails = () => {
 
 
   const fetchPhotoMetadata = () => {
-    axios.get("http://localhost:8000/photoMeta/" + photoId + "/").then(response => {
 
+    axios.get("http://localhost:8000/api/photodetails/" + photoId + "/").then(response => {
+      console.log(photoId)
       setPhotoMeta(response.data)
-
+      console.log(response.data)
       console.log('response:', response)
     })
   }
@@ -35,14 +37,15 @@ const PhotoDetails = () => {
   const handleSubmitComment = (event) => {
 
     const data = {
-      content: content
+      content: content,
+      photo: photoId
     }
 
-    axios.post("http://localhost:8000/photoMeta/" + photoId +
-      "/comments/", JSON.stringify(data))
-      .then(response => {
+    axios.post("http://localhost:8000/api/comments/" , data)
+      .then((response) => {
         setContent('')
         fetchPhotoMetadata('')
+        (console.log(response))
       })
       .catch(error => {
         console.log(error);
@@ -124,7 +127,7 @@ const PhotoDetails = () => {
 
   const handleLikeUnlikeClick = () => {
     const path = photoMeta.isLikedByMe ? "unlike/" : "like/";
-    axios.get("http://localhost:8000/photoMeta/" + photoId + "/" + path).then(response => {
+    axios.get("http://localhost:8000/photodetails/" + photoId + "/" + path).then(response => {
       fetchPhotoMetadata()
     })
   }
@@ -141,7 +144,7 @@ const PhotoDetails = () => {
 
 
   const deletePhoto = () => {
-    axios.post('http://localhost:8000/photoMeta/' + photoId + "/delete/").then(response => {
+    axios.post('http://localhost:8000/photodetails/' + photoId + "/delete/").then(response => {
       setRedirectToProfile(true)
     })
   }
@@ -149,7 +152,7 @@ const PhotoDetails = () => {
 
   require('./Style.css');
 
-  const photoSrc = "http://localhost:8000/photo/" + photoId + "/";
+  const photoSrc = "http://localhost:8000" + photoMeta.photo+ "/";
 
   if (redirectToProfile) {
     return (<Redirect to="/myprofile"/>)
@@ -219,7 +222,7 @@ const PhotoDetails = () => {
                           </svg>
                         }
                       </button>
-                      <p>{photoMeta.likes.length}</p>
+                      {/*<p>{photoMeta.likes.length}</p>*/}
                     </div>
                     <svg
                       className="bi bi-chat"
