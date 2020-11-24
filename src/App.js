@@ -27,8 +27,10 @@ const App = () => {
   useEffect(()=>{
     const token = localStorage.getItem('token');
     if (token) {
-      axios.defaults.headers.common['Authorization'] = token;
-      console.log("dodano header")
+      axios.interceptors.request.use(req => {
+        req.headers.Authorization = token;
+        return req;
+      });
     }
   },[])
 
