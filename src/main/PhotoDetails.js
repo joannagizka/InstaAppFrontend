@@ -41,7 +41,7 @@ const PhotoDetails = () => {
       photo: photoId
     }
 
-    axios.post("http://localhost:8000/api/comments/" , data)
+    axios.post("http://localhost:8000/api/comments/", data)
       .then((response) => {
         setContent('')
         fetchPhotoMetadata('')
@@ -127,9 +127,11 @@ const PhotoDetails = () => {
 
   const handleLikeUnlikeClick = () => {
     const path = photoMeta.isLikedByMe ? "unlike/" : "like/";
-    axios.get("http://localhost:8000/photodetails/" + photoId + "/" + path).then(response => {
-      fetchPhotoMetadata()
-    })
+    axios.post("http://localhost:8000/api/photodetails/" + photoId + "/" + path).then(
+      (response) => {
+        fetchPhotoMetadata()
+        console.log(response)
+      })
   }
 
 
@@ -152,12 +154,11 @@ const PhotoDetails = () => {
 
   require('./Style.css');
 
-  const photoSrc = "http://localhost:8000" + photoMeta.photo+ "/";
+  const photoSrc = photoMeta.photo ;
 
   if (redirectToProfile) {
     return (<Redirect to="/myprofile"/>)
   }
-
 
 
   return (
@@ -222,7 +223,7 @@ const PhotoDetails = () => {
                           </svg>
                         }
                       </button>
-                      {/*<p>{photoMeta.likes.length}</p>*/}
+                  {photoMeta.likesAmount}
                     </div>
                     <svg
                       className="bi bi-chat"

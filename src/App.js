@@ -24,15 +24,10 @@ axios.defaults.withCredentials = true;
 
 const App = () => {
 
-  useEffect(()=>{
-    const token = localStorage.getItem('token');
-    if (token) {
-      axios.interceptors.request.use(req => {
-        req.headers.Authorization = token;
-        return req;
-      });
-    }
-  },[])
+  const token = localStorage.getItem('token');
+  if (token) {
+    axios.defaults.headers.common['Authorization'] = token;
+  }
 
   return (
     <Router>
@@ -42,31 +37,31 @@ const App = () => {
             <Register/>
           </Route>
           <Route path="/login">
-            <Logging />
+            <Logging/>
           </Route>
           <Route path="/logout">
-            <Logout />
+            <Logout/>
           </Route>
           <Route exact path="/">
-            <MainPage />
+            <MainPage/>
           </Route>
           <Route path="/myprofile">
-            <MyProfile />
+            <MyProfile/>
           </Route>
           <Route path="/addphoto">
-            <AddPhoto />
+            <AddPhoto/>
           </Route>
           <Route path="/mainpageforloggedin">
-            <MainPageForLoggedIn />
+            <MainPageForLoggedIn/>
           </Route>
-          <Route path="/photodetails/:id"  >
-            <PhotoDetails />
+          <Route path="/photodetails/:id">
+            <PhotoDetails/>
           </Route>
           <Route path="/search">
-            <Search />
+            <Search/>
           </Route>
           <Route path="/profile">
-            <Profile />
+            <Profile/>
           </Route>
         </Switch>
       </div>
