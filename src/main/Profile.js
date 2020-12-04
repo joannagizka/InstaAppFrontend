@@ -38,7 +38,7 @@ const Profile = () => {
 
 
   const renderPhoto = (photo) => {
-    const src = "http://localhost:8000/api/allphotos/" + photo.photo + "/"
+    const src =  photo.photo
     const linkTo = "/photodetails/" + photo.id;
     return (
       <Link to={linkTo} className="card col-md-4 thumbnail">
