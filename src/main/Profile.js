@@ -5,20 +5,26 @@ import {Link} from "react-router-dom";
 
 const Profile = () => {
   const arr = window.location.href.split("/");
+  const userId = arr[arr.length - 1]
 
-  const [username, setUsername] = useState('')
+  const [users, setUsers] = useState([])
   const [photos, setPhotos] = useState([])
-  const [userId, setUserId] = useState(arr[arr.length - 1])
   const [isObserved, setIsObserved] = useState(false)
 
 
   useEffect(() => {
-    axios.get("http://localhost:8000/api/users/" + userId + "/").then(response => {
-      setUsername(response.data.username)
-      setIsObserved(response.data.isObserved)
-      setPhotos(response.data.photos)
-    })
+    getUser()
   }, [])
+
+  const getUser = () => {
+    axios.get("http://localhost:8000/api/users/" + userId + "/").then(response => {
+      setUsers(response.data);
+      setPhotos(response.data.photos)
+      setIsObserved(response.data.followedByMe)
+      console.log(response)
+      console.log(isObserved)
+    })
+  }
 
 
   const renderAllPhotos = () => {
@@ -36,9 +42,8 @@ const Profile = () => {
   }
 
 
-
   const renderPhoto = (photo) => {
-    const src =  photo.photo
+    const src = photo.photo
     const linkTo = "/photodetails/" + photo.id;
     return (
       <Link to={linkTo} className="card col-md-4 thumbnail">
@@ -51,24 +56,23 @@ const Profile = () => {
   }
 
 
+  const handleClick = (userId, followedByMe) => {
+    const path = followedByMe ? "unfollow/" : "follow/";
 
-  const handleClick = () => {
-    const path = isObserved ? "unfollow/" : "follow/";
-    axios.get("http://localhost:8000/" + path + userId + "/").then(response => {
-      setIsObserved(!isObserved);
-    })
+    axios.post("http://localhost:8000/api/users/" + userId + "/" + path)
+      .then(() => {
+        getUser()
+      })
   }
 
 
-
-  const isFollowed = () => {
+  const isFollowed = (isObserved) => {
     return (
-      <button type="button" className="btn btn-primary" onClick={handleClick} id={userId}>
+      <button type="button" className="btn btn-primary" onClick={() => handleClick(userId, isObserved)} id={userId}>
         {isObserved ? 'przestań obserwować' : 'obserwuj'}
       </button>
     );
   }
-
 
 
   require('./MyProfileStyle.css');
@@ -111,11 +115,11 @@ const Profile = () => {
               <div className="profile-sidebar">
                 <div className="profile-usertitle">
                   <div className="profile-usertitle-name">
-                    <h2>{username}</h2>
+                    <h2>{users.username}</h2>
                   </div>
                 </div>
                 <div className="profile-userbuttons">
-                  {isFollowed()}
+                  {isFollowed(isObserved)}
                 </div>
                 <div className="profile-usermenu">
                   <ul className="nav">
