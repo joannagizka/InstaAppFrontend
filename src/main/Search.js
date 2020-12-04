@@ -8,9 +8,9 @@ const Search = () => {
   const [query, setQuery] = useState('')
 
   const searchUsers = (query) => {
-    const queryString = query ? "?search=" + query : "/";
+    const queryString = query ? "?search=" + query : "";
 
-    axios.get("http://localhost:8000/api/users" + queryString)
+    axios.get("http://localhost:8000/api/users/" + queryString)
       .then((response) => {
         setUsers(response.data);
       })
