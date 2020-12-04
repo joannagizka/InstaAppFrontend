@@ -13,19 +13,20 @@ const Search = () => {
     axios.get("http://localhost:8000/api/users/" + queryString)
       .then((response) => {
         setUsers(response.data);
+        console.log(response.data)
       })
     console.log(query)
   }
 
   useEffect(() => {
-    searchUsers(query)
+    searchUsers('')
   }, [])
 
   const renderUsers = () => {
     const renderedUsers = [];
 
     for (let user of users) {
-      renderedUsers.push(makeListOftheSearchedProfiles(user.id, user.username, user.isObserved));
+      renderedUsers.push(makeListOftheSearchedProfiles(user.id, user.username, user.followedByMe));
     }
     return (
       <ul>
@@ -35,18 +36,17 @@ const Search = () => {
   }
 
 
-  // const handleClick = (id, isObserved) => {
-  //   console.log(id);
-  //   console.log(isObserved);
-  //
-  //   const path = isObserved ? "unfollow/" : "follow/";
-  //
-  //   axios.get("http://localhost:8000/" + path + id + "/")
-  //     .then((response) => {
-  //       searchUsers()
-  //       (console.log(response))
-  //     })
-  // }
+  const handleClick = (id, followedByMe) => {
+    console.log(id);
+    console.log(followedByMe);
+
+    const path = followedByMe ? "unfollow/" : "follow/";
+
+    axios.post("http://localhost:8000/api/users/" + id + "/"+ path )
+      .then(() => {
+        searchUsers(query)
+      })
+  }
 
 
   const makeListOftheSearchedProfiles = (id, username, isObserved) => {
@@ -60,7 +60,7 @@ const Search = () => {
                 {username}
               </p>
             </Link>
-            <button type="button" className="btn btn-primary"/* onClick={() => handleClick(id, isObserved)}*/ id={id}>
+            <button type="button" className="btn btn-primary" onClick={() => handleClick(id, isObserved)} id={id}>
               {isObserved ? 'przestań obserwować' : 'obserwuj'}
             </button>
           </li>
