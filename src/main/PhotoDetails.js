@@ -7,7 +7,7 @@ import Moment from 'react-moment';
 const PhotoDetails = () => {
 
   const arr = window.location.href.split('/');
-  const photoId = arr[arr.length - 2]
+  const photoId = arr[arr.length - 1]
 
   const [photoMeta, setPhotoMeta] = useState({
     likes: [],
@@ -15,7 +15,6 @@ const PhotoDetails = () => {
   })
   const [content, setContent] = useState('')
   const [redirectToProfile, setRedirectToProfile] = useState(false)
-  const [photos, setPhotos] = useState([])
 
 
   useEffect(() => {
@@ -154,7 +153,7 @@ const PhotoDetails = () => {
 
   require('./Style.css');
 
-  const photoSrc = photoMeta.photo ;
+  const photoSrc = photoMeta.photo;
 
   if (redirectToProfile) {
     return (<Redirect to="/myprofile"/>)
@@ -223,7 +222,7 @@ const PhotoDetails = () => {
                           </svg>
                         }
                       </button>
-                  {photoMeta.likesAmount}
+                      {photoMeta.likesAmount}
                     </div>
                     <svg
                       className="bi bi-chat"

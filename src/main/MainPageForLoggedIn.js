@@ -45,8 +45,8 @@ const MainPage = () => {
 
 
   const renderPhoto = (photo) => {
-     const src = "http://localhost:8000" + photo.photo;
-     const linkTo = "/photodetails/" + photo.id + "/";
+    const src = photo.photo;
+    const linkTo = "/photodetails/" + photo.id + "/";
     return (
       <Link to={linkTo} className="card col-md-4 thumbnail">
         <img src={src} alt="Lights"/>

@@ -19,8 +19,6 @@ const MyProfile = () => {
   const fetchProfileData = () => {
     axios.get('http://localhost:8000/api/myprofilephotos/')
       .then((response) => {
-        // setUsername(response.data.username)
-        // console.log(response.data.username)
         setPhotos(response.data)
       })
   }
@@ -42,7 +40,7 @@ const MyProfile = () => {
 
   const renderPhoto = (photo) => {
 
-    const src = "http://localhost:8000" + photo.photo;
+    const src =  photo.photo;
     // const linkTo = "/photodetails/" + photo.id;
 
 
