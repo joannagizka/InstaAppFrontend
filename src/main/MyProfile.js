@@ -40,14 +40,14 @@ const MyProfile = () => {
 
   const renderPhoto = (photo) => {
 
-    const src =  photo.photo;
-    // const linkTo = "/photodetails/" + photo.id;
+    const src = photo.photo;
+    const linkTo = "/photodetails/" + photo.id;
 
 
     return (
       <div>
         <div className="card-body">
-          <Link /*to={linkTo}*/ className="card col-md-8 thumbnail">
+          <Link to={linkTo} className="card col-md-8 thumbnail">
             <img src={src} alt="Lights"/>
             <p className="card-text">
               {photo.description}

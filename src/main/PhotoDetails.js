@@ -92,15 +92,15 @@ const PhotoDetails = () => {
     if (photoMeta.isMe) {
       return (
         <Link to="/myprofile">
-          {photoMeta.authorUsername}
+          {photoMeta.username}
         </Link>
       )
     }
 
-    const to = "/profile/" + photoMeta.authorId;
+    const to = "/profile/" + photoMeta.ownerId;
     return (
       <Link to={to}>
-        {photoMeta.authorUsername}
+        {photoMeta.username}
       </Link>
     )
   }
@@ -110,15 +110,15 @@ const PhotoDetails = () => {
     if (comment.isMe) {
       return (
         <Link to="/myprofile">
-          {comment.authorUsername}
+          {comment.username}
         </Link>
       )
     }
 
-    const to = "/profile/" + comment.authorId;
+    const to = "/profile/" + comment.owner;
     return (
       <Link to={to}>
-        {comment.authorUsername}
+        {comment.username}
       </Link>
     )
   }
