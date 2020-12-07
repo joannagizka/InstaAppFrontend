@@ -1,46 +1,14 @@
-import React, {useState, useCallback} from 'react'
-import axios from 'axios'
-import {Redirect} from "react-router-dom";
-import Cropper from 'react-easy-crop'
-import Slider from '@material-ui/core/Slider';
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
-import {withStyles} from '@material-ui/core/styles'
-import getCroppedImg from './cropImage'
-import {styles} from './styles'
+import React, {useState} from "react";
+import axios from "axios";
+import {Link, Redirect} from "react-router-dom";
 import ButtonComponent from "./Components/ButtonComponent";
 
-const AddPhoto = ({classes}) => {
+const AddPhoto = () => {
 
-
-  const [redirectToMyProfile, setRedirectToMyProfile] = useState('')
   const [description, setDescription] = useState('')
-  const [photoData, setPhotoData] = useState('')
   const [photoSrc, setPhotoSrc] = useState('')
-  const [crop, setCrop] = useState({x: 0, y: 0})
-  const [rotation, setRotation] = useState(0)
-  const [zoom, setZoom] = useState(1)
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
-  const [croppedImage, setCroppedImage] = useState(null)
-
-  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
-    setCroppedAreaPixels(croppedAreaPixels)
-  }, [])
-
-  const showCroppedImage = useCallback(async () => {
-    try {
-      const croppedImage = await getCroppedImg(
-        photoSrc,
-        croppedAreaPixels,
-        rotation
-      )
-      console.log('donee', {croppedImage})
-      setCroppedImage(croppedImage)
-
-    } catch (e) {
-      console.error(e)
-    }
-  }, [croppedAreaPixels, rotation])
+  const [photoData, setPhotoData] = useState('')
+  const [redirectToMyProfile, setRedirectToMyProfile] = useState('')
 
 
   const photoSourceSetter = (event) => {
@@ -58,25 +26,21 @@ const AddPhoto = ({classes}) => {
     }
   }
 
-  const handleSubmit = (event) => {
-    handleSubmit2().then(() => console.log("image uploaded"))
-    event.preventDefault();
-  }
 
-  const handleSubmit2 = async () => {
+  const handleSubmit = (event) => {
     const formData = new FormData();
 
-    const config = {responseType: 'blob'};
-    const imageResponse = await axios.get(croppedImage, config)
-
-    const imageFile = new File([imageResponse.data], "tempFile.jpg")
-    console.log(imageFile)
-    formData.append('photo', imageFile);
+    formData.append('photo', photoData);
     formData.append('description', description);
 
-    const response = await axios.post("http://127.0.0.1:8000/api/photo/", formData)
-    console.log(response);
-    setRedirectToMyProfile(true);
+    axios.post("http://127.0.0.1:8000/api/photo/", formData)
+      .then(response => {
+          console.log(response);
+          setRedirectToMyProfile(true);
+        }
+      );
+
+    event.preventDefault();
   }
 
   require('./Style.css');
@@ -87,105 +51,78 @@ const AddPhoto = ({classes}) => {
     return <Redirect to="/myprofile"/>;
   }
 
+
   return (
-    <div>
-      <div className={classes.cropContainer}>
-        <Cropper
-          image={photoSrc}
-          crop={crop}
-          rotation={rotation}
-          zoom={zoom}
-          aspect={1}
-          onCropChange={setCrop}
-          onRotationChange={setRotation}
-          onCropComplete={onCropComplete}
-          onZoomChange={setZoom}
-        />
-      </div>
-      <div className={classes.controls}>
-        <div className={classes.sliderContainer}>
-          <Typography
-            variant="overline"
-            classes={{root: classes.sliderLabel}}
-          >
-            Zoom
-          </Typography>
-          <Slider
-            value={zoom}
-            min={1}
-            max={3}
-            step={0.1}
-            aria-labelledby="Zoom"
-            classes={{container: classes.slider}}
-            onChange={(e, zoom) => setZoom(zoom)}
-          />
-        </div>
-        <div className={classes.sliderContainer}>
-          <Typography
-            variant="overline"
-            classes={{root: classes.sliderLabel}}
-          >
-            Rotation
-          </Typography>
-          <Slider
-            value={rotation}
-            min={0}
-            max={360}
-            step={1}
-            aria-labelledby="Rotation"
-            classes={{container: classes.slider}}
-            onChange={(e, rotation) => setRotation(rotation)}
-          />
-        </div>
-        <Button
-          onClick={showCroppedImage}
-          variant="contained"
-          color="primary"
-          classes={{root: classes.cropButton}}
-        >
-          Show Result
-        </Button>
-      </div>
-
-
-      <form onSubmit={handleSubmit}>
-        <div className="col">
-          <h3 className="text-left">Wybierz zdjęcie</h3>
-        </div>
-        <div className="col mx-auto text-center">
-          <div className="form-group">
-            <input
-              type="file"
-              className="form-control-file"
-              id="exampleFormControlFile1"
-              accept="image/jpeg"
-              onChange={handlePhotoUploadChange}
-            />
+    <div className="layout text-center">
+      <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div className="container">
+          <a className="navbar-brand js-scroll-trigger" href="/mainpageforloggedin">
+            WhiteWall
+          </a>
+          <div className="collapse navbar-collapse" id="navbarResponsive">
+            <ul className="navbar-nav ml-auto">
+              <div className="btn-group">
+                <Link to="/myprofile" className="btn bg-primary light">
+                  Mój profil
+                </Link>
+                <Link to="/search" className="btn bg-primary light">
+                  Znajdź innych użytkowników
+                </Link>
+                <Link to="/logout" className="btn bg-primary light">
+                  Wyloguj się
+                </Link>
+              </div>
+            </ul>
           </div>
         </div>
-        <div
-          className="col mx-auto text-center">
-          <textarea
-            className="form-control"
-            id="textareacontent"
-            rows="3"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          />
+      </nav>
+
+      <div className="d-flex justify-content-center col-6 mx-auto">
+        <div className="container">
+          <row>
+            <form onSubmit={handleSubmit}>
+              <div className="col">
+                <h3 className="text-left">Wybierz zdjęcie</h3>
+              </div>
+              <div className="col mx-auto text-center">
+                <div className="form-group">
+                  <input
+                    type="file"
+                    className="form-control-file"
+                    id="exampleFormControlFile1"
+                    accept="image/png, image/jpeg"
+                    onChange={handlePhotoUploadChange}
+                  />
+                </div>
+              </div>
+              <div className="col mx-auto text-center">
+                  <textarea
+                    className="form-control"
+                    id="textareacontent"
+                    rows="3"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    required
+                  />
+              </div>
+
+              <img
+                className="centered-and-cropped rounded mx-auto d-block"
+                src={photoSrc}
+                alt="your added content"
+              />
+
+              <ButtonComponent
+                type="submit"
+                label="dodaj"
+              />
+
+            </form>
+          </row>
         </div>
-
-        <ButtonComponent
-          type="submit"
-          label="dodaj"
-        />
-
-      </form>
+      </div>
     </div>
-  )
-
+  );
 }
 
-const StyledAddPhoto = withStyles(styles)(AddPhoto)
-
-export default StyledAddPhoto;
+export default AddPhoto;
