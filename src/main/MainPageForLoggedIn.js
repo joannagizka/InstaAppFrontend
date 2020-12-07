@@ -1,34 +1,38 @@
 import React, {useState, useEffect} from 'react';
-import {Link} from "react-router-dom";
-import './Style.css';
-import './MainStyle.css';
+import {Link, Redirect} from "react-router-dom";
 import axios from "axios";
 import ReactPaginate from 'react-paginate';
+import PageTemplateComponent from "./Components/PageTemplateComponent";
+import CenterComponent from "./Components/CenterComponent";
+import RightSideComponent from "./Components/RightSideComponent ";
+import LeftSideNavBarComponent from "./Components/LeftSideNavBarComponent";
 
 const MainPage = () => {
+
+  const PAGE_SIZE = 30
 
   const [photos, setPhotos] = useState([])
   const [pageCount, setPageCount] = useState(0)
 
 
   useEffect(() => {
-    fetchPhotosMetadata();
+    fetchPhotosMetadata(1);
   }, [])
 
 
-  // const handlePageClick = (page) => {
-  //   fetchPhotosMetadata(page.selected);
-  // }
+  const handlePageClick = (page) => {
+    fetchPhotosMetadata(page.selected + 1);
+  }
 
-  const fetchPhotosMetadata = () => {
-    axios.get('http://localhost:8000/api/allphotos/')
+  const fetchPhotosMetadata = (page) => {
+    axios.get('http://localhost:8000/api/allphotos/?page=' + page + "&page_size=" + PAGE_SIZE)
       .then((response) => {
-        // const pageCount = response.data.totalCount / 21;
-        setPhotos(response.data)
-        console.log(response.data.photo)
-        // setPageCount(pageCount)
+        const pageCount = response.data.count / PAGE_SIZE;
+        setPhotos(response.data.results)
+        setPageCount(pageCount)
       })
   }
+
 
 
   const renderAllPhotos = () => {
@@ -37,7 +41,7 @@ const MainPage = () => {
       renderedPhotos.push(renderPhoto(photo));
     }
     return (
-      <div className="row">
+      <div>
         {renderedPhotos}
       </div>
     )
@@ -48,7 +52,8 @@ const MainPage = () => {
     const src = photo.photo;
     const linkTo = "/photodetails/" + photo.id;
     return (
-      <Link to={linkTo} className="card col-md-4 thumbnail">
+
+      <Link to={linkTo} className="card col-md-6 thumbnail">
         <img src={src} alt="Lights"/>
         <div className="card-body text-muted">
           <span className="badge badge-primary">
@@ -92,62 +97,38 @@ const MainPage = () => {
 
 
   return (
-    <div className="layout">
-      <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-        <div className="container">
-          <a className="navbar-brand js-scroll-trigger" href="/mainpageforloggedin">WhiteWall</a>
-          <button
-            className="navbar-toggler navbar-toggler-right"
-            type="button" data-toggle="collapse"
-            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-            aria-label="Toggle navigation">
-            Menu
-            <i className="fas fa-bars"></i>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarResponsive">
-            <ul className="navbar-nav ml-auto">
-              <div className="btn-group">
-                <Link to="/addphoto" className="btn bg-primary light">Dodaj zdjęcie</Link>
-                <Link to="/myprofile" className="btn bg-primary light">Mój profil </Link>
-                <Link to="/search" className="btn bg-primary light">Znajdź innych użytkowników</Link>
-                <Link to="/logout" className="btn bg-primary light">Wyloguj się</Link>
-              </div>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <header className="masthead">
-        <div className="container h-100">
-          <div className="row h-100">
-            <div className="col-lg-7 my-auto">
-              <div className="header-content mx-auto">
-                <h1 className="mb-5">
-                  Dziel się chwilą ze swoimi znajomymi, wrzucaj zdjęcia kiedy chcesz i gdzie chcesz!
-                </h1>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-      <div className="container">
-        <div className="profile-content col-md-2s align-content-md-center">
+    <PageTemplateComponent>
+      <LeftSideNavBarComponent/>
+      <CenterComponent>
+        <div className="profile-content align-content-md-center">
+          <h4>Your feedback</h4>
           {renderAllPhotos()}
         </div>
-        <ReactPaginate
-          previousLabel={'poprzednia'}
-          nextLabel={'następna'}
-          breakLabel={'...'}
-          breakClassName={'break-me'}
-          // pageCount={pageCount}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          // onPageChange={handlePageClick}
-          containerClassName={'pagination'}
-          subContainerClassName={'pages pagination'}
-          activeClassName={'active'}
-        />
-      </div>
-    </div>
+        <div align="center">
+          <ReactPaginate
+            previousLabel={'poprzednia'}
+            nextLabel={'następna'}
+            breakLabel={'...'}
+            breakClassName={'break-me'}
+            pageCount={pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={handlePageClick}
+            containerClassName={'pagination'}
+            subContainerClassName={'pages pagination'}
+            activeClassName={'active'}
+          />
+        </div>
+      </CenterComponent>
+      <RightSideComponent>
+        <div className="md-form">
+          <input className="form-control" type="text" placeholder="Search" aria-label="Search"/>
+        </div>
+        <hr/>
+        <h4>Suggestions for you</h4>
+      </RightSideComponent>
+    </PageTemplateComponent>
+
   );
 }
 

@@ -1,8 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
 import {Link, Redirect} from "react-router-dom";
-import './Style.css';
-import './MainStyle.css';
 
 const Logging = () => {
 
@@ -12,6 +10,8 @@ const Logging = () => {
 
 
   const handleSubmit = (event) => {
+    event.preventDefault();
+
     const data ={
       username,
       password
@@ -30,7 +30,6 @@ const Logging = () => {
       console.log("login error", error);
       alert("Blad w trakcie logowania")
     });
-    event.preventDefault();
   }
 
 
@@ -103,9 +102,11 @@ const Logging = () => {
                     </div>
                   </div>
                   <div className="form-group col-md-auto">
-                    <button type="button" className="btnSubmit" onClick={handleSubmit}>
-                      Zaloguj się
-                    </button>
+                    <form onSubmit={handleSubmit}>
+                      <button type="submit" className="btnSubmit" >
+                        Zaloguj się
+                      </button>
+                    </form>
                   </div>
                 </div>
               </div>

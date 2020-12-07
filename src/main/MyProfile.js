@@ -1,6 +1,10 @@
 import axios from 'axios';
 import React, {useState, useEffect} from "react";
 import {Link, Redirect} from "react-router-dom";
+import LeftSideNavBarComponent from "./Components/LeftSideNavBarComponent";
+import CenterComponent from "./Components/CenterComponent";
+import RightSideComponent from "./Components/RightSideComponent ";
+import PageTemplateComponent from "./Components/PageTemplateComponent";
 
 
 const MyProfile = () => {
@@ -47,7 +51,7 @@ const MyProfile = () => {
     return (
       <div>
         <div className="card-body">
-          <Link to={linkTo} className="card col-md-8 thumbnail">
+          <Link to={linkTo} className="col-md-6 thumbnail">
             <img src={src} alt="Lights"/>
             <p className="card-text">
               {photo.description}
@@ -114,91 +118,25 @@ const MyProfile = () => {
   }
 
 
-  require('./MyProfileStyle.css');
-  require('./Style.css');
-  require('./MainStyle.css');
-
-
   if (redirect) {
     return <Redirect to="/"/>;
   }
 
   return (
-    <div>
-      <div className="layout">
-        <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-          <div className="container">
-            <a
-              className="navbar-brand js-scroll-trigger"
-              href="/mainpageforloggedin">
-              WhiteWall
-            </a>
-            <button
-              className="navbar-toggler navbar-toggler-right"
-              type="button" data-toggle="collapse"
-              data-target="#navbarResponsive"
-              aria-controls="navbarResponsive"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              Menu
-              <i className="fas fa-bars"/>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarResponsive">
-              <ul className="navbar-nav ml-auto">
-                <div className="btn-group">
-                  <Link to="/addphoto" className="btn bg-primary light">
-                    Dodaj zdjęcie
-                  </Link>
-                  <Link to="/search" className="btn bg-primary light">
-                    Znajdź innych użytkowników
-                  </Link>
-                  <Link to="/logout" className="btn bg-primary light">
-                    Wyloguj się
-                  </Link>
-                </div>
-              </ul>
-            </div>
-          </div>
-        </nav>
-
+    <PageTemplateComponent>
+      <LeftSideNavBarComponent/>
+      <CenterComponent>
         <div className="container">
-          <div className="row profile ">
-            <div className="col-md-3">
-              <div className="profile-sidebar  ">
-                <div className="profile-usertitle">
-                  <div className="profile-usertitle-name">
-                    <h2>{username}</h2>
-                  </div>
-                </div>
-                <div className="profile-usermenu">
-                  <ul className="nav">
-                    <li className={displaySettings ? "" : "active"}>
-                      <a href="#" onClick={() => setDisplaySettings(false)}>
-                        <i className="glyphicon glyphicon-home"/>
-                        Przegląd
-                      </a>
-                    </li>
-                    <li className={displaySettings ? "active" : ""}>
-                      <a href="#" onClick={() => setDisplaySettings(true)}>
-                        <i className="glyphicon glyphicon-user"/>
-                        Ustawienia konta
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-md-9">
-              <div className="profile-content">
-                {displaySettings ? renderSettings() : renderAllPhotos()}
-              </div>
+          <div className="col-md-9">
+            <div className="profile-content">
+              {displaySettings ? renderSettings() : renderAllPhotos()}
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </CenterComponent>
+      <RightSideComponent/>
+    </PageTemplateComponent>
+
   );
 }
 
