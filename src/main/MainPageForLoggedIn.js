@@ -6,10 +6,12 @@ import PageTemplateComponent from "./Components/PageTemplateComponent";
 import CenterComponent from "./Components/CenterComponent";
 import RightSideComponent from "./Components/RightSideComponent ";
 import LeftSideNavBarComponent from "./Components/LeftSideNavBarComponent";
+import "../css/app.css";
+
 
 const MainPage = () => {
 
-  const PAGE_SIZE = 30
+  const PAGE_SIZE = 6
 
   const [photos, setPhotos] = useState([])
   const [pageCount, setPageCount] = useState(0)
@@ -34,7 +36,6 @@ const MainPage = () => {
   }
 
 
-
   const renderAllPhotos = () => {
     const renderedPhotos = [];
     for (let photo of photos) {
@@ -52,10 +53,11 @@ const MainPage = () => {
     const src = photo.photo;
     const linkTo = "/photodetails/" + photo.id;
     return (
-
-      <Link to={linkTo} className="card col-md-6 thumbnail">
-        <img src={src} alt="Lights"/>
-        <div className="card-body text-muted">
+      <div className="col-md-6">
+        <Link to={linkTo}>
+          <img src={src} alt="Lights"/>
+        </Link>
+        <div>
           <span className="badge badge-primary">
             {photo.owner}
           </span>
@@ -91,7 +93,7 @@ const MainPage = () => {
             {photo.commentsAmount}
           </p>
         </div>
-      </Link>
+      </div>
     )
   }
 
@@ -100,33 +102,37 @@ const MainPage = () => {
     <PageTemplateComponent>
       <LeftSideNavBarComponent/>
       <CenterComponent>
-        <div className="profile-content align-content-md-center">
-          <h4>Your feedback</h4>
-          {renderAllPhotos()}
-        </div>
-        <div align="center">
-          <ReactPaginate
-            previousLabel={'poprzednia'}
-            nextLabel={'następna'}
-            breakLabel={'...'}
-            breakClassName={'break-me'}
-            pageCount={pageCount}
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={5}
-            onPageChange={handlePageClick}
-            containerClassName={'pagination'}
-            subContainerClassName={'pages pagination'}
-            activeClassName={'active'}
-          />
-        </div>
+          <div className="profile-content align-content-md-center">
+            <h4>Your feedback</h4>
+            {renderAllPhotos()}
+          </div>
+
+
+
+        {(pageCount < 6) ?
+
+          <h5  align="center" className="col-md-12">
+            That's all we got for You. Follow more users to get more content!
+          </h5>
+           :
+          <div align="center" className="col-md-12">
+            <ReactPaginate
+              previousLabel={'poprzednia'}
+              nextLabel={'następna'}
+              breakLabel={'...'}
+              breakClassName={'break-me'}
+              pageCount={pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={handlePageClick}
+              containerClassName={'pagination'}
+              subContainerClassName={'pages pagination'}
+              activeClassName={'active'}
+            />
+          </div>
+        }
       </CenterComponent>
-      <RightSideComponent>
-        <div className="md-form">
-          <input className="form-control" type="text" placeholder="Search" aria-label="Search"/>
-        </div>
-        <hr/>
-        <h4>Suggestions for you</h4>
-      </RightSideComponent>
+      <RightSideComponent/>
     </PageTemplateComponent>
 
   );
