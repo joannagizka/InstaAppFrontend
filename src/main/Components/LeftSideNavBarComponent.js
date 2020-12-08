@@ -20,7 +20,11 @@ const LeftSideNavBarComponent = () => {
 
   return (
     <div className="col-md-2">
-      <div className="navbar-brand" href="/mainpageforloggedin">WhiteWall</div>
+      <div className="site-logo">
+        <Link to="/mainpageforloggedin">
+        <img  id="logo" src="WhiteWallLogo.png" alt="logo"/>
+        </Link>
+      </div>
       <ul className="navbar-nav ml-auto">
         <Link to="/addphoto">Add photo</Link>
         <Link to="/myprofile">My profile</Link>
