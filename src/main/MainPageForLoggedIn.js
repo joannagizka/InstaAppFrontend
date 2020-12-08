@@ -100,7 +100,7 @@ const MainPage = () => {
 
   return (
     <PageTemplateComponent>
-      <LeftSideNavBarComponent/>
+      <LeftSideNavBarComponent tabToHighlight="mainpageforloggedin"/>
       <CenterComponent>
         <div className="profile-content align-content-md-center">
           <h4>Your feedback</h4>

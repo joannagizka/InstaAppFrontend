@@ -66,7 +66,7 @@ const MyProfile = () => {
 
   return (
     <PageTemplateComponent>
-      <LeftSideNavBarComponent/>
+      <LeftSideNavBarComponent tabToHighlight="myprofile"/>
       <CenterComponent>
         {(photos.length === 0) ?
           <div>

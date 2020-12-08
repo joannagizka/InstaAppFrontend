@@ -59,7 +59,7 @@ const AddPhoto = () => {
 
   return (
     <PageTemplateComponent>
-      <LeftSideNavBarComponent/>
+      <LeftSideNavBarComponent tabToHighlight="addphoto"/>
       <CenterComponent>
         <row>
           <form onSubmit={handleSubmit}>
