@@ -102,19 +102,15 @@ const MainPage = () => {
     <PageTemplateComponent>
       <LeftSideNavBarComponent/>
       <CenterComponent>
-          <div className="profile-content align-content-md-center">
-            <h4>Your feedback</h4>
-            {renderAllPhotos()}
-          </div>
-
-
-
+        <div className="profile-content align-content-md-center">
+          <h4>Your feedback</h4>
+          {renderAllPhotos()}
+        </div>
         {(pageCount < 6) ?
-
-          <h5  align="center" className="col-md-12">
+          <h5 align="center" className="col-md-12">
             That's all we got for You. Follow more users to get more content!
           </h5>
-           :
+          :
           <div align="center" className="col-md-12">
             <ReactPaginate
               previousLabel={'poprzednia'}

@@ -6,4 +6,12 @@ img {
   border: 2px solid white;
 }
 
+#profilePhotos {
+  object-fit: cover;
+  width: 300px;
+  height: 300px;
+  border-radius: 25px;
+  border: 2px solid white;
+}
+
 /*# sourceMappingURL=app.css.map */
