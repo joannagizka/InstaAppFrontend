@@ -11,9 +11,7 @@ const MyProfile = () => {
 
   const [username, setUsername] = useState('')
   const [photos, setPhotos] = useState([])
-  const [displaySettings, setDisplaySettings] = useState(false)
   const [redirect, setRedirect] = useState(false)
-
 
   useEffect(() => {
     fetchProfileData()
@@ -23,7 +21,9 @@ const MyProfile = () => {
   const fetchProfileData = () => {
     axios.get('http://localhost:8000/api/myprofilephotos/')
       .then((response) => {
-        setPhotos(response.data)
+        setPhotos(response.data.photos)
+
+        setUsername(response.data)
       })
   }
 
@@ -43,78 +43,20 @@ const MyProfile = () => {
 
 
   const renderPhoto = (photo) => {
-
     const src = photo.photo;
     const linkTo = "/photodetails/" + photo.id;
 
-
     return (
-      <div>
-        <div className="card-body">
-          <Link to={linkTo} className="col-md-6 thumbnail">
-            <img src={src} alt="Lights"/>
-            <p className="card-text">
-              {photo.description}
-            </p>
-          </Link>
-          <div className="dropdown">
-            <button
-              className="btn btn-secondary dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            />
-            <div
-              className="dropdown-menu"
-              aria-labelledby="dropdownMenuButton"
-            >
-              <button
-                type="button"
-                className="btn"
-                onClick={() => deletePhoto(photo.id)}
-              >
-                Usuń
-              </button>
-            </div>
-          </div>
-        </div>
+
+      <div className="col-md-4">
+        <Link to={linkTo}>
+          <img src={src} alt="Lights"/>
+          <p className="card-text">
+            {photo.description}
+          </p>
+        </Link>
       </div>
     )
-  }
-
-
-  const deletePhoto = (photoId) => {
-    axios.post('http://localhost:8000/photoMeta/' + photoId + "/delete/")
-      .then((response) => {
-        fetchProfileData()
-        console.log(response)
-      })
-  }
-
-
-  const renderSettings = () => {
-    return (
-      <div>
-        <p>Uwaga usuniecie konta jest nieodwracalne!</p>
-        <button
-          type="button"
-          className="btn bg-primary light"
-          onClick={() => deleteAccount()}
-        >
-          Usuń
-        </button>
-      </div>
-    )
-  }
-
-  const deleteAccount = () => {
-    axios.post('http://localhost:8000/deleteAccount/')
-      .then((response) => {
-        setRedirect(true)
-        console.log(response)
-      })
   }
 
 
@@ -126,17 +68,26 @@ const MyProfile = () => {
     <PageTemplateComponent>
       <LeftSideNavBarComponent/>
       <CenterComponent>
-        <div className="container">
-          <div className="col-md-9">
-            <div className="profile-content">
-              {displaySettings ? renderSettings() : renderAllPhotos()}
+        {(photos.length === 0) ?
+          <div>
+            <div>
+              <h2>{username.username}</h2>
+              <h4>followers: {username.followersAmount}</h4>
             </div>
+            Your profile is empty now, start adding content.
           </div>
-        </div>
+          :
+          <div>
+            <div>
+              <h2>{username.username}</h2>
+              <h4>followers: {username.followersAmount}</h4>
+            </div>
+            {renderAllPhotos()}
+          </div>
+        }
       </CenterComponent>
       <RightSideComponent/>
     </PageTemplateComponent>
-
   );
 }
 
