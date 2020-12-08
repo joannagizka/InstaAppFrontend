@@ -4,7 +4,7 @@ import PageTemplateComponent from "./PageTemplateComponent";
 
 const CenterComponent = (props) => {
   return (
-    <div className="col-md-7">
+    <div id="CenterComponent" className="col-md-7">
       {props.children}
     </div>
 
