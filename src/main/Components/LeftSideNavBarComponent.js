@@ -26,7 +26,7 @@ const LeftSideNavBarComponent = ({ tabToHighlight }) => {
   }
 
   return (
-    <div className="col-md-2">
+    <nav className=" navbar-expand-sm col-md-2">
       <div className="site-logo">
         <Link to="/mainpageforloggedin">
         <img  id="logo" src="/WhiteWallLogo.png" alt="logo"/>
@@ -55,7 +55,7 @@ const LeftSideNavBarComponent = ({ tabToHighlight }) => {
           </li>
         </Link>
       </ul>
-    </div>
+    </nav>
   )
 }
 

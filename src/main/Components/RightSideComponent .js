@@ -56,15 +56,15 @@ const RightSideComponent = (props) => {
         <li className="list-group-item">
 
           <Link to={to}>
-            <p className="mb-2 col-sm-12">
+            <h5 id="search-username" className="mb-2 col-sm-12">
               {username}
-            </p>
+            </h5>
           </Link>
 
           <span className="col-sm-12">
-            <button id="follow-unfollow-button" type="button " onClick={() => handleClick(id, isObserved)} id={id}>
+            <ButtonComponent id="follow-unfollow-button" type="button " onClick={() => handleClick(id, isObserved)} id={id}>
               {isObserved ? 'unfollow' : 'follow'}
-            </button>
+            </ButtonComponent>
           </span>
         </li>
       </ul>
@@ -78,6 +78,7 @@ const RightSideComponent = (props) => {
       <nav className="navbar navbar-light">
         <form className="form-inline" id="search">
           <input
+            id="search-input"
             className="form-control col-sm-12 mr-sm-2"
             type="search"
             placeholder="Search"
@@ -85,9 +86,9 @@ const RightSideComponent = (props) => {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-          <button className="btn my-2 my-sm-0" type="button" onClick={() => searchUsers(query)}>
+          <ButtonComponent className="btn my-2 my-sm-0" type="button" onClick={() => searchUsers(query)}>
             Search
-          </button>
+          </ButtonComponent>
         </form>
 
         <ul className="list-group list-group-flush">

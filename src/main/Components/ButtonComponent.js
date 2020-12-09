@@ -8,7 +8,9 @@ const ButtonComponent = (props) => {
       className="btn"
       type={props.type}
       onClick={props.onClick}
-    />
+    >
+      {props.children}
+    </button>
 
   )
 }
