@@ -52,49 +52,62 @@ const RightSideComponent = (props) => {
   const makeListOftheSearchedProfiles = (id, username, isObserved) => {
     const to = "/profile/" + id
     return (
-      <ul id="follow-unfollow" className="list-group">
-        <li className="list-group-item">
-
-          <Link to={to}>
-            <h5 id="search-username" className="mb-2 col-sm-12">
-              {username}
-            </h5>
-          </Link>
-
-          <span className="col-sm-12">
-            <ButtonComponent id="follow-unfollow-button" type="button " onClick={() => handleClick(id, isObserved)} id={id}>
-              {isObserved ? 'unfollow' : 'follow'}
-            </ButtonComponent>
-          </span>
+      <ul className="list-group row">
+        <li className="list-group-item ">
+          <div className=" col-xs-1  center-block align-baseline">
+            <Link to={to}>
+              <h5 id="search-username" className="mb-2">
+                {username}
+              </h5>
+            </Link>
+          </div>
+          <div className="float-right align-baseline ">
+          <ButtonComponent
+            className="mb-2"
+            id="follow-unfollow-button"
+            type="button "
+            onClick={() => handleClick(id, isObserved)}
+          >
+            {isObserved ? 'unfollow' : 'follow'}
+          </ButtonComponent>
+          </div>
         </li>
       </ul>
-
     )
   }
 
 
   return (
     <div id="RightSideComponent" className="col-md-3">
-      <nav className="navbar navbar-light">
-        <form className="form-inline" id="search">
+      <form id="search" className="d-flex justify-content-center">
+        <div className="input-group row">
           <input
             id="search-input"
-            className="form-control col-sm-12 mr-sm-2"
+            className="form-control "
             type="search"
             placeholder="Search"
             aria-label="Search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-          <ButtonComponent className="btn my-2 my-sm-0" type="button" onClick={() => searchUsers(query)}>
-            Search
-          </ButtonComponent>
-        </form>
 
-        <ul className="list-group list-group-flush">
-          <li className="list-group-item">{renderUsers()}</li>
-        </ul>
-      </nav>
+          <span className="input-group-btn">
+          <ButtonComponent
+            className="btn-block"
+            id="search-button"
+            type="button"
+            onClick={() => searchUsers(query)}
+          >
+            <span className="fa fa-search" aria-hidden="true"
+            />
+          </ButtonComponent>
+            </span>
+        </div>
+
+      </form>
+      <ul className="list-group list-group-flush">
+        <li className="list-group-item">{renderUsers()}</li>
+      </ul>
     </div>
   )
 }

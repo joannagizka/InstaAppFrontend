@@ -23,17 +23,6 @@ a {
   color: #A9B1FA;
 }
 
-#follow-unfollow {
-  width: 20vw;
-  margin-top: 4vh;
-  padding-top: 4vh;
-  border-top: 2px solid #d8e4f2;
-}
-
-#search {
-  margin-top: 4vh;
-}
-
 #search-username {
   color: black;
 }
@@ -41,11 +30,15 @@ a {
 #search-input {
   background-color: white !important;
   color: #7468A7 !important;
-  box-shadow: 2px 3px 8px #E1EBFD;
+}
+
+#search {
+  margin-top: 5%;
 }
 
 #CenterComponent {
-  background-color: #f5f9ff;
+  background: #d8e4f2;
+  background: radial-gradient(circle, #d8e4f2 8%, #f2f5fe 47%, #f2f5fe 88%);
   border-right: 2px solid #d8e4f2;
   min-height: 90vh;
 }
@@ -55,6 +48,25 @@ h4 {
 }
 
 #ButtonComponent {
+  background-color: #a974ff;
+  color: white;
+}
+
+#follow-unfollow-button {
+  background-color: #a974ff;
+  color: white;
+  width: 100px;
+  max-width: 100%;
+}
+
+#follow-unfollow-button {
+  background-color: #a974ff;
+  color: white;
+  width: 100px;
+  max-width: 100%;
+}
+
+#search-button {
   background-color: #a974ff;
   color: white;
 }

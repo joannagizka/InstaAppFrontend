@@ -4,7 +4,7 @@ import React from 'react';
 const ButtonComponent = (props) => {
   return (
     <button
-      id="ButtonComponent"
+      id={props.id}
       className="btn"
       type={props.type}
       onClick={props.onClick}
