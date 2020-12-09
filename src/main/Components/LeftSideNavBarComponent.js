@@ -29,7 +29,7 @@ const LeftSideNavBarComponent = ({ tabToHighlight }) => {
     <div className="col-md-2">
       <div className="site-logo">
         <Link to="/mainpageforloggedin">
-        <img  id="logo" src="WhiteWallLogo.png" alt="logo"/>
+        <img  id="logo" src="/WhiteWallLogo.png" alt="logo"/>
         </Link>
       </div>
       <h5>Menu</h5>
@@ -49,7 +49,7 @@ const LeftSideNavBarComponent = ({ tabToHighlight }) => {
             <a>My profile</a>
           </li>
         </Link>
-        <Link to="/logout" onClick={handleLogout}>
+        <Link to="/login" onClick={handleLogout}>
           <li className="list-group-item list-group-item-action">
             <a>Logout</a>
           </li>

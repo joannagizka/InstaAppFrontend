@@ -50,7 +50,7 @@ const MyProfile = () => {
 
       <div className="col-md-4">
         <Link to={linkTo}>
-          <img src={src} alt="Lights"/>
+          <img id="profilePhotos" src={src} alt="Lights"/>
           <p className="card-text">
             {photo.description}
           </p>

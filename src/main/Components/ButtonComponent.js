@@ -7,10 +7,8 @@ const ButtonComponent = (props) => {
       id="ButtonComponent"
       className="btn"
       type={props.type}
-      onClick={props.handleClick}
-    >
-      {props.label}
-    </button>
+      onClick={props.onClick}
+    />
 
   )
 }

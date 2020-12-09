@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
+import ButtonComponent from "./ButtonComponent";
 
 const RightSideComponent = (props) => {
   const [users, setUsers] = useState([])
@@ -17,10 +18,6 @@ const RightSideComponent = (props) => {
     console.log(query)
   }
 
-  useEffect(() => {
-    searchUsers('')
-  }, [])
-
   const renderUsers = () => {
     const renderedUsers = [];
 
@@ -28,11 +25,15 @@ const RightSideComponent = (props) => {
       renderedUsers.push(makeListOftheSearchedProfiles(user.id, user.username, user.followedByMe));
     }
     return (
-      <ul>
+      <React.Fragment>
         {renderedUsers}
-      </ul>
+      </React.Fragment>
     )
   }
+
+  useEffect(() => {
+    searchUsers('')
+  }, [])
 
 
   const handleClick = (id, followedByMe) => {
@@ -51,42 +52,49 @@ const RightSideComponent = (props) => {
   const makeListOftheSearchedProfiles = (id, username, isObserved) => {
     const to = "/profile/" + id
     return (
-      <div className="row">
-        <Link to={to}>
-          <p>
-            {username}
-          </p>
-        </Link>
-        <button type="button" onClick={() => handleClick(id, isObserved)} id={id}>
-          {isObserved ? 'unfollow' : 'follow'}
-        </button>
-      </div>
+      <ul id="follow-unfollow" className="list-group">
+        <li className="list-group-item">
+
+          <Link to={to}>
+            <p className="mb-2 col-sm-12">
+              {username}
+            </p>
+          </Link>
+
+          <span className="col-sm-12">
+            <button id="follow-unfollow-button" type="button " onClick={() => handleClick(id, isObserved)} id={id}>
+              {isObserved ? 'unfollow' : 'follow'}
+            </button>
+          </span>
+        </li>
+      </ul>
+
     )
   }
 
 
   return (
-    <div className="col-md-3">
-      <form>
-          <div>
-            <input
-              type="search"
-              placeholder="Search"
-              name="query"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              className="form-control"
-              required/>
-            <button type="button" onClick={() => searchUsers(query)}>
-              Search
-            </button>
-          </div>
-          <div className="row">
-            {renderUsers()}
-          </div>
-      </form>
-    </div>
+    <div id="RightSideComponent" className="col-md-3">
+      <nav className="navbar navbar-light">
+        <form className="form-inline" id="search">
+          <input
+            className="form-control col-sm-12 mr-sm-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <button className="btn my-2 my-sm-0" type="button" onClick={() => searchUsers(query)}>
+            Search
+          </button>
+        </form>
 
+        <ul className="list-group list-group-flush">
+          <li className="list-group-item">{renderUsers()}</li>
+        </ul>
+      </nav>
+    </div>
   )
 }
 
