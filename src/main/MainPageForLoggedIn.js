@@ -61,9 +61,6 @@ const MainPage = () => {
           <span className="badge badge-primary">
             {photo.owner}
           </span>
-          <p className="text-decoration-none">
-            {photo.description}
-          </p>
           <p>
             <svg
               className="bi bi-heart"

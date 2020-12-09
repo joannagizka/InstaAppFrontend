@@ -3,7 +3,8 @@ import {Link} from "react-router-dom";
 import axios from 'axios';
 import {Redirect} from "react-router-dom";
 
-const LeftSideNavBarComponent = ({ tabToHighlight }) => {
+
+const LeftSideNavBarComponent = ({tabToHighlight}) => {
 
   const [redirectToMain, setRedirectToMain] = useState(false)
 
@@ -29,29 +30,35 @@ const LeftSideNavBarComponent = ({ tabToHighlight }) => {
     <nav className=" navbar-expand-sm col-md-2">
       <div className="site-logo">
         <Link to="/mainpageforloggedin">
-        <img  id="logo" src="/WhiteWallLogo.png" alt="logo"/>
+          <img id="logo" src="/WhiteWallLogo.png" alt="logo"/>
         </Link>
       </div>
       <h5>Menu</h5>
       <ul className="list-group list-group-flush list-group-item-action">
         <Link to="/mainpageforloggedin">
           <li className={"list-group-item list-group-item-action " + isActive("mainpageforloggedin")}>
-            <a>Home</a>
+           <span className="fa fa-home"/>
+            <a> Home</a>
+
           </li>
         </Link>
         <Link to="/addphoto">
           <li className={"list-group-item list-group-item-action " + isActive("addphoto")}>
-           <a>Add photo</a>
+            <span className="fa fa-image"/>
+            <a> Add photo</a>
           </li>
-          </Link>
+        </Link>
         <Link to="/myprofile">
-          <li className={"list-group-item list-group-item-action " + isActive("myprofile")} >
-            <a>My profile</a>
+          <li className={"list-group-item list-group-item-action " + isActive("myprofile")}>
+
+            <span className="fa fa-user"/>
+            <a> My profile</a>
           </li>
         </Link>
         <Link to="/login" onClick={handleLogout}>
           <li className="list-group-item list-group-item-action">
-            <a>Logout</a>
+            <span className="fa fa-sign-out"/>
+            <a> Logout</a>
           </li>
         </Link>
       </ul>
