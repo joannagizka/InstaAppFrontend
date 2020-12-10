@@ -53,7 +53,7 @@ const MainPage = () => {
     const src = photo.photo;
     const linkTo = "/photodetails/" + photo.id;
     return (
-      <div className="col-md-6">
+      <div className="col-md-6 col-sm-12">
         <Link to={linkTo}>
         <div className="image-container">
           <img src={src} alt="Lights"/>

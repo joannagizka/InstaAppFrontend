@@ -78,7 +78,7 @@ const RightSideComponent = (props) => {
 
 
   return (
-    <div id="RightSideComponent" className="col-md-3">
+    <div id="RightSideComponent" className="col-2">
       <form id="search" className="d-flex justify-content-center">
         <div className="input-group row">
           <input

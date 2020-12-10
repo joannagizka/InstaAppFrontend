@@ -59,6 +59,10 @@ h4 {
   margin-top: 4vh;
 }
 
+.body {
+  margin: 1%;
+}
+
 #ButtonComponent {
   background-color: #a974ff;
   color: white;
@@ -67,7 +71,7 @@ h4 {
 #follow-unfollow-button {
   background-color: #a974ff;
   color: white;
-  width: 100px;
+  width: 50px;
   max-width: 100%;
 }
 
