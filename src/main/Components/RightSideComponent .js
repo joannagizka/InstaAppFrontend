@@ -52,33 +52,32 @@ const RightSideComponent = (props) => {
   const makeListOftheSearchedProfiles = (id, username, isObserved) => {
     const to = "/profile/" + id
     return (
-      <ul className="list-group row">
-        <li className="list-group-item ">
-          <div className=" col-xs-1  center-block align-baseline">
-            <Link to={to}>
-              <h5 id="search-username" className="mb-2">
-                {username}
-              </h5>
-            </Link>
-          </div>
-          <div className="float-right align-baseline ">
+      <div className="row">
+        <div className="col-xl-6 col-lg-12 col-md-6">
+          <Link to={to}>
+            <h5 id="search-username">
+              {username}
+            </h5>
+          </Link>
+        </div>
+        <div className="col-xl-6 col-lg-12 col-md-6">
           <ButtonComponent
-            className="mb-2"
+            className="btn-block"
             id="follow-unfollow-button"
             type="button "
             onClick={() => handleClick(id, isObserved)}
           >
             {isObserved ? 'unfollow' : 'follow'}
           </ButtonComponent>
-          </div>
-        </li>
-      </ul>
+        </div>
+      </div>
+
     )
   }
 
 
   return (
-    <div id="RightSideComponent" className="col-2">
+    <div id="RightSideComponent" className="col-lg-2 col-md-12">
       <form id="search" className="d-flex justify-content-center">
         <div className="input-group row">
           <input
@@ -103,11 +102,8 @@ const RightSideComponent = (props) => {
           </ButtonComponent>
             </span>
         </div>
-
       </form>
-      <ul className="list-group list-group-flush">
-        <li className="list-group-item">{renderUsers()}</li>
-      </ul>
+      <div>{renderUsers()}</div>
     </div>
   )
 }

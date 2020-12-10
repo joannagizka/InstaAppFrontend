@@ -27,7 +27,7 @@ const LeftSideNavBarComponent = ({tabToHighlight}) => {
   }
 
   return (
-    <nav className=" navbar-expand-sm col-md-2">
+    <nav className=" navbar-expand-sm col-lg-2 col-md-12">
       <div className="site-logo">
         <Link to="/mainpageforloggedin">
           <img id="logo" src="/WhiteWallLogo.png" alt="logo"/>
@@ -37,7 +37,7 @@ const LeftSideNavBarComponent = ({tabToHighlight}) => {
       <ul className="list-group list-group-flush list-group-item-action">
         <Link to="/mainpageforloggedin">
           <li className={"list-group-item list-group-item-action " + isActive("mainpageforloggedin")}>
-           <span className="fa fa-home"/>
+            <span className="fa fa-home"/>
             <a> Home</a>
 
           </li>
