@@ -55,7 +55,9 @@ const MainPage = () => {
     return (
       <div className="col-md-6">
         <Link to={linkTo}>
+        <div className="image-container">
           <img src={src} alt="Lights"/>
+        </div>
         </Link>
         <div>
           <span className="badge badge-primary">
