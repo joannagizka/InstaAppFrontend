@@ -28,16 +28,9 @@ const Register = () => {
       localStorage.setItem('token', token);
     })
 
-    // .catch(error => {
-    //   if (error.response.status === 400) {
-    //     alert("Użytkownik o danej nazwie już istnieje");
-    //   }
-    // })
   }
 
-
-  require('./Style.css');
-  require('./MainStyle.css');
+  ;
 
   if (redirectToWelcome) {
     return <Redirect to="/mainpageforloggedin"/>;

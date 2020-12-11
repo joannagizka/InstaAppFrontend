@@ -148,9 +148,6 @@ const PhotoDetails = () => {
       })
   }
 
-
-  require('./Style.css');
-
   const photoSrc = photoMeta.photo;
 
   if (redirectToProfile) {

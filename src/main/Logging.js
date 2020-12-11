@@ -12,13 +12,12 @@ const Logging = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const data ={
+    const data = {
       username,
       password
     }
 
     axios.post("http://localhost:8000/auth/", data
-
     ).then((response) => {
       const token = `Token ${response.data.token}`
       axios.defaults.headers.common['Authorization'] = token;
@@ -31,11 +30,6 @@ const Logging = () => {
       alert("Blad w trakcie logowania")
     });
   }
-
-
-  require('./Style.css');
-  require('./MainStyle.css');
-
 
   if (redirect) {
     return <Redirect to="/mainpageforloggedin"/>;
@@ -103,7 +97,7 @@ const Logging = () => {
                   </div>
                   <div className="form-group col-md-auto">
                     <form onSubmit={handleSubmit}>
-                      <button type="submit" className="btnSubmit" >
+                      <button type="submit" className="btnSubmit">
                         Zaloguj się
                       </button>
                     </form>

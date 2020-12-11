@@ -85,11 +85,6 @@ const Profile = () => {
     );
   }
 
-
-  require('./MyProfileStyle.css');
-  require('./Style.css');
-  require('./MainStyle.css');
-
   return (
     <PageTemplateComponent>
       <LeftSideNavBarComponent/>

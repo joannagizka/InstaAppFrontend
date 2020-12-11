@@ -44,12 +44,8 @@ const AddPhoto = () => {
           setRedirectToMyProfile(true);
         }
       );
-
     event.preventDefault();
   }
-
-  require('./Style.css');
-  require('./MainStyle.css');
 
 
   if (redirectToMyProfile) {
@@ -84,11 +80,11 @@ const AddPhoto = () => {
                     required
                   />
                   <div className="add-photo-button-wrapper col-xl-5 col-lg-5 col-sm-5 col-md-5 col-xs-5">
-                  <ButtonComponent
-                    className="btn-block"
-                    id="add-photo-button"
-                    type="button "
-                  >Add photo</ButtonComponent>
+                    <ButtonComponent
+                      className="btn-block"
+                      id="add-photo-button"
+                      type="button "
+                    >Add photo</ButtonComponent>
                   </div>
                 </div>
               </div>)
