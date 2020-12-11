@@ -64,14 +64,18 @@ const AddPhoto = () => {
         <row>
           <form onSubmit={handleSubmit}>
             {photoData ?
-              (<div>
-                <div className="col">
+              (<div className="row">
+                <div className="col-6">
                   <h3>Add your post!</h3>
+                  <div className="image-container">
+                    <img
+                      src={photoSrc}
+                      alt="your added content"
+                    />
+                  </div>
                 </div>
-                  <img
-                    src={photoSrc}
-                    alt="your added content"
-                  />
+                <div className="col-xl-6 col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                  <h3>Add description</h3>
                   <textarea
                     className="form-control"
                     rows="3"
@@ -79,24 +83,36 @@ const AddPhoto = () => {
                     onChange={(e) => setDescription(e.target.value)}
                     required
                   />
+                  <div className="add-photo-button-wrapper col-xl-5 col-lg-5 col-sm-5 col-md-5 col-xs-5">
                   <ButtonComponent
-                    type="submit"
-                    label="add"
-                  />
-                </div>)
+                    className="btn-block"
+                    id="add-photo-button"
+                    type="button "
+                  >Add photo</ButtonComponent>
+                  </div>
+                </div>
+              </div>)
               :
-              (<div>
-                <div className="col">
+              (
+                <div className="col-xl-6 col-lg-6 col-sm-6 col-md-6 col-xs-12">
                   <h3>Choose photo</h3>
+                  <form method="post">
+                    <label htmlFor="file" className="br_dropzone">
+                      <input
+                        type="file"
+                        id="file"
+                        name="file"
+                        onChange={handlePhotoUploadChange}
+                        required/>
+                      <input
+                        type="text"
+                        id="fileName"
+                        name="fileName"
+                        placeholder="Drop files to upload (or click)"
+                        readOnly/>
+                    </label>
+                  </form>
                 </div>
-                <div className="form-group">
-                  <input
-                    type="file"
-                    accept="image/png, image/jpeg"
-                    onChange={handlePhotoUploadChange}
-                  />
-                </div>
-              </div>
               )
             }
           </form>
