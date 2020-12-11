@@ -5,6 +5,7 @@ import PageTemplateComponent from "./Components/PageTemplateComponent";
 import LeftSideNavBarComponent from "./Components/LeftSideNavBarComponent";
 import CenterComponent from "./Components/CenterComponent";
 import RightSideComponent from "./Components/RightSideComponent ";
+import ButtonComponent from "./Components/ButtonComponent";
 
 
 const Profile = () => {
@@ -52,9 +53,11 @@ const Profile = () => {
     return (
       <div className="col-md-4">
         <Link to={linkTo}>
-          <img id="profilePhotos" src={src} alt="Lights"/>
+          <div id="profilePhotos" className="image-container">
+            <img src={src} alt="Lights"/>
+            <p/>
+          </div>
         </Link>
-        <p className="card-text">{photo.description}</p>
       </div>
     )
   }
@@ -72,9 +75,13 @@ const Profile = () => {
 
   const isFollowed = (isObserved) => {
     return (
-      <button type="button" onClick={() => handleClick(userId, isObserved)} id={userId}>
-        {isObserved ? 'przestań obserwować' : 'obserwuj'}
-      </button>
+      <ButtonComponent
+        id="follow"
+        type="button "
+        onClick={() => handleClick(userId, isObserved)}
+      >
+        {isObserved ? 'unfollow' : 'follow'}
+      </ButtonComponent>
     );
   }
 

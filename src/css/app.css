@@ -48,10 +48,15 @@ a {
   margin-top: 5%;
 }
 
+#user-list {
+  margin-top: 3vh;
+}
+
 #CenterComponent {
   background: #d8e4f2;
   background: radial-gradient(circle, #d8e4f2 8%, #f2f5fe 47%, #f2f5fe 88%);
   border-right: 2px solid #d8e4f2;
+  border-left: 2px solid #d8e4f2;
   min-height: 90vh;
 }
 
@@ -75,6 +80,11 @@ h4 {
 }
 
 #search-button {
+  background-color: #a974ff;
+  color: white;
+}
+
+#follow {
   background-color: #a974ff;
   color: white;
 }
