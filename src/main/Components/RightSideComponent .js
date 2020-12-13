@@ -96,8 +96,7 @@ const RightSideComponent = (props) => {
             type="button"
             onClick={() => searchUsers(query)}
           >
-            <span className="fa fa-search" aria-hidden="true"
-            />
+            <span className="fa fa-search" aria-hidden="true"/>
           </ButtonComponent>
             </span>
         </div>

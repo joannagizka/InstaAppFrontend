@@ -1,18 +1,27 @@
-#main-username
-  height: 10vh
+#photo-details-list-container
+  position: relative
+  height: 100%
+  width: 100%
+  min-height: 200px
 
 #photo-details-list
-  max-height: 50vh
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
   overflow: scroll
-  -webkit-overflow-scrolling: touch
-
-#photo-details-likes-and-comments
-  height: 5vh
+  overflow-x: hidden
 
 #photo-details-textarea
-  max-height: 60vh
-  overflow: scroll
-  -webkit-overflow-scrolling: touch
+  display: flex
+  flex-direction: column
 
-#photo-details-photo
-  padding: 2vh
+#photo-details-row
+  display: flex
+  align-items: stretch
+  flex-direction: column
+  justify-content: space-between
+
+#photo-details-photo-class
+  padding: 0 !important
