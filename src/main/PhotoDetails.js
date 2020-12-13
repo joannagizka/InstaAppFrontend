@@ -7,6 +7,7 @@ import PageTemplateComponent from "./Components/PageTemplateComponent";
 import LeftSideNavBarComponent from "./Components/LeftSideNavBarComponent";
 import CenterComponent from "./Components/CenterComponent";
 import RightSideComponent from "./Components/RightSideComponent ";
+import ButtonComponent from "./Components/ButtonComponent";
 
 const PhotoDetails = () => {
 
@@ -169,7 +170,7 @@ const PhotoDetails = () => {
     <PageTemplateComponent>
       <LeftSideNavBarComponent/>
       <CenterComponent>
-        <div>
+        <div id="photo-details-center">
           <div className="row">
             <div id="photo-details-photo-class" className="col-xl-8 col-l-8 col-md-8 col-sm-12 col-xs-12">
               <div id="photo-details-photo" className="image-container">
@@ -181,30 +182,35 @@ const PhotoDetails = () => {
                 {renderAuthorLinkTo()}
               </div>
 
+
               <div id="photo-details-list-container">
                 <div id="photo-details-list" className="">
-                  {renderAuthorLinkTo()}
-                  <hl/>
-                  {photoMeta.description}
-                  <div className="row">
-                    <div className="col-6">
-                      <p className="text-muted">
-                        <Moment format="YYYY/MM/DD">
-                          {photoMeta.creationTime}
-                        </Moment>
-                      </p>
-                    </div>
-                    <div className="col-6">
-                      {photoMeta.isMe ?
-                        <span
-                          title="Delete photo."
-                          type="button"
-                          onClick={() => deletePhoto()}
-                          className="fa fa-trash"
-                        />
-                        : null}
-                    </div>
-                  </div>
+                  <ul className="list-group list-group-flush">
+                    <li className="list-group-item">
+                      {renderAuthorLinkTo()}
+                      <hl/>
+                      {photoMeta.description}
+                      <div className="row">
+                        <div className="col-6">
+                          <p className="text-muted">
+                            <Moment format="YYYY/MM/DD">
+                              {photoMeta.creationTime}
+                            </Moment>
+                          </p>
+                        </div>
+                        <div className="col-6">
+                          {photoMeta.isMe ?
+                            <span
+                              title="Delete photo."
+                              type="button"
+                              onClick={() => deletePhoto()}
+                              className="fa fa-trash"
+                            />
+                            : null}
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
                   {!(photoMeta.comments.length === 0) ?
                     <div>
                       <b className="text-secondary">
@@ -221,17 +227,16 @@ const PhotoDetails = () => {
                 </div>
               </div>
 
-              <div id="photo-details-likes-and-comments" className="">
-                <div className="row">
-                  <button
-                    type="button"
+              <div id="photo-details-likes-and-comments" className="row">
+                <div className="col-1">
+                  <div
                     className=""
                     onClick={() => handleLikeUnlikeClick(photoId)}
                     id={photoId}>
                     {photoMeta.isLikedByMe ?
                       <svg
                         className="bi bi-heart"
-                        width="1em" height="1em"
+                        width="1.3em" height="1.3em"
                         viewBox="0 0 16 16"
                         fill="currentColor"
                         xmlns="http://www.w3.org/2000/svg">
@@ -243,8 +248,8 @@ const PhotoDetails = () => {
                       :
                       <svg
                         className="bi bi-heart-fill"
-                        width="1em"
-                        height="1em"
+                        width="1.3em"
+                        height="1.3em"
                         viewBox="0 0 16 16"
                         fill="currentColor"
                         xmlns="http://www.w3.org/2000/svg">
@@ -254,14 +259,17 @@ const PhotoDetails = () => {
                           clip-rule="evenodd"/>
                       </svg>
                     }
-                  </button>
-                  <div>
-                    {photoMeta.likesAmount}
+                    <div>
+                      {photoMeta.likesAmount}
+                    </div>
                   </div>
+                </div>
+
+                <div className="col-1">
                   <svg
                     className="bi bi-chat"
-                    width="1em"
-                    height="1em"
+                    width="1.3em"
+                    height="1.3em"
                     viewBox="0 0 16 16"
                     fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg">
@@ -277,16 +285,23 @@ const PhotoDetails = () => {
 
               <div id="photo-details-textarea" className="">
                 <h5>
-                  Dodaj komentarz:
+                  Add comment:
                 </h5>
                 <textarea
+                  id="photo-details-textarea-field"
                   rows="4"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                 />
-                <button onClick={handleSubmitComment}>
-                  Dodaj
-                </button>
+                <div className="">
+                  <ButtonComponent
+                    className="btn-block"
+                    id="follow-unfollow-button"
+                    type="button "
+                    onClick={handleSubmitComment}>
+                    Add comment
+                  </ButtonComponent>
+                </div>
               </div>
             </div>
           </div>
