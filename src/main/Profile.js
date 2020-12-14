@@ -51,11 +51,10 @@ const Profile = () => {
     const src = photo.photo
     const linkTo = "/photodetails/" + photo.id;
     return (
-      <div className="col-md-4">
+      <div className="col-md-4" key={photo.id}>
         <Link to={linkTo}>
-          <div id="profilePhotos" className="image-container">
-            <img src={src} alt="Lights"/>
-            <p/>
+          <div className="image-container">
+            <img id="profilePhotos" src={src} alt="Lights"/>
           </div>
         </Link>
       </div>
@@ -76,11 +75,11 @@ const Profile = () => {
   const isFollowed = (isObserved) => {
     return (
       <ButtonComponent
-        id="follow"
+        id="follow-on-profile"
         type="button "
         onClick={() => handleClick(userId, isObserved)}
       >
-        {isObserved ? 'unfollow' : 'follow'}
+        {isObserved ? 'followed' : 'follow'}
       </ButtonComponent>
     );
   }
@@ -89,12 +88,12 @@ const Profile = () => {
     <PageTemplateComponent>
       <LeftSideNavBarComponent/>
       <CenterComponent>
-        <div>
-          <h2>{users.username}</h2>
-          <h4>followers: {users.followersAmount}</h4>
-        </div>
-        <div>
-          {isFollowed(isObserved)}
+        <div id="user-bio">
+          <h4>{users.username}
+            {isFollowed(isObserved)}
+          </h4>
+          <h5><b>{users.followersAmount}</b> followers</h5>
+          <h5><b>{photos.length}</b> posts</h5>
         </div>
         <div>
           {renderAllPhotos()}

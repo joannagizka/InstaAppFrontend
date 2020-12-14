@@ -57,62 +57,58 @@ const AddPhoto = () => {
     <PageTemplateComponent>
       <LeftSideNavBarComponent tabToHighlight="addphoto"/>
       <CenterComponent>
-        <row>
-          <form onSubmit={handleSubmit}>
-            {photoData ?
-              (<div className="row">
-                <div className="col-6">
-                  <h3>Add your post!</h3>
-                  <div className="image-container">
-                    <img
-                      src={photoSrc}
-                      alt="your added content"
-                    />
-                  </div>
-                </div>
-                <div className="col-xl-4 col-lg-4 col-sm-4 col-md-4 col-xs-12">
-                  <h3>Add description</h3>
-                  <textarea
-                    className="form-control"
-                    rows="3"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    required
+        <form onSubmit={handleSubmit}>
+          {photoData ?
+            (<div className="row">
+              <div className="col-6">
+                <h3>Add your post!</h3>
+                <div className="image-container">
+                  <img
+                    src={photoSrc}
+                    alt="your added content"
                   />
-                  <div className="add-photo-button-wrapper">
-                    <ButtonComponent
-                      className="btn-block"
-                      id="add-photo-button"
-                      type="button "
-                    >Add photo</ButtonComponent>
-                  </div>
                 </div>
-              </div>)
-              :
-              (
-                <div className="col-xl-6 col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                  <h3>Choose photo</h3>
-                  <form method="post">
-                    <label htmlFor="file" className="br_dropzone">
-                      <input
-                        type="file"
-                        id="file"
-                        name="file"
-                        onChange={handlePhotoUploadChange}
-                        required/>
-                      <input
-                        type="text"
-                        id="fileName"
-                        name="fileName"
-                        placeholder="Drop files to upload (or click)"
-                        readOnly/>
-                    </label>
-                  </form>
+              </div>
+              <div className="col-xl-4 col-lg-4 col-sm-4 col-md-4 col-xs-12">
+                <h3>Add description</h3>
+                <textarea
+                  className="form-control"
+                  rows="3"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  required
+                />
+                <div className="add-photo-button-wrapper">
+                  <ButtonComponent
+                    className="btn-block"
+                    id="add-photo-button"
+                    type="button "
+                  >Add photo</ButtonComponent>
                 </div>
-              )
-            }
-          </form>
-        </row>
+              </div>
+            </div>)
+            :
+            (
+              <div className="col-xl-6 col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                <h3>Choose photo</h3>
+                <label htmlFor="file" className="br_dropzone">
+                  <input
+                    type="file"
+                    id="file"
+                    name="file"
+                    onChange={handlePhotoUploadChange}
+                    required/>
+                  <input
+                    type="text"
+                    id="fileName"
+                    name="fileName"
+                    placeholder="Drop files to upload (or click)"
+                    readOnly/>
+                </label>
+              </div>
+            )
+          }
+        </form>
       </CenterComponent>
       <RightSideComponent/>
     </PageTemplateComponent>

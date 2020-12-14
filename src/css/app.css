@@ -14,6 +14,18 @@
   height: 100%;
 }
 
+#profilePhotos {
+  padding-bottom: 3vh;
+}
+
+#user-bio {
+  margin-bottom: 10%;
+}
+
+.badge {
+  background-color: #a974ff;
+}
+
 #logo {
   width: 100%;
   max-width: 100px;
@@ -190,6 +202,12 @@ h4 {
 #follow {
   background-color: #a974ff;
   color: white;
+}
+
+#follow-on-profile {
+  background-color: #a974ff;
+  color: white;
+  margin-left: 1%;
 }
 
 /*# sourceMappingURL=app.css.map */

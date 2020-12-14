@@ -37,28 +37,34 @@ const LeftSideNavBarComponent = ({tabToHighlight}) => {
       <ul className="list-group list-group-flush list-group-item-action">
         <Link to="/mainpageforloggedin">
           <li className={"list-group-item list-group-item-action " + isActive("mainpageforloggedin")}>
-            <span className="fa fa-home"/>
-            <a> Home</a>
-
+            <p>
+              <span className="fa fa-home"/>
+              Home
+            </p>
           </li>
         </Link>
         <Link to="/addphoto">
           <li className={"list-group-item list-group-item-action " + isActive("addphoto")}>
-            <span className="fa fa-image"/>
-            <a> Add photo</a>
+            <p>
+              <span className="fa fa-image"/>
+              Add photo
+            </p>
           </li>
         </Link>
         <Link to="/myprofile">
           <li className={"list-group-item list-group-item-action " + isActive("myprofile")}>
-
-            <span className="fa fa-user"/>
-            <a> My profile</a>
+            <p>
+              <span className="fa fa-user"/>
+              My profile
+            </p>
           </li>
         </Link>
         <Link to="/login" onClick={handleLogout}>
           <li className="list-group-item list-group-item-action">
-            <span className="fa fa-sign-out"/>
-            <a> Logout</a>
+            <p>
+              <span className="fa fa-sign-out"/>
+              Logout
+            </p>
           </li>
         </Link>
       </ul>

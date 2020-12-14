@@ -52,7 +52,7 @@ const RightSideComponent = (props) => {
   const makeListOftheSearchedProfiles = (id, username, isObserved) => {
     const to = "/profile/" + id
     return (
-      <div id="user-list" className="row">
+      <div id="user-list" className="row" key={id}>
         <div className="col-xl-6 col-lg-12 col-md-6">
           <Link to={to}>
             <h5 id="search-username">

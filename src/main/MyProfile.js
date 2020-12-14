@@ -47,11 +47,10 @@ const MyProfile = () => {
     const linkTo = "/photodetails/" + photo.id;
 
     return (
-      <div className="col-md-4">
+      <div className="col-md-4" key={photo.id}>
         <Link to={linkTo}>
-          <div id="profilePhotos" className="image-container">
-          <img src={src} alt="Lights"/>
-          <p> </p>
+          <div className="image-container">
+            <img id="profilePhotos" src={src} alt="Lights"/>
           </div>
         </Link>
       </div>
