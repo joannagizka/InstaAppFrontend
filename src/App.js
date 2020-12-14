@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,7 +15,6 @@ import MyProfile from "./main/MyProfile";
 import AddPhoto from "./main/AddPhoto";
 import MainPageForLoggedIn from "./main/MainPageForLoggedIn";
 import PhotoDetails from "./main/PhotoDetails";
-import Search from "./main/Search";
 import Profile from "./main/Profile";
 import Logout from "./main/Logout";
 
@@ -56,9 +55,6 @@ const App = () => {
           </Route>
           <Route path="/photodetails/:id">
             <PhotoDetails/>
-          </Route>
-          <Route path="/search">
-            <Search/>
           </Route>
           <Route path="/profile">
             <Profile/>

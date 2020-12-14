@@ -26,7 +26,6 @@ const Logging = () => {
 
       setRedirect(true);
     }).catch(error => {
-      console.log("login error", error);
       alert("Blad w trakcie logowania")
     });
   }

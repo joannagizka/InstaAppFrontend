@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
 import {Link, Redirect} from "react-router-dom";
 import axios from "axios";
 import 'moment-timezone';
@@ -22,33 +22,29 @@ const PhotoDetails = () => {
   const [redirectToProfile, setRedirectToProfile] = useState(false)
 
 
+  const fetchPhotoMetadata = useCallback(() => {
+    axios.get("http://localhost:8000/api/photodetails/" + photoId + "/").then(response => {
+      setPhotoMeta(response.data)
+    })
+  }, [photoId])
+
+
   useEffect(() => {
     fetchPhotoMetadata();
-  }, [])
-
-
-  const fetchPhotoMetadata = () => {
-
-    axios.get("http://localhost:8000/api/photodetails/" + photoId + "/").then(response => {
-      console.log(photoId)
-      setPhotoMeta(response.data)
-      console.log(response.data)
-      console.log('response:', response)
-    })
-  }
+  }, [fetchPhotoMetadata])
 
 
   const handleSubmitComment = (event) => {
+    event.preventDefault()
     const data = {
       content: content,
       photo: photoId
     }
 
     axios.post("http://localhost:8000/api/comments/", data)
-      .then((response) => {
+      .then(() => {
         setContent('')
-        fetchPhotoMetadata('')
-        (console.log(response))
+        fetchPhotoMetadata()
       })
       .catch(error => {
         console.log(error);
@@ -134,27 +130,15 @@ const PhotoDetails = () => {
   const handleLikeUnlikeClick = () => {
     const path = photoMeta.isLikedByMe ? "unlike/" : "like/";
     axios.post("http://localhost:8000/api/photodetails/" + photoId + "/" + path).then(
-      (response) => {
+      () => {
         fetchPhotoMetadata()
-        console.log(response)
       })
-  }
-
-
-  const renderDeleteButton = () => {
-    if (photoMeta.isMe) {
-      return (
-        <button type="button" className="btn bg-primary light" onClick={deletePhoto}><span className="fa fa-trash"/>
-        </button>
-      )
-    }
-    return null;
   }
 
 
   const deletePhoto = () => {
     axios.delete('http://localhost:8000/api/photo/' + photoId + '/').then(
-      (response) => {
+      () => {
         setRedirectToProfile(true)
       })
   }
@@ -197,7 +181,7 @@ const PhotoDetails = () => {
                             </Moment>
                           </p>
                         </div>
-                        <div className="col-6">
+                        <div className="col-12">
                           {photoMeta.isMe ?
                             <span
                               title="Delete photo."

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Link, Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 import axios from "axios";
 import ReactPaginate from 'react-paginate';
 import PageTemplateComponent from "./Components/PageTemplateComponent";
@@ -105,15 +105,15 @@ const MainPage = () => {
           <h4>Your feedback</h4>
           {renderAllPhotos()}
         </div>
-        {(pageCount < 6) ?
+        {(pageCount > 6) ?
           <h5 align="center" className="col-md-12">
             That's all we got for You. Follow more users to get more content!
           </h5>
           :
           <div align="center" className="col-md-12">
             <ReactPaginate
-              previousLabel={'poprzednia'}
-              nextLabel={'następna'}
+              previousLabel={'prev'}
+              nextLabel={'next'}
               breakLabel={'...'}
               breakClassName={'break-me'}
               pageCount={pageCount}

@@ -1,5 +1,4 @@
 import React from "react";
-import LeftSideNavBarComponent from "./LeftSideNavBarComponent";
 
 const PageTemplateComponent = (props) => {
   return (

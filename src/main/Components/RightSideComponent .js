@@ -13,9 +13,7 @@ const RightSideComponent = (props) => {
     axios.get("http://localhost:8000/api/users/" + queryString)
       .then((response) => {
         setUsers(response.data);
-        console.log(response.data)
       })
-    console.log(query)
   }
 
   const renderUsers = () => {
@@ -37,9 +35,6 @@ const RightSideComponent = (props) => {
 
 
   const handleClick = (id, followedByMe) => {
-    console.log(id);
-    console.log(followedByMe);
-
     const path = followedByMe ? "unfollow/" : "follow/";
 
     axios.post("http://localhost:8000/api/users/" + id + "/" + path)

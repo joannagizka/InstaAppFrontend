@@ -38,7 +38,7 @@ const LeftSideNavBarComponent = ({tabToHighlight}) => {
         <Link to="/mainpageforloggedin">
           <li className={"list-group-item list-group-item-action " + isActive("mainpageforloggedin")}>
             <p>
-              <span className="fa fa-home"/>
+              <span id="icon" className="fa fa-home"/>
               Home
             </p>
           </li>
@@ -46,7 +46,7 @@ const LeftSideNavBarComponent = ({tabToHighlight}) => {
         <Link to="/addphoto">
           <li className={"list-group-item list-group-item-action " + isActive("addphoto")}>
             <p>
-              <span className="fa fa-image"/>
+              <span id="icon" className="fa fa-image"/>
               Add photo
             </p>
           </li>
@@ -54,7 +54,7 @@ const LeftSideNavBarComponent = ({tabToHighlight}) => {
         <Link to="/myprofile">
           <li className={"list-group-item list-group-item-action " + isActive("myprofile")}>
             <p>
-              <span className="fa fa-user"/>
+              <span id="icon" className="fa fa-user"/>
               My profile
             </p>
           </li>
@@ -62,7 +62,7 @@ const LeftSideNavBarComponent = ({tabToHighlight}) => {
         <Link to="/login" onClick={handleLogout}>
           <li className="list-group-item list-group-item-action">
             <p>
-              <span className="fa fa-sign-out"/>
+              <span id="icon" className="fa fa-sign-out"/>
               Logout
             </p>
           </li>

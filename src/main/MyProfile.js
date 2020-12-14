@@ -11,7 +11,7 @@ const MyProfile = () => {
 
   const [username, setUsername] = useState('')
   const [photos, setPhotos] = useState([])
-  const [redirect, setRedirect] = useState(false)
+  const redirect = false;
 
   useEffect(() => {
     fetchProfileData()
@@ -68,17 +68,21 @@ const MyProfile = () => {
       <CenterComponent>
         {(photos.length === 0) ?
           <div>
-            <div>
-              <h2>{username.username}</h2>
-              <h4>followers: {username.followersAmount}</h4>
+            <div id="user-bio">
+              <h4>{username.username}
+              </h4>
+              <h5><b>{username.followersAmount}</b> followers</h5>
+              <h5><b>{photos.length}</b> posts</h5>
             </div>
-            Your profile is empty now, start adding content.
+            Your profile is empty now, start adding photos.
           </div>
           :
           <div>
-            <div>
-              <h2>{username.username}</h2>
-              <h4>followers: {username.followersAmount}</h4>
+            <div id="user-bio">
+              <h4>{username.username}
+              </h4>
+              <h5><b>{username.followersAmount}</b> followers</h5>
+              <h5><b>{photos.length}</b> posts</h5>
             </div>
             {renderAllPhotos()}
           </div>

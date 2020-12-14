@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useCallback} from "react";
 import {Link} from "react-router-dom";
 import PageTemplateComponent from "./Components/PageTemplateComponent";
 import LeftSideNavBarComponent from "./Components/LeftSideNavBarComponent";
@@ -16,21 +16,17 @@ const Profile = () => {
   const [photos, setPhotos] = useState([])
   const [isObserved, setIsObserved] = useState(false)
 
-
-  useEffect(() => {
-    getUser()
-  }, [])
-
-  const getUser = () => {
+  const getUser = useCallback(() => {
     axios.get("http://localhost:8000/api/users/" + userId + "/").then(response => {
       setUsers(response.data);
       setPhotos(response.data.photos)
       setIsObserved(response.data.followedByMe)
-      console.log(response)
-      console.log(isObserved)
     })
-  }
+  }, [userId])
 
+  useEffect(() => {
+    getUser()
+  }, [getUser])
 
   const renderAllPhotos = () => {
     const renderedPhotos = [];

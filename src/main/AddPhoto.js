@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
-import {Link, Redirect} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import ButtonComponent from "./Components/ButtonComponent";
 import PageTemplateComponent from "./Components/PageTemplateComponent";
 import LeftSideNavBarComponent from "./Components/LeftSideNavBarComponent";
@@ -40,7 +40,6 @@ const AddPhoto = () => {
 
     axios.post("http://127.0.0.1:8000/api/photo/", formData)
       .then(response => {
-          console.log(response);
           setRedirectToMyProfile(true);
         }
       );

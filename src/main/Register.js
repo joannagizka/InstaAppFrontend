@@ -19,7 +19,6 @@ const Register = () => {
 
    axios.post('http://127.0.0.1:8000/api/users/', data)
    .then((response) => {
-     console.log(response);
 
      setRedirectToWelcome(true);
       const token = `Token ${response.data.token}`
