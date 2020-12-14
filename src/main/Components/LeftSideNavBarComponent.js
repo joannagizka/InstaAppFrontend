@@ -59,7 +59,7 @@ const LeftSideNavBarComponent = ({tabToHighlight}) => {
             </p>
           </li>
         </Link>
-        <Link to="/login" onClick={handleLogout}>
+        <Link to="/" onClick={handleLogout}>
           <li className="list-group-item list-group-item-action">
             <p>
               <span id="icon" className="fa fa-sign-out"/>

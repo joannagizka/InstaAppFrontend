@@ -3,7 +3,7 @@ import axios from "axios";
 import {Link} from "react-router-dom";
 import ButtonComponent from "./ButtonComponent";
 
-const RightSideComponent = (props) => {
+const RightSideComponent = () => {
   const [users, setUsers] = useState([])
   const [query, setQuery] = useState('')
 
@@ -96,6 +96,7 @@ const RightSideComponent = (props) => {
             </span>
         </div>
       </form>
+      <h6>Some interesting users for You:</h6>
       <div>{renderUsers()}</div>
     </div>
   )

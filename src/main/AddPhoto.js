@@ -60,7 +60,7 @@ const AddPhoto = () => {
           {photoData ?
             (<div className="row">
               <div className="col-6">
-                <h3>Add your post!</h3>
+                <h4>Choose photo</h4>
                 <div className="image-container">
                   <img
                     src={photoSrc}
@@ -69,8 +69,9 @@ const AddPhoto = () => {
                 </div>
               </div>
               <div className="col-xl-4 col-lg-4 col-sm-4 col-md-4 col-xs-12">
-                <h3>Add description</h3>
+                <h4>Add description</h4>
                 <textarea
+                  placeholder="Type some description"
                   className="form-control"
                   rows="3"
                   value={description}
@@ -89,7 +90,7 @@ const AddPhoto = () => {
             :
             (
               <div className="col-xl-6 col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <h3>Choose photo</h3>
+                <h4>Choose photo</h4>
                 <label htmlFor="file" className="br_dropzone">
                   <input
                     type="file"

@@ -53,6 +53,9 @@ const MainPage = () => {
       .then(() => {
         login(username, password)
       })
+      .catch(() => {
+        alert("Ups! Something went wrong, try again later.")
+      })
   }
 
   if (redirectToWelcome) {
@@ -61,7 +64,7 @@ const MainPage = () => {
 
   return (
     <PageTemplateComponent>
-      <nav className=" navbar-expand-sm col-md-2">
+      <nav className="navbar-expand-sm col-md-2">
         <div className="site-logo">
           <Link to="/">
             <img id="logo" src="/WhiteWallLogo.png" alt="logo"/>
@@ -71,7 +74,7 @@ const MainPage = () => {
       <CenterComponent>
         <div id="main-page-center-content">
           <div className=" d-flex flex-row-reverse">
-            <div className="dropdown col-3">
+            <div className="dropdown col-md-3 col-sm-4 col-xs-4">
               <button
                 className="btn btn-secondary dropdown-toggle"
                 type="button"
@@ -85,7 +88,7 @@ const MainPage = () => {
               <form className="dropdown-menu p-4">
                 <h5>Log in</h5>
                 <div className="form-group">
-                  <label htmlFor="dropdown-username">Username</label>
+                    Username
                   <input
                     type="email"
                     className="form-control"
@@ -97,7 +100,7 @@ const MainPage = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="dropdown-password">Password</label>
+                    Password
                   <input
                     type="password"
                     className="form-control"
@@ -110,9 +113,13 @@ const MainPage = () => {
                 </div>
 
                 <form onSubmit={handleSubmitLogin}>
-                  <button type="submit" className="btnSubmit">
-                    Zaloguj się
-                  </button>
+                  <ButtonComponent
+                    id="loggin-button"
+                    type="submit"
+                    className="btnSubmit"
+                  >
+                    Login
+                  </ButtonComponent>
                 </form>
               </form>
             </div>
@@ -120,46 +127,44 @@ const MainPage = () => {
 
 
           <div id="main-page-lower-content" className="row">
-            <div id="text-col-main-page" className="col-6">
+            <div id="text-col-main-page" className="col-md-6 col-sm-12 col-xs-12">
               <div className="base-container center form-group justify-content-center row">
                 <div className="container register-form flex-column">
-                  <div className="form">
-                    <div className="form-content">
-                      <div className="row">
-                        <div className="col-md-6 mx-auto">
-                          <h4>Register right now! </h4>
-                          <div className="form-group">
-                            <label id="username"/>
-                            <input
-                              type="text"
-                              name="username"
-                              value={username}
-                              onChange={(e) => setUsername(e.target.value)}
-                              className="form-control"
-                              placeholder="Username"
-                            />
-                          </div>
-                          <div className="form-group">
-                            <label id="password"/>
-                            <input
-                              type="password"
-                              name="password"
-                              value={password}
-                              onChange={(e) => setPassword(e.target.value)}
-                              className="form-control"
-                              placeholder="Password"
-                            />
-                          </div>
-                          <div className="form-group">
-                            <ButtonComponent
-                              id="follow-unfollow-button"
-                              type="button"
-                              className="btnSubmit"
-                              onClick={handleSubmit}
-                            >
-                              Sign up
-                            </ButtonComponent>
-                          </div>
+                  <div className="form-content">
+                    <div className="row">
+                      <div className="col-6 mx-auto">
+                        <h4>Register right now! </h4>
+                        <div className="form-group">
+                          <p>username</p>
+                          <input
+                            type="text"
+                            name="username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            className="form-control"
+                            placeholder="username"
+                          />
+                        </div>
+                        <div className="form-group">
+                          <p>password</p>
+                          <input
+                            type="password"
+                            name="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="form-control"
+                            placeholder="password"
+                          />
+                        </div>
+                        <div className="form-group">
+                          <ButtonComponent
+                            id="follow-unfollow-button"
+                            type="button"
+                            className="btnSubmit"
+                            onClick={handleSubmit}
+                          >
+                            Sign up
+                          </ButtonComponent>
                         </div>
                       </div>
                     </div>
@@ -167,7 +172,7 @@ const MainPage = () => {
                 </div>
               </div>
             </div>
-            <div className="col-6">
+            <div className="col-md-6 col-sm-12 col-xs-12">
               <div className="image-container2">
                 <img src="/mockup.png" alt="logo"/>
               </div>

@@ -110,7 +110,7 @@ const MainPage = () => {
             That's all we got for You. Follow more users to get more content!
           </h5>
           :
-          <div align="center" className="col-md-12">
+          <div align="center" className="col-md-12 align-text-bottom">
             <ReactPaginate
               previousLabel={'prev'}
               nextLabel={'next'}

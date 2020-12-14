@@ -133,10 +133,10 @@ a {
 }
 
 #add-photo-button {
-  background-color: #a974ff;
-  color: white;
+  background-color: #f85378 !important;
+  color: white !important;
   width: 100% !important;
-  padding-left: 0 k !important;
+  padding-left: 0 !important;
   margin-top: 1%;
 }
 
@@ -200,7 +200,7 @@ a {
   background: radial-gradient(circle, #d8e4f2 8%, #f2f5fe 47%, #f2f5fe 88%);
   border-right: 2px solid #d8e4f2;
   border-left: 2px solid #d8e4f2;
-  min-height: 93vh;
+  min-height: 99vh;
 }
 
 h4 {
@@ -223,8 +223,31 @@ h4 {
   height: 5%;
 }
 
-#ButtonComponent {
-  background-color: #a974ff;
+.pagination > li.active > a {
+  background-color: #f85378;
+  color: white;
+  border-color: white;
+}
+
+.pagination > li.active > a:hover {
+  background-color: #f85378;
+  color: white;
+  border-color: white;
+}
+
+.pagination > li > a,
+.pagination > li > span {
+  color: #f85378;
+  background-color: #fff;
+}
+
+.pagination > li > span:hover {
+  color: #f85378;
+  background-color: #fff;
+}
+
+.pagination > li > a:hover {
+  background-color: #f85378;
   color: white;
 }
 
@@ -235,7 +258,7 @@ h4 {
 }
 
 #search-button {
-  background-color: #a974ff;
+  background-color: #f85378;
   color: white;
 }
 
@@ -248,6 +271,12 @@ h4 {
   background-color: #a974ff;
   color: white;
   margin-left: 1%;
+}
+
+#loggin-button {
+  background-color: #f85378;
+  color: white;
+  width: 100%;
 }
 
 /*# sourceMappingURL=app.css.map */
