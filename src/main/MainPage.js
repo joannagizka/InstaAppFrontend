@@ -4,7 +4,6 @@ import PageTemplateComponent from "./Components/PageTemplateComponent";
 import CenterComponent from "./Components/CenterComponent";
 import ButtonComponent from "./Components/ButtonComponent";
 import axios from "axios";
-import FooterComponent from "./Components/FooterComponent";
 
 
 const MainPage = () => {
@@ -13,27 +12,48 @@ const MainPage = () => {
   const [redirectToWelcome, setRedirectToWelcome] = useState(false)
 
 
-  const handleSubmit = (event) => {
-      event.preventDefault();
+  const [usernameLogin, setUsernameLogin] = useState('')
+  const [passwordLogin, setPasswordLogin] = useState('')
 
-      const data = {
-        username: username,
-        password: password
-      };
+  const handleSubmitLogin = (event) => {
+    event.preventDefault();
+    login(usernameLogin, passwordLogin)
+  }
 
-      axios.post('http://127.0.0.1:8000/api/users/', data)
-        .then((response) => {
+  const login = (username, password) => {
 
-          setRedirectToWelcome(true);
-          const token = `Token ${response.data.token}`
-          axios.defaults.headers.common['Authorization'] = token;
-
-          localStorage.setItem('token', token);
-        })
-
+    const dataLogin = {
+      username,
+      password
     }
 
-  ;
+    axios.post("http://localhost:8000/auth/", dataLogin
+    ).then((response) => {
+      const token = `Token ${response.data.token}`
+      axios.defaults.headers.common['Authorization'] = token;
+
+      localStorage.setItem('token', token);
+
+      setRedirectToWelcome(true);
+    }).catch((error) => {
+      alert("Blad w trakcie logowania")
+    });
+  }
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const data = {
+      username: username,
+      password: password
+    };
+
+    axios.post('http://127.0.0.1:8000/api/registration/', data)
+      .then(() => {
+        login(username, password)
+      })
+  }
 
   if (redirectToWelcome) {
     return <Redirect to="/mainpageforloggedin"/>;
@@ -66,16 +86,34 @@ const MainPage = () => {
                 <h5>Log in</h5>
                 <div className="form-group">
                   <label htmlFor="dropdown-username">Username</label>
-                  <input type="email" className="form-control" id="dropdown-username"
-                         placeholder="username"/>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="dropdown-username"
+                    placeholder="username"
+                    value={usernameLogin}
+                    onChange={(e) => setUsernameLogin(e.target.value)}
+                    required
+                  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="dropdown-password">Password</label>
-                  <input type="password" className="form-control" id="dropdown-password"
-                         placeholder="password"/>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="dropdown-password"
+                    placeholder="password"
+                    value={passwordLogin}
+                    onChange={(e) => setPasswordLogin(e.target.value)}
+                    required
+                  />
                 </div>
 
-                <button type="submit" id="follow-unfollow-button" className="btn btn-primary">Log in</button>
+                <form onSubmit={handleSubmitLogin}>
+                  <button type="submit" className="btnSubmit">
+                    Zaloguj się
+                  </button>
+                </form>
               </form>
             </div>
           </div>
