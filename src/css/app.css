@@ -14,6 +14,34 @@
   height: 100%;
 }
 
+.image-container2 {
+  position: relative;
+}
+.image-container2 img {
+  width: 100%;
+  height: 70vh;
+  border-radius: 25px;
+}
+
+#text-col-main-page {
+  background-color: #f85378;
+  color: white;
+  border-radius: 25px;
+}
+
+#main-page-center-content {
+  padding: 3%;
+}
+
+#footer {
+  background-color: #fcb000;
+  color: white;
+}
+
+#main-page-lower-content {
+  padding-top: 3%;
+}
+
 #profilePhotos {
   padding-bottom: 3vh;
 }
@@ -172,7 +200,7 @@ a {
   background: radial-gradient(circle, #d8e4f2 8%, #f2f5fe 47%, #f2f5fe 88%);
   border-right: 2px solid #d8e4f2;
   border-left: 2px solid #d8e4f2;
-  min-height: 99vh;
+  min-height: 93vh;
 }
 
 h4 {
@@ -185,6 +213,14 @@ h4 {
 
 #icon {
   margin: 1vh;
+}
+
+#login-register-nav {
+  padding: 2vh;
+}
+
+#footer {
+  height: 5%;
 }
 
 #ButtonComponent {
