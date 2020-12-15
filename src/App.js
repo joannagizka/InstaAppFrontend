@@ -10,7 +10,6 @@ import axios from "axios";
 
 import MainPage from "./main/MainPage";
 import Register from "./main/Register";
-import Logging from "./main/Logging";
 import MyProfile from "./main/MyProfile";
 import AddPhoto from "./main/AddPhoto";
 import MainPageForLoggedIn from "./main/MainPageForLoggedIn";
@@ -34,9 +33,6 @@ const App = () => {
         <Switch>
           <Route path="/register">
             <Register/>
-          </Route>
-          <Route path="/login">
-            <Logging/>
           </Route>
           <Route path="/logout">
             <Logout/>

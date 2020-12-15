@@ -40,9 +40,11 @@ const AddPhoto = () => {
 
     axios.post("http://127.0.0.1:8000/api/photo/", formData)
       .then(response => {
-          setRedirectToMyProfile(true);
-        }
-      );
+        setRedirectToMyProfile(true);
+      })
+      .catch(() => {
+        alert('Ups! Something went wrong, try again later.')
+      })
     event.preventDefault();
   }
 

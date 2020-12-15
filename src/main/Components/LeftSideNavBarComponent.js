@@ -16,7 +16,7 @@ const LeftSideNavBarComponent = ({tabToHighlight}) => {
 
 
   if (redirectToMain) {
-    return (<Redirect to="/main"/>)
+    return (<Redirect to="/"/>)
   }
 
   const isActive = (tabName) => {

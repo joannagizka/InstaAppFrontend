@@ -26,6 +26,9 @@ const PhotoDetails = () => {
     axios.get("http://localhost:8000/api/photodetails/" + photoId + "/").then(response => {
       setPhotoMeta(response.data)
     })
+      .catch(() => {
+        alert('Ups! Something went wrong, try again later.')
+      })
   }, [photoId])
 
 
@@ -46,8 +49,8 @@ const PhotoDetails = () => {
         setContent('')
         fetchPhotoMetadata()
       })
-      .catch(error => {
-        console.log(error);
+      .catch(() => {
+        alert('Ups! Something went wrong, try again later.')
       })
   }
 
@@ -133,6 +136,9 @@ const PhotoDetails = () => {
       () => {
         fetchPhotoMetadata()
       })
+      .catch(() => {
+        alert('Ups! Something went wrong, try again later.')
+      })
   }
 
 
@@ -140,6 +146,9 @@ const PhotoDetails = () => {
     axios.delete('http://localhost:8000/api/photo/' + photoId + '/').then(
       () => {
         setRedirectToProfile(true)
+      })
+      .catch(() => {
+        alert('Ups! Something went wrong, try again later.')
       })
   }
 

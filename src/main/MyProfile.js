@@ -25,6 +25,9 @@ const MyProfile = () => {
 
         setUsername(response.data)
       })
+      .catch(() => {
+        alert('Ups! Something went wrong, try again later.')
+      })
   }
 
 
@@ -71,7 +74,12 @@ const MyProfile = () => {
             <div id="user-bio">
               <h4>{username.username}
               </h4>
-              <h5><b>{username.followersAmount}</b> followers</h5>
+              <h5>
+                <b>
+                  {username.followersAmount}
+                </b>
+                followers
+              </h5>
               <h5><b>{photos.length}</b> posts</h5>
             </div>
             Your profile is empty now, start adding photos.

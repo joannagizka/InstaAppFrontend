@@ -33,6 +33,9 @@ const MainPage = () => {
         setPhotos(response.data.results)
         setPageCount(pageCount)
       })
+      .catch(() => {
+        alert('Ups! Something went wrong, try again later.')
+      })
   }
 
 

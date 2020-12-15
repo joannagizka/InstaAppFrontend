@@ -41,6 +41,9 @@ const RightSideComponent = () => {
       .then(() => {
         searchUsers(query)
       })
+      .catch(() => {
+        alert('Ups! Something went wrong, try again later.')
+      })
   }
 
 

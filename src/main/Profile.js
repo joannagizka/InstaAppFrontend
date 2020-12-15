@@ -22,6 +22,9 @@ const Profile = () => {
       setPhotos(response.data.photos)
       setIsObserved(response.data.followedByMe)
     })
+      .catch(() => {
+        alert('Ups! Something went wrong, try again later.')
+      })
   }, [userId])
 
   useEffect(() => {
@@ -64,6 +67,9 @@ const Profile = () => {
     axios.post("http://localhost:8000/api/users/" + userId + "/" + path)
       .then(() => {
         getUser()
+      })
+      .catch(() => {
+        alert('Ups! Something went wrong, try again later.')
       })
   }
 
