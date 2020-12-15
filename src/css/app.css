@@ -14,44 +14,12 @@
   height: 100%;
 }
 
-.image-container2 {
-  position: relative;
-}
-.image-container2 img {
-  width: 100%;
-  height: 70vh;
-  border-radius: 25px;
-}
-
-#text-col-main-page {
-  background-color: #f85378;
-  color: white;
-  border-radius: 25px;
-}
-
-#main-page-center-content {
-  padding: 3%;
-}
-
-#footer {
-  background-color: #fcb000;
-  color: white;
-}
-
-#main-page-lower-content {
-  padding-top: 3%;
-}
-
 #profilePhotos {
   padding-bottom: 3vh;
 }
 
 #user-bio {
   margin-bottom: 10%;
-}
-
-.badge {
-  background-color: #a974ff;
 }
 
 #logo {
@@ -62,13 +30,12 @@
 
 .active {
   background-color: white !important;
-  color: #7468A7 !important;
+  color: #f85378 !important;
   box-shadow: 2px 3px 8px #E1EBFD;
 }
 
 a {
   text-decoration: none !important;
-  color: #A9B1FA;
 }
 
 #search-username {
@@ -77,7 +44,7 @@ a {
 
 #search-input {
   background-color: white !important;
-  color: #7468A7 !important;
+  color: #a974ff !important;
 }
 
 #search {
@@ -97,7 +64,7 @@ a {
   border-radius: 4px;
   box-sizing: border-box;
   background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.03) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.03) 50%, rgba(0, 0, 0, 0.03) 75%, transparent 75%, transparent);
-  background-color: #FAFCFD;
+  background-color: white;
   background-size: 16px 16px;
 }
 
@@ -128,20 +95,7 @@ a {
 }
 
 .br_dropzone.dragover {
-  background-color: #eee;
-  border: 6px dashed rgba(0, 0, 0, 0.1);
-}
-
-#add-photo-button {
-  background-color: #f85378 !important;
-  color: white !important;
-  width: 100% !important;
-  padding-left: 0 !important;
-  margin-top: 1%;
-}
-
-.add-photo-button-wrapper {
-  padding: 0;
+  background-color: white;
 }
 
 #photo-details-list-container {
@@ -195,6 +149,34 @@ a {
   margin-bottom: 1%;
 }
 
+.pagination > li.active > a {
+  background-color: #f85378;
+  color: white;
+  border-color: white;
+}
+
+.pagination > li.active > a:hover {
+  background-color: #f85378;
+  color: white;
+  border-color: white;
+}
+
+.pagination > li > a,
+.pagination > li > span {
+  color: #f85378;
+  background-color: white;
+}
+
+.pagination > li > span:hover {
+  color: #f85378;
+  background-color: white;
+}
+
+.pagination > li > a:hover {
+  background-color: #f85378;
+  color: white;
+}
+
 #CenterComponent {
   background: #d8e4f2;
   background: radial-gradient(circle, #d8e4f2 8%, #f2f5fe 47%, #f2f5fe 88%);
@@ -223,35 +205,16 @@ h4 {
   height: 5%;
 }
 
-.pagination > li.active > a {
-  background-color: #f85378;
-  color: white;
-  border-color: white;
-}
-
-.pagination > li.active > a:hover {
-  background-color: #f85378;
-  color: white;
-  border-color: white;
-}
-
-.pagination > li > a,
-.pagination > li > span {
-  color: #f85378;
-  background-color: #fff;
-}
-
-.pagination > li > span:hover {
-  color: #f85378;
-  background-color: #fff;
-}
-
-.pagination > li > a:hover {
-  background-color: #f85378;
+#footer {
+  background-color: #fcb000;
   color: white;
 }
 
-#follow-unfollow-button {
+.badge {
+  background-color: #a974ff;
+}
+
+#strech-button-violet {
   background-color: #a974ff;
   color: white;
   width: 100%;
@@ -259,11 +222,6 @@ h4 {
 
 #search-button {
   background-color: #f85378;
-  color: white;
-}
-
-#follow {
-  background-color: #a974ff;
   color: white;
 }
 
@@ -277,6 +235,41 @@ h4 {
   background-color: #f85378;
   color: white;
   width: 100%;
+}
+
+#add-photo-button {
+  background-color: #f85378 !important;
+  color: white !important;
+  width: 100% !important;
+  padding-left: 0 !important;
+  margin-top: 1%;
+}
+
+.add-photo-button-wrapper {
+  padding: 0;
+}
+
+.image-container2 {
+  position: relative;
+}
+.image-container2 img {
+  width: 100%;
+  height: 70vh;
+  border-radius: 25px;
+}
+
+#text-col-main-page {
+  background-color: #f85378;
+  color: white;
+  border-radius: 25px;
+}
+
+#main-page-center-content {
+  padding: 3%;
+}
+
+#main-page-lower-content {
+  padding-top: 3%;
 }
 
 /*# sourceMappingURL=app.css.map */

@@ -279,7 +279,7 @@ const PhotoDetails = () => {
                 <div className="">
                   <ButtonComponent
                     className="btn-block"
-                    id="follow-unfollow-button"
+                    id="strech-button-violet"
                     type="button "
                     onClick={handleSubmitComment}>
                     Add comment

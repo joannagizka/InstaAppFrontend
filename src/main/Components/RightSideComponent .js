@@ -58,7 +58,7 @@ const RightSideComponent = () => {
         <div className="col-xl-6 col-lg-12 col-md-6">
           <ButtonComponent
             className="btn-block"
-            id="follow-unfollow-button"
+            id="strech-button-violet"
             type="button "
             onClick={() => handleClick(id, isObserved)}
           >

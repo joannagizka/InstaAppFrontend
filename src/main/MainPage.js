@@ -78,7 +78,7 @@ const MainPage = () => {
               <button
                 className="btn btn-secondary dropdown-toggle"
                 type="button"
-                id="follow-unfollow-button"
+                id="strech-button-violet"
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
@@ -158,7 +158,7 @@ const MainPage = () => {
                         </div>
                         <div className="form-group">
                           <ButtonComponent
-                            id="follow-unfollow-button"
+                            id="strech-button-violet"
                             type="button"
                             className="btnSubmit"
                             onClick={handleSubmit}
