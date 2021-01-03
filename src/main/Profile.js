@@ -6,15 +6,17 @@ import LeftSideNavBarComponent from "./Components/LeftSideNavBarComponent";
 import CenterComponent from "./Components/CenterComponent";
 import RightSideComponent from "./Components/RightSideComponent ";
 import ButtonComponent from "./Components/ButtonComponent";
+import {useLocation} from 'react-router-dom';
 
 
 const Profile = () => {
   const arr = window.location.href.split("/");
-  const userId = arr[arr.length - 1]
-
+  const [userId, setUserId] = useState(arr[arr.length - 1])
   const [users, setUsers] = useState([])
   const [photos, setPhotos] = useState([])
   const [isObserved, setIsObserved] = useState(false)
+  const currentPath = useLocation()
+
 
   const getUser = useCallback(() => {
     axios.get("http://localhost:8000/api/users/" + userId + "/").then(response => {
@@ -27,9 +29,18 @@ const Profile = () => {
       })
   }, [userId])
 
+
+  useEffect(() => {
+    const arr = window.location.href.split("/");
+    setUserId(arr[arr.length - 1])
+  }, [currentPath])
+
+
   useEffect(() => {
     getUser()
-  }, [getUser])
+  }, [getUser, userId])
+
+
 
   const renderAllPhotos = () => {
     const renderedPhotos = [];
@@ -94,8 +105,18 @@ const Profile = () => {
           <h4>{users.username}
             {isFollowed(isObserved)}
           </h4>
-          <h5><b>{users.followersAmount}</b> followers</h5>
-          <h5><b>{photos.length}</b> posts</h5>
+          <h5>
+            <b>
+              {users.followersAmount}
+            </b>
+            followers
+          </h5>
+          <h5>
+            <b>
+              {photos.length}
+            </b>
+            posts
+          </h5>
         </div>
         <div>
           {renderAllPhotos()}

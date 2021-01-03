@@ -72,7 +72,8 @@ const MyProfile = () => {
         {(photos.length === 0) ?
           <div>
             <div id="user-bio">
-              <h4>{username.username}
+              <h4>
+                {username.username}
               </h4>
               <h5>
                 <b>
@@ -80,7 +81,12 @@ const MyProfile = () => {
                 </b>
                 followers
               </h5>
-              <h5><b>{photos.length}</b> posts</h5>
+              <h5>
+                <b>
+                  {photos.length}
+                </b>
+                posts
+              </h5>
             </div>
             Your profile is empty now, start adding photos.
           </div>
