@@ -49,7 +49,7 @@ const MainPage = () => {
       password: password
     };
 
-    axios.post('http://127.0.0.1:8000/api/registration/', data)
+    axios.post('api/registration/', data)
       .then(() => {
         login(username, password)
       })

@@ -17,7 +17,7 @@ const Register = () => {
       password: password
     };
 
-   axios.post('http://127.0.0.1:8000/api/users/', data)
+   axios.post('api/users/', data)
    .then((response) => {
 
      setRedirectToWelcome(true);
