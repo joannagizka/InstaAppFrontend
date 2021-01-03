@@ -38,7 +38,7 @@ const AddPhoto = () => {
     formData.append('photo', photoData);
     formData.append('description', description);
 
-    axios.post("http://127.0.0.1:8000/api/photo/", formData)
+    axios.post("api/photo/", formData)
       .then(response => {
         setRedirectToMyProfile(true);
       })

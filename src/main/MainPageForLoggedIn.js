@@ -27,7 +27,7 @@ const MainPage = () => {
   }
 
   const fetchPhotosMetadata = (page) => {
-    axios.get('http://localhost:8000/api/allphotos/?page=' + page + "&page_size=" + PAGE_SIZE)
+    axios.get('api/allphotos/?page=' + page + "&page_size=" + PAGE_SIZE)
       .then((response) => {
         const pageCount = response.data.count / PAGE_SIZE;
         setPhotos(response.data.results)

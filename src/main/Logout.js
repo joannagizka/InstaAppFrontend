@@ -7,7 +7,7 @@ const Logout = () => {
   const [redirect, setRedirect] = useState(false)
 
   useEffect(() => {
-    axios.post('http://localhost:8000/logout/').then((response) => {
+    axios.post('logout/').then((response) => {
       setRedirect(true);
     });
   }, [])

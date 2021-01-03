@@ -19,7 +19,7 @@ const MyProfile = () => {
 
 
   const fetchProfileData = () => {
-    axios.get('http://localhost:8000/api/myprofilephotos/')
+    axios.get('api/myprofilephotos/')
       .then((response) => {
         setPhotos(response.data.photos)
 

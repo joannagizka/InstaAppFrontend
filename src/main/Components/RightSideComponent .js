@@ -10,7 +10,7 @@ const RightSideComponent = () => {
   const searchUsers = (query) => {
     const queryString = query ? "?search=" + query : "";
 
-    axios.get("http://localhost:8000/api/users/" + queryString)
+    axios.get("api/users/" + queryString)
       .then((response) => {
         setUsers(response.data);
       })
@@ -37,7 +37,7 @@ const RightSideComponent = () => {
   const handleClick = (id, followedByMe) => {
     const path = followedByMe ? "unfollow/" : "follow/";
 
-    axios.post("http://localhost:8000/api/users/" + id + "/" + path)
+    axios.post("api/users/" + id + "/" + path)
       .then(() => {
         searchUsers(query)
       })

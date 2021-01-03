@@ -23,7 +23,7 @@ const PhotoDetails = () => {
 
 
   const fetchPhotoMetadata = useCallback(() => {
-    axios.get("http://localhost:8000/api/photodetails/" + photoId + "/").then(response => {
+    axios.get("api/photodetails/" + photoId + "/").then(response => {
       setPhotoMeta(response.data)
     })
       .catch(() => {
@@ -44,7 +44,7 @@ const PhotoDetails = () => {
       photo: photoId
     }
 
-    axios.post("http://localhost:8000/api/comments/", data)
+    axios.post("api/comments/", data)
       .then(() => {
         setContent('')
         fetchPhotoMetadata()
@@ -132,7 +132,7 @@ const PhotoDetails = () => {
 
   const handleLikeUnlikeClick = () => {
     const path = photoMeta.isLikedByMe ? "unlike/" : "like/";
-    axios.post("http://localhost:8000/api/photodetails/" + photoId + "/" + path).then(
+    axios.post("api/photodetails/" + photoId + "/" + path).then(
       () => {
         fetchPhotoMetadata()
       })
@@ -143,7 +143,7 @@ const PhotoDetails = () => {
 
 
   const deletePhoto = () => {
-    axios.delete('http://localhost:8000/api/photo/' + photoId + '/').then(
+    axios.delete('api/photo/' + photoId + '/').then(
       () => {
         setRedirectToProfile(true)
       })

@@ -19,7 +19,7 @@ const Profile = () => {
 
 
   const getUser = useCallback(() => {
-    axios.get("http://localhost:8000/api/users/" + userId + "/").then(response => {
+    axios.get("api/users/" + userId + "/").then(response => {
       setUsers(response.data);
       setPhotos(response.data.photos)
       setIsObserved(response.data.followedByMe)
@@ -75,7 +75,7 @@ const Profile = () => {
   const handleClick = (userId, followedByMe) => {
     const path = followedByMe ? "unfollow/" : "follow/";
 
-    axios.post("http://localhost:8000/api/users/" + userId + "/" + path)
+    axios.post("api/users/" + userId + "/" + path)
       .then(() => {
         getUser()
       })

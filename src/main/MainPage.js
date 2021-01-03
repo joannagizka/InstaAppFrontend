@@ -27,7 +27,7 @@ const MainPage = () => {
       password
     }
 
-    axios.post("http://localhost:8000/auth/", dataLogin
+    axios.post("auth/", dataLogin
     ).then((response) => {
       const token = `Token ${response.data.token}`
       axios.defaults.headers.common['Authorization'] = token;
