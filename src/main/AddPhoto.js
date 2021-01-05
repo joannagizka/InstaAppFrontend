@@ -7,6 +7,8 @@ import LeftSideNavBarComponent from "./Components/LeftSideNavBarComponent";
 import CenterComponent from "./Components/CenterComponent";
 import RightSideComponent from "./Components/RightSideComponent ";
 import "../css/app.css";
+import {ProgressBar} from "react-bootstrap";
+import 'axios-progress-bar/dist/nprogress.css'
 
 const AddPhoto = () => {
 
@@ -14,6 +16,7 @@ const AddPhoto = () => {
   const [photoSrc, setPhotoSrc] = useState('')
   const [photoData, setPhotoData] = useState('')
   const [redirectToMyProfile, setRedirectToMyProfile] = useState('')
+  const [progress, setProgress] = useState(0)
 
 
   const photoSourceSetter = (event) => {
@@ -38,11 +41,20 @@ const AddPhoto = () => {
     formData.append('photo', photoData);
     formData.append('description', description);
 
-    axios.post("api/photo/", formData)
+    const config = {
+      onUploadProgress: function (progressEvent) {
+        const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+        console.log("Percent completed", percentCompleted)
+        setProgress(percentCompleted)
+      }
+    };
+
+    axios.post("api/photo/", formData, config)
       .then(response => {
         setRedirectToMyProfile(true);
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log(error)
         alert('Ups! Something went wrong, try again later.')
       })
     event.preventDefault();
@@ -53,11 +65,19 @@ const AddPhoto = () => {
     return <Redirect to="/myprofile"/>;
   }
 
+  const renderProgress = (progress) => {
+    const now = progress;
+
+    const progressInstance = <ProgressBar now={now} label={`${now}%`}/>;
+
+    return (progressInstance);
+  }
 
   return (
     <PageTemplateComponent>
       <LeftSideNavBarComponent tabToHighlight="addphoto"/>
       <CenterComponent>
+
         <form onSubmit={handleSubmit}>
           {photoData ?
             (<div className="row">
@@ -87,6 +107,7 @@ const AddPhoto = () => {
                     type="button "
                   >Add photo</ButtonComponent>
                 </div>
+                {renderProgress(progress)}
               </div>
             </div>)
             :
