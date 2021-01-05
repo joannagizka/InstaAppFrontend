@@ -76,16 +76,16 @@ const MyProfile = () => {
                 {username.username}
               </h4>
               <h5>
-                <b>
-                  {username.followersAmount}
-                </b>
-                followers
-              </h5>
-              <h5>
-                <b>
-                  {photos.length}
-                </b>
-                posts
+                <div>
+                  <p>
+                    <b>{username.followersAmount}</b> followers
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <b>{photos.length}</b> posts
+                  </p>
+                </div>
               </h5>
             </div>
             Your profile is empty now, start adding photos.

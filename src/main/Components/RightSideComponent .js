@@ -34,12 +34,17 @@ const RightSideComponent = () => {
   }, [])
 
 
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   const handleClick = (id, followedByMe) => {
     const path = followedByMe ? "unfollow/" : "follow/";
 
     axios.post("api/users/" + id + "/" + path)
       .then(() => {
         searchUsers(query)
+        refreshPage()
       })
       .catch(() => {
         alert('Ups! Something went wrong, try again later.')
