@@ -67,9 +67,7 @@ const AddPhoto = () => {
 
   const renderProgress = (progress) => {
     const now = progress;
-
     const progressInstance = <ProgressBar now={now} label={`${now}%`}/>;
-
     return (progressInstance);
   }
 
@@ -102,6 +100,7 @@ const AddPhoto = () => {
                 />
                 <div className="add-photo-button-wrapper">
                   <ButtonComponent
+                    disabled={progress ? "true" : ""}
                     className="btn-block"
                     id="add-photo-button"
                     type="button "
