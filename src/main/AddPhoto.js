@@ -44,7 +44,6 @@ const AddPhoto = () => {
     const config = {
       onUploadProgress: function (progressEvent) {
         const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-        console.log("Percent completed", percentCompleted)
         setProgress(percentCompleted)
       }
     };

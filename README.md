@@ -21,7 +21,7 @@ in the downloaded directory, then run
 
 #### Or just try online demo
 
-* [WhiteWall](http://www.dropwizard.io/1.0.2/docs/) - Link to Demo deployed on Heroku.
+* [WhiteWall](https://inst-app-frontend.herokuapp.com/) - Link to Demo deployed on Heroku.
 
 
 ###Built with
