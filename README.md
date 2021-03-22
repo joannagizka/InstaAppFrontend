@@ -21,7 +21,7 @@ in the downloaded directory, then run
 
 #### Or just try online demo
 
-* [WhiteWall](https://inst-app-frontend.herokuapp.com/) - Link to Demo deployed on Heroku.
+* [WhiteWall](http://52.29.228.97:3001) - Link to deplyed demo.
 
 
 ###Built with
